@@ -1,13 +1,21 @@
 {
-	"compilerOptions": {
-		"target": "ES6",
-		"module": "ESNext",
-		"jsx": "react-jsx",
-		"moduleResolution": "node",
-		"strict": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true
-	},
-	"include": ["src"]
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@styles/*": ["styles/*"],
+      "@components/*": ["components/*"],
+      "@assets/*": ["assets/*"],
+      "@constants/*": ["constants/*"],
+      "@pages/*": ["pages/*"]
+    }
+  },
+  "include": ["src"]
 }
