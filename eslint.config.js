@@ -44,7 +44,7 @@ export default [
           pathGroups: [
             {
               pattern: '@styles/**',
-              group: 'builtin',
+              group: 'internal',
               position: 'before',
             },
             {

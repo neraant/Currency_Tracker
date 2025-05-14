@@ -1,6 +1,6 @@
-import { Container } from '@styles/GlobalStyle';
-
 import { Link } from 'react-router-dom';
+
+import { Container } from '@styles/GlobalStyle';
 
 import logo from '@assets/icons/logo_icon.svg';
 

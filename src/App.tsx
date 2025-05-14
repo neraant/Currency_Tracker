@@ -1,8 +1,8 @@
-import { GlobalStyle } from '@styles/GlobalStyle';
-import { DarkTheme } from '@styles/Theme';
-
 import { BrowserRouter as Router, Routes as Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+
+import { GlobalStyle } from '@styles/GlobalStyle';
+import { DarkTheme } from '@styles/Theme';
 
 import { Header } from '@components/common/Header/Header';
 
