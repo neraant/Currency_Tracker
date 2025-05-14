@@ -1,6 +1,8 @@
+import { DefaultTheme } from 'styled-components';
+
 const BASE_SPACING = 4;
 
-export const DarkTheme = {
+export const DarkTheme: DefaultTheme = {
   status: {
     success: '#00BC4F',
     error: '#EA3943',
@@ -15,8 +17,10 @@ export const DarkTheme = {
     green200: '#00CE2C', // Градиент1
     green300: '#16C782', // Свечи
     green400: '#00BC4F', // Индикатор
+    green500: '#24794033', // Индикатор
     red300: '#EA3943', // Свечи,
     gray300: '#A7B2C3',
+    preblack: '#121212',
   },
 
   background: {
@@ -52,6 +56,8 @@ export const DarkTheme = {
       '4xl': '2.25rem', // 36px
       '5xl': '3rem', // 48px
       '6xl': '3.75rem', // 60px
+      '7xl': '4.75rem', // 76px
+      '8xl': '3.75rem', // 90px
     },
 
     fontWeight: {
@@ -93,13 +99,5 @@ export const DarkTheme = {
     20: `${BASE_SPACING * 20}px`, // 80px
     24: `${BASE_SPACING * 24}px`, // 96px
     32: `${BASE_SPACING * 32}px`, // 128px
-
-    none: '0',
-    xs: `${BASE_SPACING * 1}px`,
-    sm: `${BASE_SPACING * 2}px`,
-    md: `${BASE_SPACING * 4}px`,
-    lg: `${BASE_SPACING * 6}px`,
-    xl: `${BASE_SPACING * 8}px`,
-    xxl: `${BASE_SPACING * 12}px`,
   },
 };

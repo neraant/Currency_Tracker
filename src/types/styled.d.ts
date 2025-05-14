@@ -15,12 +15,15 @@ declare module 'styled-components' {
       green200: string;
       green300: string;
       green400: string;
+      green500: string;
       red300: string;
       gray300: string;
+      preblack: string;
     };
     background: {
       primary: string;
       secondary: string;
+      tertiary: string;
     };
     text: {
       primary: string;
