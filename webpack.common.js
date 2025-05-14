@@ -8,11 +8,14 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  mode: 'development',
-  devServer: {
-    static: './dist',
-    port: 3000,
-    open: true,
+  module: {
+    rules: [
+      {
+        test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -22,15 +25,6 @@ module.exports = {
       '@constants': path.resolve(__dirname, 'src/constants/'),
       '@pages': path.resolve(__dirname, 'src/pages/'),
     },
-  },
-  module: {
-    rules: [
-      {
-        test: /\.[jt]sx?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader',
-      },
-    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
