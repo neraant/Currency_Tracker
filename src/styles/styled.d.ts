@@ -1,5 +1,5 @@
-import { LightTheme } from './Theme';
 import { DefaultTheme } from './../../node_modules/styled-components/dist/models/ThemeProvider.d';
+import { LightTheme } from './Theme';
 import 'styled-components';
 import { LightTheme } from './theme';
 

@@ -1,9 +1,12 @@
 import { GlobalStyle } from '@styles/GlobalStyle';
 import { DarkTheme } from '@styles/Theme';
-import { ThemeProvider } from 'styled-components';
+
 import { BrowserRouter as Router, Routes as Switch, Route } from 'react-router-dom';
-import { Routes } from '@constants/Routes';
+import { ThemeProvider } from 'styled-components';
+
 import { Header } from '@components/common/Header/Header';
+
+import { ROUTES } from '@constants/Routes';
 
 export const App = () => {
   return (
@@ -13,8 +16,8 @@ export const App = () => {
         <Header />
 
         <Switch>
-          {Routes.map((route, index) => (
-            <Route key={index} path={route.link} element={<route.component />} />
+          {ROUTES.map(({ component: Component, link }, index) => (
+            <Route key={index} path={link} element={<Component />} />
           ))}
         </Switch>
       </Router>

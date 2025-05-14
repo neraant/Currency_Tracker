@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { Circle, ToggleWrapper } from './styled';
 
 export const ToggleButton = () => {

@@ -1,4 +1,4 @@
-export const HeaderNavLinks = [
+export const HEADER_NAVLINKS = [
   {
     label: 'Home',
     link: '#',
