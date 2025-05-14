@@ -1,7 +1,6 @@
 {
   "name": "currency-tracker",
   "version": "1.0.0",
-  "type": "module",
   "main": "index.js",
   "author": "neraant <neraant1111@gmail.com>",
   "license": "MIT",

@@ -10,8 +10,8 @@ export const ToggleButton = () => {
   };
 
   return (
-    <ToggleWrapper toggled={toggled} onClick={handleClick}>
-      <Circle toggled={toggled} />
+    <ToggleWrapper $toggled={toggled} onClick={handleClick}>
+      <Circle $toggled={toggled} />
     </ToggleWrapper>
   );
 };

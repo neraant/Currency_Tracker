@@ -29,6 +29,7 @@ module.exports = {
       '@assets': path.resolve(__dirname, 'src/assets/'),
       '@constants': path.resolve(__dirname, 'src/constants/'),
       '@pages': path.resolve(__dirname, 'src/pages/'),
+      '@types': path.resolve(__dirname, 'src/types/'),
     },
   },
   plugins: [

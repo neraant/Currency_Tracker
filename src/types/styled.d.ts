@@ -1,7 +1,4 @@
-import { DefaultTheme } from './../../node_modules/styled-components/dist/models/ThemeProvider.d';
-import { LightTheme } from './Theme';
-import 'styled-components';
-import { LightTheme } from './theme';
+import { DefaultTheme } from 'styled-components/dist/models/ThemeProvider';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -28,6 +25,7 @@ declare module 'styled-components' {
     text: {
       primary: string;
       secondary: string;
+      tertiary: string;
     };
     border: {
       primary: string;

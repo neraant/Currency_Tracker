@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '@styles/GlobalStyle';
 import { DarkTheme } from '@styles/Theme';
 
+import { Footer } from '@components/common/Footer/Footer';
 import { Header } from '@components/common/Header/Header';
 
 import { ROUTES } from '@constants/Routes';
@@ -20,6 +21,8 @@ export const App = () => {
             <Route key={index} path={link} element={<Component />} />
           ))}
         </Switch>
+
+        <Footer />
       </Router>
     </ThemeProvider>
   );
