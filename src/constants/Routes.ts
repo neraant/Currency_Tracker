@@ -1,9 +1,9 @@
-import { HomePage } from '@pages/HomePage/HomePage';
-import { TimelinePage } from '@pages/TimelinePage/TimelinePage';
 import { BankCardPage } from '@pages/BankCardPage/BankCardPage';
 import { ContactsPage } from '@pages/ContactsPage/ContactsPage';
+import { HomePage } from '@pages/HomePage/HomePage';
+import { TimelinePage } from '@pages/TimelinePage/TimelinePage';
 
-export const Routes = [
+export const ROUTES = [
   {
     component: HomePage,
     link: '/',
