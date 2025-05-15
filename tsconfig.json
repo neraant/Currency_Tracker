@@ -15,8 +15,11 @@
       "@assets/*": ["assets/*"],
       "@constants/*": ["constants/*"],
       "@pages/*": ["pages/*"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@api/*": ["api/*"],
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/types/vite-env.d.ts"]
 }

@@ -1,6 +1,15 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+
+const env = dotenv.config().parsed;
+
+const envKeys = Object.keys(env).reduce((acc, key) => {
+  acc[`process.env.${key}`] = JSON.stringify(env[key]);
+  return acc;
+}, {});
 
 module.exports = {
   entry: './src/index.tsx',
@@ -30,9 +39,13 @@ module.exports = {
       '@constants': path.resolve(__dirname, 'src/constants/'),
       '@pages': path.resolve(__dirname, 'src/pages/'),
       '@types': path.resolve(__dirname, 'src/types/'),
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@api': path.resolve(__dirname, 'src/api/'),
+      '@hooks': path.resolve(__dirname, 'src/hooks/'),
     },
   },
   plugins: [
+    new webpack.DefinePlugin(envKeys),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',

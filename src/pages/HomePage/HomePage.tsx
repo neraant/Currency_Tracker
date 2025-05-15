@@ -1,5 +1,11 @@
-import { Banner } from '@components/common/Banner/Banner';
+import { Container } from '@styles/GlobalStyle';
+
+import { QuotesList } from '@components/HomePage/QuotesList/QuotesList';
 
 export const HomePage = () => {
-  return <Banner />;
+  return (
+    <Container>
+      <QuotesList />
+    </Container>
+  );
 };

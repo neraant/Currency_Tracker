@@ -1,5 +1,3 @@
-import { Banner } from '@components/common/Banner/Banner';
-
 export const BankCardPage = () => {
-  return <Banner />;
+  return <></>;
 };

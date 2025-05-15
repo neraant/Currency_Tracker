@@ -2,6 +2,7 @@ import { Container } from '@styles/GlobalStyle';
 
 import logo from '@assets/icons/logo_icon.svg';
 
+import { CURRENT_YEAR } from '@constants/CurrentDate';
 import { FOOTER_MENUS } from '@constants/FooterMenus';
 
 import { FooterMenuBlock } from './FooterMenuBlock';
@@ -12,19 +13,12 @@ import {
   FooterInfoText,
   FooterInfoTitle,
   FooterInfoTitleWrapper,
-  FooterMenu,
-  FooterMenuItem,
-  FooterMenuLink,
   FooterMenusWrapper,
-  FooterMenuTitle,
-  FooterMenuWrapper,
   FooterTop,
   FooterWrapper,
 } from './styled';
 
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
     <FooterContainer>
       <Container>
@@ -52,7 +46,7 @@ export const Footer = () => {
           </FooterTop>
 
           <FooterBottomText>
-            Startsup &copy; 2024-{currentYear}, All Rights Reserved
+            Startsup &copy; 2024-{CURRENT_YEAR}, All Rights Reserved
           </FooterBottomText>
         </FooterWrapper>
       </Container>

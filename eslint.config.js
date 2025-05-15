@@ -58,6 +58,21 @@ export default [
               position: 'before',
             },
             {
+              pattern: '@types/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '@hooks/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '@api/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
               pattern: '@assets/**',
               group: 'internal',
               position: 'after',
