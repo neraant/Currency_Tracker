@@ -1,18 +1,18 @@
 export const HEADER_NAVLINKS = [
   {
     label: 'Home',
-    link: '#',
+    link: '/',
   },
   {
     label: 'Timeline',
-    link: '#',
+    link: '/timeline',
   },
   {
     label: 'Bank card',
-    link: '#',
+    link: '/bank-card',
   },
   {
     label: 'Contacts',
-    link: '#',
+    link: '/contacts',
   },
 ];

@@ -7,6 +7,15 @@ export const GlobalStyle = createGlobalStyle`
 		box-sizing: border-box;
 		font-family: ${({ theme }) => theme.typography.fontFamily.poppins};
 	}
+	body {
+		background-color: ${({ theme }) => theme.background.primary};
+	}
+	#root {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-height: 100dvh;
+	}
 	a {
 		text-decoration: none;
 		color: ${({ theme }) => theme.text.primary};
@@ -15,6 +24,6 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.div`
   max-width: 1254px;
-  padding: 0px 15px;
+  padding: 0px 20px;
   margin: 0 auto;
 `;
