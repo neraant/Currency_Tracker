@@ -4,19 +4,25 @@ import { useQuery } from '@hooks/useQuery';
 
 import { fetchCurrencyData } from '@api/CurrencyApi';
 
+import { useSubject } from '@context/ObserverConext';
+
 import { formatCurrencyData } from '@utils/formatCurrencyData';
 
 import { QuotesListContainer, QuotesListTitle, QuotesListWrapper } from './styled';
-import { Currency } from '../../../types/asd';
+import { Currency } from '../../../types/currency';
 import { QuotesItem } from '../QuotesItem/QuotesItem';
 
 export const QuotesList = () => {
+  const subject = useSubject('last_updated');
+
   const { data, isLoading, error } = useQuery('currencies', fetchCurrencyData);
   const [currencies, setCurrencies] = useState<Currency[]>([]);
 
   useEffect(() => {
     if (!data) return;
-    setCurrencies(formatCurrencyData(data));
+    const { currencies, last_updated_at } = formatCurrencyData(data);
+    subject.setState(last_updated_at ?? '—');
+    setCurrencies(currencies);
   }, [data]);
 
   return (

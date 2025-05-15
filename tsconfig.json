@@ -18,6 +18,8 @@
       "@types/*": ["types/*"],
       "@api/*": ["api/*"],
       "@hooks/*": ["hooks/*"],
+      "@context/*": ["context/*"],
+      "@patterns/*": ["patterns/*"],
       "@utils/*": ["utils/*"]
     }
   },

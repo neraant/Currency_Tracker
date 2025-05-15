@@ -11,28 +11,32 @@ import { Header } from '@components/common/Header/Header';
 import { UpdateComponent } from '@components/common/UpdateComponent/UpdateComponent';
 import { Layout } from '@components/Layout/Layout';
 
+import { SubjectProvider } from '@context/ObserverConext';
+
 import { ROUTES } from '@constants/Routes';
 
 export const App = () => {
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
       <ThemeProvider theme={DarkTheme}>
-        <GlobalStyle />
-        <Router>
-          <Switch>
-            {ROUTES.map(({ component: Component, link }, index) => (
-              <Route
-                key={index}
-                path={link}
-                element={
-                  <Layout>
-                    <Component />
-                  </Layout>
-                }
-              />
-            ))}
-          </Switch>
-        </Router>
+        <SubjectProvider>
+          <GlobalStyle />
+          <Router>
+            <Switch>
+              {ROUTES.map(({ component: Component, link }, index) => (
+                <Route
+                  key={index}
+                  path={link}
+                  element={
+                    <Layout>
+                      <Component />
+                    </Layout>
+                  }
+                />
+              ))}
+            </Switch>
+          </Router>
+        </SubjectProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

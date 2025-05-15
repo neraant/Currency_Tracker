@@ -73,6 +73,16 @@ export default [
               position: 'before',
             },
             {
+              pattern: '@context/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '@patterns/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
               pattern: '@assets/**',
               group: 'internal',
               position: 'after',

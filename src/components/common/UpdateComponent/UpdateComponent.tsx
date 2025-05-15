@@ -1,15 +1,16 @@
 import { Container } from '@styles/GlobalStyle';
 
+import { useObserver } from '@hooks/useObserver';
+
+import { useSubject } from '@context/ObserverConext';
+
+import { formatTime } from '@utils/formatTime';
+
 import { LargeCircle, SmallCircle, UpdateText, UpdateWrapper } from './styled';
 
 export const UpdateComponent = () => {
-  const now = new Date();
-
-  const formattedTime = new Intl.DateTimeFormat('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  }).format(now);
+  const subject = useSubject('last_updated');
+  const lastUpdated = useObserver(subject);
 
   return (
     <div>
@@ -20,7 +21,12 @@ export const UpdateComponent = () => {
           </LargeCircle>
 
           <UpdateText>
-            Last updated at <time dateTime={now.toISOString()}>{formattedTime}</time>
+            Last updated at{' '}
+            {lastUpdated ? (
+              <time dateTime={new Date(lastUpdated).toISOString()}>{formatTime(lastUpdated)}</time>
+            ) : (
+              '—'
+            )}
           </UpdateText>
         </UpdateWrapper>
       </Container>

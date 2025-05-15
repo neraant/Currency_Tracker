@@ -16,5 +16,12 @@ export interface CurrencyApiResponse {
   data: {
     [code: string]: CurrencyDetail;
   };
-  meta?: any;
+  meta?: {
+    last_updated_at?: string;
+  };
+}
+
+export interface FormattedCurrencyData {
+  currencies: Currency[];
+  last_updated_at?: string;
 }
