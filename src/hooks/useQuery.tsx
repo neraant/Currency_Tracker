@@ -10,7 +10,7 @@ interface QueryFn<T> {
   (): Promise<T>;
 }
 
-interface CachedValue<T> {
+export interface CachedValue<T> {
   timestamp: number;
   data: T;
 }
@@ -30,7 +30,7 @@ export function useQuery<T>(
     const cached = memoryCache.get(key);
     if (cached && now - cached.timestamp < ttl) return cached.data;
 
-    const local = localStorage.getItem(`cache_${key}`);
+    const local = localStorage.getItem(`cache_${key}`.toUpperCase());
     if (local) {
       try {
         const parsed: CachedValue<T> = JSON.parse(local);
@@ -58,7 +58,7 @@ export function useQuery<T>(
       };
 
       memoryCache.set(key, cachedValue);
-      localStorage.setItem(`cache_${key}`, JSON.stringify(cachedValue));
+      localStorage.setItem(`cache_${key}`.toUpperCase(), JSON.stringify(cachedValue));
 
       setData(result);
       setIsLoading(false);

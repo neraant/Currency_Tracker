@@ -12,5 +12,8 @@ module.exports = merge(common, {
     compress: true,
     open: true,
     hot: true,
+    client: {
+      overlay: true,
+    },
   },
 });

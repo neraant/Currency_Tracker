@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { formatCurrencyData } from '@utils/formatCurrencyData';
+
 import { CURRENCIES } from '@constants/Currencies';
 
 const API_KEY = process.env.REACT_CURRENCY_API_KEY;
@@ -19,7 +21,7 @@ export const fetchCurrencyData = async () => {
       `${BASE_URL}?apikey=${API_KEY}&base_currency=${BASE_CURRENCY}&currencies=${currencies}`
     );
 
-    return data;
+    return formatCurrencyData(data);
   } catch (error) {
     console.error('Error fetching currencies data:', error);
     throw error;

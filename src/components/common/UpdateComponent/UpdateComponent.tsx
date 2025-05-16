@@ -1,16 +1,24 @@
 import { Container } from '@styles/GlobalStyle';
 
 import { useObserver } from '@hooks/useObserver';
+import { CachedValue } from '@hooks/useQuery';
 
 import { useSubject } from '@context/ObserverConext';
 
 import { formatTime } from '@utils/formatTime';
+import { StorageUtility } from '@utils/localStorage';
 
 import { LargeCircle, SmallCircle, UpdateText, UpdateWrapper } from './styled';
+import { FormattedCurrencyData } from '../../../types/currency';
 
 export const UpdateComponent = () => {
   const subject = useSubject('last_updated');
-  const lastUpdated = useObserver(subject);
+  const lastUpdated =
+    useObserver(subject) ||
+    StorageUtility.getItem<CachedValue<FormattedCurrencyData>>('CACHE_CURRENCIES')?.data
+      .last_updated_at;
+
+  console.log(lastUpdated);
 
   return (
     <div>

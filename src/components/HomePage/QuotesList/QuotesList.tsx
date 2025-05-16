@@ -20,8 +20,11 @@ export const QuotesList = () => {
 
   useEffect(() => {
     if (!data) return;
-    const { currencies, last_updated_at } = formatCurrencyData(data);
-    subject.setState(last_updated_at ?? '—');
+    const { currencies, last_updated_at } = data;
+
+    console.log(data);
+
+    subject.setState(last_updated_at ?? null);
     setCurrencies(currencies);
   }, [data]);
 

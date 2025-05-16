@@ -3,7 +3,7 @@ import { createContext, ReactNode, useContext } from 'react';
 import { Subject } from '@patterns/observer/Subject';
 
 interface ObserverStateMap {
-  last_updated: string;
+  last_updated: string | null;
 }
 
 type SubjectsMap = {
