@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
 		font-family: ${({ theme }) => theme.typography.fontFamily.poppins};
 	}
 	body {
+		position: relative;
 		background-color: ${({ theme }) => theme.background.primary};
 	}
 	#root {
@@ -19,6 +20,14 @@ export const GlobalStyle = createGlobalStyle`
 	a {
 		text-decoration: none;
 		color: ${({ theme }) => theme.text.primary};
+	}
+	ul {
+		list-style-type: none;
+	}
+	button {
+		background: none;
+		border: none;
+		outline: none;
 	}
 `;
 

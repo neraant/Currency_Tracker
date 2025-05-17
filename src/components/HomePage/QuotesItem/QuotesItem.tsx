@@ -9,18 +9,26 @@ import {
 interface QuotesItemsProps {
   icon: string;
   name: string;
-  info: string;
+  formattedValue: string;
+  code: string;
+  selectCurrency: (currency: string) => void;
 }
 
-export const QuotesItem = ({ icon, name, info }: QuotesItemsProps) => {
+export const QuotesItem = ({
+  icon,
+  name,
+  formattedValue,
+  code,
+  selectCurrency,
+}: QuotesItemsProps) => {
   return (
-    <QuotesCard>
+    <QuotesCard onClick={() => selectCurrency(code)}>
       <QuotesCardIcon src={icon} alt={name} />
 
       <QuotesCardInfo>
         <QuotesCardTitle>{name}</QuotesCardTitle>
 
-        <QuotesCardText>{info}</QuotesCardText>
+        <QuotesCardText>{formattedValue}</QuotesCardText>
       </QuotesCardInfo>
     </QuotesCard>
   );

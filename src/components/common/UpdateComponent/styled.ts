@@ -28,11 +28,27 @@ export const LargeCircle = styled.span`
     background: ${({ theme }) => theme.status.success};
     opacity: 0.35;
     z-index: 1;
+    animation: pulse 1s infinite ease-out;
   }
 
   @media (max-width: 620px) {
     width: 28px;
     height: 28px;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    70% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
   }
 `;
 

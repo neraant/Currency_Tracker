@@ -1,43 +1,38 @@
-import { useEffect, useState } from 'react';
-
-import { useQuery } from '@hooks/useQuery';
-
-import { fetchCurrencyData } from '@api/CurrencyApi';
-
-import { useSubject } from '@context/ObserverConext';
-
-import { formatCurrencyData } from '@utils/formatCurrencyData';
+import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
+import { Spinner } from '@components/common/Spinner/Spinner';
 
 import { QuotesListContainer, QuotesListTitle, QuotesListWrapper } from './styled';
 import { Currency } from '../../../types/currency';
 import { QuotesItem } from '../QuotesItem/QuotesItem';
 
-export const QuotesList = () => {
-  const subject = useSubject('last_updated');
+interface QuotesListProps {
+  isLoading: boolean;
+  currencies: Currency[];
+  error: Error | null;
+  selectCurrency: (currency: string) => void;
+}
 
-  const { data, isLoading, error } = useQuery('currencies', fetchCurrencyData);
-  const [currencies, setCurrencies] = useState<Currency[]>([]);
+export const QuotesList = ({ isLoading, currencies, error, selectCurrency }: QuotesListProps) => {
+  if (error) {
+    return (
+      <QuotesListContainer>
+        <QuotesListTitle>Quotes</QuotesListTitle>
 
-  useEffect(() => {
-    if (!data) return;
-    const { currencies, last_updated_at } = data;
-
-    console.log(data);
-
-    subject.setState(last_updated_at ?? null);
-    setCurrencies(currencies);
-  }, [data]);
+        <ErrorFallback errorMessage={`Error loading currencies: ${error.message}`} />
+      </QuotesListContainer>
+    );
+  }
 
   return (
     <QuotesListContainer>
       <QuotesListTitle>Quotes</QuotesListTitle>
 
       {isLoading ? (
-        'loading'
+        <Spinner />
       ) : (
         <QuotesListWrapper>
-          {currencies.map(({ name, icon, formattedValue }) => (
-            <QuotesItem key={name} name={name} icon={icon} info={formattedValue} />
+          {currencies.map((currency) => (
+            <QuotesItem {...currency} key={currency.code} selectCurrency={selectCurrency} />
           ))}
         </QuotesListWrapper>
       )}

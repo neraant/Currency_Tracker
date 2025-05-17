@@ -18,7 +18,7 @@ interface SubjectProviderProps {
 
 export const SubjectProvider = ({ children }: SubjectProviderProps) => {
   const subjects: SubjectsMap = {
-    last_updated: new Subject<string>(''),
+    last_updated: new Subject<string | null>(null),
   };
 
   return <ObserverContext.Provider value={subjects}>{children}</ObserverContext.Provider>;

@@ -27,3 +27,20 @@ export const fetchCurrencyData = async () => {
     throw error;
   }
 };
+
+export const convertCurrency = async (from: string | null, to: string) => {
+  if (!API_KEY || !BASE_URL) {
+    throw new Error('Missing environment variables');
+  }
+
+  try {
+    const { data } = await axios.get(
+      `${BASE_URL}?apikey=${API_KEY}&base_currency=${from}&currencies=${to}`
+    );
+
+    return data;
+  } catch (error) {
+    console.error('Error converting currencies:', error);
+    throw error;
+  }
+};

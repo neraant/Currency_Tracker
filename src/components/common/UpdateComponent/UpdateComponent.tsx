@@ -18,8 +18,6 @@ export const UpdateComponent = () => {
     StorageUtility.getItem<CachedValue<FormattedCurrencyData>>('CACHE_CURRENCIES')?.data
       .last_updated_at;
 
-  console.log(lastUpdated);
-
   return (
     <div>
       <Container>
