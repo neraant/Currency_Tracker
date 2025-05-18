@@ -41,6 +41,11 @@ export const ConverterContainer = styled.div<ConverterContainerProps>`
       visibility: visible;
       transform: translate(-50%, -50%);
     `}
+
+  @media (max-width: 620px) {
+    max-width: calc(100vw - 20px);
+    padding: ${({ theme }) => theme.spacing[6]};
+  }
 `;
 
 export const ConverterWrapper = styled.div`
@@ -57,6 +62,10 @@ export const ConverterTitle = styled.h3`
   font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
   font-weight: ${({ theme }) => theme.typography.fontWeight.light};
   color: ${({ theme }) => theme.text.primary};
+
+  @media (max-width: 620px) {
+    font-size: ${({ theme }) => theme.typography.fontSize['xl']};
+  }
 `;
 
 export const ConverterCloseButton = styled.button`
@@ -70,6 +79,11 @@ export const ConverterCloseButton = styled.button`
 
   &:hover {
     opacity: 0.5;
+  }
+
+  @media (max-width: 620px) {
+    font-size: ${({ theme }) => theme.typography.fontSize['lg']};
+    top: ${({ theme }) => theme.spacing[6]};
   }
 `;
 
@@ -111,6 +125,11 @@ export const ConverterDropDownInput = styled.input`
   border-radius: 4px;
   border: none;
   outline: 1px solid ${({ theme }) => theme.border.primary};
+
+  @media (max-width: 620px) {
+    font-size: ${({ theme }) => theme.typography.fontSize['lg']};
+    padding: ${({ theme }) => theme.spacing[2]};
+  }
 `;
 
 export const ConverterDropDownLabel = styled.span`
@@ -124,6 +143,11 @@ export const ConverterDropDownLabel = styled.span`
   border-radius: 4px;
   border: none;
   outline: 1px solid ${({ theme }) => theme.border.primary};
+
+  @media (max-width: 620px) {
+    font-size: ${({ theme }) => theme.typography.fontSize['lg']};
+    padding: ${({ theme }) => theme.spacing[2]};
+  }
 `;
 
 export const ConverterDropDownList = styled.ul<ConverterDropDownListProps>`
@@ -153,6 +177,10 @@ export const ConverterDropDownList = styled.ul<ConverterDropDownListProps>`
       opacity: 1;
       transform: scaleY(1);
     `}
+
+  @media (max-width: 620px) {
+    top: 44px;
+  }
 `;
 
 export const ConverterDropDownItem = styled.li`
@@ -188,6 +216,11 @@ export const ConverterInput = styled.input<ConverterInputProps>`
     css`
       outline: 1px solid ${({ theme }) => theme.status.error};
     `}
+
+  @media (max-width: 620px) {
+    font-size: ${({ theme }) => theme.typography.fontSize['lg']};
+    padding: ${({ theme }) => theme.spacing[2]};
+  }
 `;
 
 export const ConverterOutput = styled.input`
@@ -200,6 +233,11 @@ export const ConverterOutput = styled.input`
   border-radius: 4px;
   border: none;
   outline: 1px solid ${({ theme }) => theme.border.primary};
+
+  @media (max-width: 620px) {
+    font-size: ${({ theme }) => theme.typography.fontSize['lg']};
+    padding: ${({ theme }) => theme.spacing[2]};
+  }
 `;
 
 export const ConverterButton = styled.button`
@@ -216,5 +254,9 @@ export const ConverterButton = styled.button`
   &:hover {
     background-color: transparent;
     color: ${({ theme }) => theme.neutral.white};
+  }
+
+  @media (max-width: 620px) {
+    font-size: ${({ theme }) => theme.typography.fontSize['lg']};
   }
 `;

@@ -17,7 +17,7 @@ export interface CachedValue<T> {
 
 const memoryCache = new Map<string, CachedValue<any>>();
 
-const TTL = 1000 * 60 * 100000;
+const TTL = 1000 * 60 * 1000000;
 
 export function useQuery<T>(
   key: string,
