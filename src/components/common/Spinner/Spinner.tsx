@@ -1,5 +1,9 @@
 import { Spin } from './styled';
 
-export const Spinner = () => {
-  return <Spin />;
+interface SpinnerProps {
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+}
+
+export const Spinner = ({ size }: SpinnerProps) => {
+  return <Spin $size={size} />;
 };

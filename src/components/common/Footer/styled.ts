@@ -5,7 +5,7 @@ import arrowIcon from '@assets/icons/arrow_icon.svg';
 
 export const FooterContainer = styled.footer`
   background-color: ${({ theme }) => theme.background.primary};
-  padding: ${({ theme }) => theme.spacing[10]} 0;
+  padding: ${({ theme }) => theme.spacing[14]} 0 ${({ theme }) => theme.spacing[10]} 0;
 `;
 
 export const FooterWrapper = styled.div`

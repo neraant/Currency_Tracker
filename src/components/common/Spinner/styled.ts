@@ -1,8 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Spin = styled.span`
-	width: 48px;
-	height: 48px;
+interface SpinProps {
+  $size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+}
+
+const sizeMap = {
+  xs: '16px',
+  sm: '20px',
+  md: '24px',
+  lg: '32px',
+  xl: '40px',
+};
+
+export const Spin = styled.span<SpinProps>`
+  width: ${({ $size }) => sizeMap[$size || 'lg']};
+  height: ${({ $size }) => sizeMap[$size || 'lg']};
 	border: 5px solid #FFF;
 	border-bottom-color: transparent;
 	border-radius: 50%;

@@ -4,13 +4,17 @@ import { Subject } from '@patterns/observer/Subject';
 
 interface ObserverStateMap {
   last_updated: string | null;
+  notification: {
+    isPopup: boolean;
+    message: string;
+  };
 }
 
 type SubjectsMap = {
   [K in keyof ObserverStateMap]: Subject<ObserverStateMap[K]>;
 };
 
-const ObserverContext = createContext<SubjectsMap | null>(null);
+export const ObserverContext = createContext<SubjectsMap | null>(null);
 
 interface SubjectProviderProps {
   children: ReactNode;
@@ -19,6 +23,10 @@ interface SubjectProviderProps {
 export const SubjectProvider = ({ children }: SubjectProviderProps) => {
   const subjects: SubjectsMap = {
     last_updated: new Subject<string | null>(null),
+    notification: new Subject<{ isPopup: boolean; message: string }>({
+      isPopup: false,
+      message: '',
+    }),
   };
 
   return <ObserverContext.Provider value={subjects}>{children}</ObserverContext.Provider>;
