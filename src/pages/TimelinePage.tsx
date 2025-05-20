@@ -45,8 +45,6 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
           handleCloseModal={this.handleCloseModal}
           handleOpenModal={this.handleOpenModal}
         />
-
-        <Overlay isOpen={isModal} />
       </Container>
     );
   }

@@ -1,21 +1,12 @@
 import { ChangeEvent, Component, createRef, ReactNode } from 'react';
 
+import { Modal } from '@components/common/Modal/Modal';
+
+import { ChartFieldName, IChartBar, IChartBarFormData, IFormValidationState } from '@typings/chart';
+
 import { CHART_BAR_FIELDS } from '@constants/Chart';
 
-import {
-  ChartButton,
-  ChartCloseButton,
-  ChartForm,
-  ChartInputsContainer,
-  ChartTitle,
-  ChartWrapper,
-} from './styled';
-import {
-  ChartFieldName,
-  IChartBar,
-  IChartBarFormData,
-  IFormValidationState,
-} from '../../../types/chart';
+import { ChartInputsContainer } from './styled';
 import ChartInputComponent from '../ChartInput/ChartInputComponent';
 
 interface IChartModalProps {
@@ -182,13 +173,7 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
     const { timestamp } = defaultValues;
 
     return (
-      <ChartForm ref={this.currencyModalRef} $isModal={isModal}>
-        <ChartWrapper>
-          <ChartTitle>Enter chart data</ChartTitle>
-
-          <ChartCloseButton onClick={handleCloseModal}>&#10005;</ChartCloseButton>
-        </ChartWrapper>
-
+      <Modal isOpen={isModal} onClose={handleCloseModal} onSubmit={this.handleSubmit}>
         <ChartInputsContainer>
           <ChartInputComponent
             key="timestamp"
@@ -213,9 +198,7 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
             );
           })}
         </ChartInputsContainer>
-
-        <ChartButton onClick={this.handleSubmit}>Edit</ChartButton>
-      </ChartForm>
+      </Modal>
     );
   }
 }

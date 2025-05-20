@@ -2,7 +2,7 @@ import { Component, Context, ContextType, createRef } from 'react';
 
 import 'chartjs-adapter-luxon';
 
-import { ActiveElement, Chart, ChartEvent, registerables } from 'chart.js';
+import { ActiveElement, Chart, registerables } from 'chart.js';
 import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial';
 
 import { DarkTheme } from '@styles/Theme';
@@ -11,10 +11,11 @@ import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Popup } from '@components/common/Popup/Popup';
 import { Spinner } from '@components/common/Spinner/Spinner';
 
-import { fetchChartData } from '@api/TwelveDataApi';
+import { fetchChartData } from '@api/twelveDataApi';
 
 import { ObserverContext } from '@context/ObserverConext';
 
+import { IChartBar, IChartEntry } from '@typings/chart';
 import { getRandomData } from '@utils/chartMockData';
 
 import { CURRENCY_ICONS, CURRENCY_NAMES } from '@constants/Currencies';
@@ -29,7 +30,6 @@ import {
 
 import { AxiosError } from 'axios';
 
-import { IChartBar, IChartEntry } from '../../../types/chart';
 import { ChartModal } from '../ChartModal/ChartModal';
 
 Chart.register(...registerables, CandlestickController, CandlestickElement);
