@@ -2,22 +2,24 @@ import { Component } from 'react';
 
 import { Container } from '@styles/GlobalStyle';
 
-import { Overlay } from '@components/common/Overlay/Overlay';
+import { CurrencyDropDown } from '@components/common/CurrencyDropDown/CurrencyDropDown';
 import { ChartComponent } from '@components/TimelinePage/ChartComponent/ChartComponent';
-import { CurrencyDropDown } from '@components/TimelinePage/CurrencyDropDown/CurrencyDropDown';
+import { ChartSearch } from '@components/TimelinePage/ChartSearch/ChartSearch';
+
+import { CurrencyCode } from '@typings/currency';
 
 interface ITimelinePageState {
-  selectedCurrency: string;
+  selectedCurrency: CurrencyCode;
   isModal: boolean;
 }
 
 export class TimelinePage extends Component<{}, ITimelinePageState> {
   state: ITimelinePageState = {
-    selectedCurrency: 'USD',
+    selectedCurrency: CurrencyCode.USD,
     isModal: false,
   };
 
-  setCurrency = (newCurrency: string) => {
+  setCurrency = (newCurrency: CurrencyCode) => {
     this.setState({ selectedCurrency: newCurrency });
   };
 
@@ -34,10 +36,16 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
 
     return (
       <Container>
-        <CurrencyDropDown
-          setCurrency={(currency) => this.setCurrency(currency)}
-          selectedCurrency={selectedCurrency}
-        />
+        <CurrencyDropDown setCurrency={this.setCurrency} selectedCurrency={selectedCurrency}>
+          {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (
+            <ChartSearch
+              query={query}
+              handleDropDown={handleDropDown}
+              handleInputChange={handleInputChange}
+              handleKeyDown={handleKeyDown}
+            />
+          )}
+        </CurrencyDropDown>
 
         <ChartComponent
           selectedCurrency={selectedCurrency}

@@ -1,4 +1,4 @@
-import { Component, Context, ContextType, createRef } from 'react';
+import { Component, ContextType, createRef } from 'react';
 
 import 'chartjs-adapter-luxon';
 
@@ -16,6 +16,7 @@ import { fetchChartData } from '@api/twelveDataApi';
 import { ObserverContext } from '@context/ObserverConext';
 
 import { IChartBar, IChartEntry } from '@typings/chart';
+import { CurrencyCode } from '@typings/currency';
 import { getRandomData } from '@utils/chartMockData';
 
 import { CURRENCY_ICONS, CURRENCY_NAMES } from '@constants/Currencies';
@@ -35,7 +36,7 @@ import { ChartModal } from '../ChartModal/ChartModal';
 Chart.register(...registerables, CandlestickController, CandlestickElement);
 
 interface IChartComponentProps {
-  selectedCurrency: string;
+  selectedCurrency: CurrencyCode;
   isModal: boolean;
   handleCloseModal: () => void;
   handleOpenModal: () => void;

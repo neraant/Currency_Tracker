@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { Container } from '@styles/GlobalStyle';
 
-import { Overlay } from '@components/common/Overlay/Overlay';
 import { ConvertModal } from '@components/HomePage/ConvertModal/ConvertModal';
 import { QuotesList } from '@components/HomePage/QuotesList/QuotesList';
 

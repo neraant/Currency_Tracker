@@ -5,4 +5,9 @@ export const MapWrapper = styled.div`
   width: 100%;
   background-color: lightgrey;
   min-height: 460px;
+
+  @media (max-width: 620px) {
+    min-height: 360px;
+    max-height: 360px;
+  }
 `;

@@ -108,6 +108,8 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
     const isLowValid = !isNaN(lowVal);
     const isCloseValid = !isNaN(closeVal);
 
+    const isAllValid = isOpenValid && isHighValid && isLowValid && isCloseValid;
+
     const validations: IFormValidationState = {
       open: isOpenValid,
       high: isHighValid,
@@ -116,7 +118,7 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
       allValid: false,
     };
 
-    if (isOpenValid && isHighValid && isLowValid && isCloseValid) {
+    if (isAllValid) {
       if (highVal < Math.max(openVal, lowVal, closeVal)) {
         validations.high = false;
       }

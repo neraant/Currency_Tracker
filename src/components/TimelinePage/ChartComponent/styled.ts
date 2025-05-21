@@ -5,12 +5,14 @@ export const CurrencyInfoWrapper = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.spacing[6]};
   margin-bottom: ${({ theme }) => theme.spacing[10]};
+  margin-top: ${({ theme }) => theme.spacing[14]};
 
   @media (max-width: 920px) {
     gap: ${({ theme }) => theme.spacing[2]};
   }
   @media (max-width: 620px) {
     margin-bottom: ${({ theme }) => theme.spacing[6]};
+    margin-top: ${({ theme }) => theme.spacing[8]};
   }
 `;
 
