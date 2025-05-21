@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { CACHE_TTL } from '@constants/time';
+
 interface useQueryResult<T> {
   data: T | null;
   isLoading: boolean;
@@ -17,35 +19,24 @@ export interface CachedValue<T> {
 
 const memoryCache = new Map<string, CachedValue<any>>();
 
-const TTL = 1000 * 60 * 1000000;
-
 export function useQuery<T>(
   key: string,
   queryFn: QueryFn<T>,
-  ttl: number = TTL
+  ttl: number = CACHE_TTL
 ): useQueryResult<T> {
-  const [data, setData] = useState<T | null>(() => {
-    const now = Date.now();
-
-    const cached = memoryCache.get(key);
-    if (cached && now - cached.timestamp < ttl) return cached.data;
-
-    const local = localStorage.getItem(`cache_${key}`.toUpperCase());
-    if (local) {
-      try {
-        const parsed: CachedValue<T> = JSON.parse(local);
-        if (now - parsed.timestamp < ttl) {
-          memoryCache.set(key, parsed);
-          return parsed.data;
-        }
-      } catch (error) {}
-    }
-
-    return null;
-  });
-
+  const [data, setData] = useState<T | null>(() => readCache());
   const [isLoading, setIsLoading] = useState(!memoryCache.has(key));
   const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const now = Date.now();
+    const cached = memoryCache.get(key);
+    const isMemoryStale = !cached || now - cached.timestamp >= ttl;
+
+    if (isMemoryStale) {
+      fetchData();
+    }
+  }, [key, ttl]);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -68,14 +59,27 @@ export function useQuery<T>(
     }
   };
 
-  useEffect(() => {
+  function readCache(): T | null {
     const now = Date.now();
 
     const cached = memoryCache.get(key);
-    if (!cached || now - cached.timestamp >= ttl) {
-      fetchData();
+    const isMemoryReset = cached ? now - cached.timestamp < ttl : false;
+    if (cached && isMemoryReset) return cached.data;
+
+    const local = localStorage.getItem(`cache_${key}`.toUpperCase());
+    if (local) {
+      try {
+        const parsed: CachedValue<T> = JSON.parse(local);
+        const isLocalReset = now - parsed.timestamp < ttl;
+        if (isLocalReset) {
+          memoryCache.set(key, parsed);
+          return parsed.data;
+        }
+      } catch (error) {}
     }
-  }, [key, ttl]);
+
+    return null;
+  }
 
   return { data, isLoading, error };
 }

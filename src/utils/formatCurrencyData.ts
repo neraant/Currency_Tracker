@@ -1,6 +1,6 @@
-import { CURRENCY_NAMES, CURRENCY_ICONS } from '@constants/Currencies';
+import { Currency, CurrencyApiResponse, FormattedCurrencyData } from '@typings/currency';
 
-import { Currency, CurrencyApiResponse, FormattedCurrencyData } from '../types/currency';
+import { CURRENCY_NAMES, CURRENCY_ICONS } from '@constants/Currencies';
 
 export const formatCurrencyData = (data: CurrencyApiResponse): FormattedCurrencyData => {
   const formatted: Currency[] = [];

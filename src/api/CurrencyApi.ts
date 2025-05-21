@@ -1,26 +1,21 @@
-import axios from 'axios';
-
+import { CurrencyApiResponse, CurrencyDetail } from '@typings/currency';
+import { ENV } from '@utils/env';
 import { formatCurrencyData } from '@utils/formatCurrencyData';
 
-import { CURRENCIES } from '@constants/Currencies';
+import { BASE_CURRENCY, CURRENCIES } from '@constants/Currencies';
 
-const API_KEY = process.env.REACT_CURRENCY_API_KEY;
-const BASE_URL = process.env.REACT_CURRENCY_API_BASE_URL;
-
-const BASE_CURRENCY = 'BRL';
+import { currencyApiClient } from './clents';
 
 export const fetchCurrencyData = async () => {
-  if (!API_KEY || !BASE_URL) {
-    throw new Error('Missing environment variables');
-  }
-
   const currencies = CURRENCIES.join(',');
-
   try {
-    const { data } = await axios.get(
-      `${BASE_URL}?apikey=${API_KEY}&base_currency=${BASE_CURRENCY}&currencies=${currencies}`
-    );
-
+    const data = await currencyApiClient.get<CurrencyApiResponse>('', {
+      params: {
+        apikey: ENV.CURRENCY_API_KEY,
+        base_currency: BASE_CURRENCY,
+        currencies: currencies,
+      },
+    });
     return formatCurrencyData(data);
   } catch (error) {
     console.error('Error fetching currencies data:', error);
@@ -29,16 +24,14 @@ export const fetchCurrencyData = async () => {
 };
 
 export const convertCurrency = async (from: string | null, to: string) => {
-  if (!API_KEY || !BASE_URL) {
-    throw new Error('Missing environment variables');
-  }
-
   try {
-    const { data } = await axios.get(
-      `${BASE_URL}?apikey=${API_KEY}&base_currency=${from}&currencies=${to}`
-    );
-
-    return data;
+    return await currencyApiClient.get<CurrencyDetail>('', {
+      params: {
+        apikey: ENV.CURRENCY_API_KEY,
+        base_currency: from,
+        currencies: to,
+      },
+    });
   } catch (error) {
     console.error('Error converting currencies:', error);
     throw error;

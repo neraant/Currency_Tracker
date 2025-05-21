@@ -1,5 +1,23 @@
+export enum CurrencyCode {
+  USD = 'USD',
+  EUR = 'EUR',
+  JPY = 'JPY',
+  ARS = 'ARS',
+  AUD = 'AUD',
+  BTC = 'BTC',
+  CAD = 'CAD',
+  CNY = 'CNY',
+  GBP = 'GBP',
+}
+
+export enum CacheCode {
+  CACHE_CURRENCIES = 'CACHE_CURRENCIES',
+}
+
+export const MAX_PARSED_VALUE = 1_000_000;
+
 export interface Currency {
-  code: string;
+  code: CurrencyCode;
   name: string;
   icon: string;
   value: number;
