@@ -79,8 +79,6 @@ export const ConvertModal = ({
       document.addEventListener('mousedown', handleOutsideClick);
     }
 
-    document.body.style.overflow = isModal ? 'hidden' : '';
-
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
       document.body.style.overflow = '';

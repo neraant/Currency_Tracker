@@ -44,6 +44,7 @@ module.exports = {
       '@hooks': path.resolve(__dirname, 'src/hooks/'),
       '@context': path.resolve(__dirname, 'src/context/'),
       '@patterns': path.resolve(__dirname, 'src/patterns/'),
+      '@data': path.resolve(__dirname, 'src/data/'),
     },
   },
   plugins: [

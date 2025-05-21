@@ -5,6 +5,7 @@
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "strict": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -20,6 +21,7 @@
       "@hooks/*": ["hooks/*"],
       "@context/*": ["context/*"],
       "@patterns/*": ["patterns/*"],
+      "@data/*": ["data/*"],
       "@utils/*": ["utils/*"]
     }
   },

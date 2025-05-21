@@ -1,4 +1,9 @@
-import { Currency, CurrencyApiResponse, FormattedCurrencyData } from '@typings/currency';
+import {
+  Currency,
+  CurrencyApiResponse,
+  FormattedCurrencyData,
+  CurrencyCode,
+} from '@typings/currency';
 
 import { CURRENCY_NAMES, CURRENCY_ICONS } from '@constants/Currencies';
 
@@ -6,10 +11,12 @@ export const formatCurrencyData = (data: CurrencyApiResponse): FormattedCurrency
   const formatted: Currency[] = [];
 
   for (const [code, details] of Object.entries(data.data)) {
+    const currencyCode = code as CurrencyCode;
+
     formatted.push({
-      code,
-      name: CURRENCY_NAMES[code] || code,
-      icon: CURRENCY_ICONS[code],
+      code: currencyCode,
+      name: CURRENCY_NAMES[currencyCode] || code,
+      icon: CURRENCY_ICONS[currencyCode],
       value: parseFloat(details.value.toFixed(2)),
       formattedValue: `R$ ${details.value.toFixed(2)}`,
     });

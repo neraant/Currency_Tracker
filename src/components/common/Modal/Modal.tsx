@@ -27,8 +27,12 @@ export const Modal = ({ children, isOpen, isLoading, onClose, onSubmit }: ModalP
     };
 
     document.addEventListener('mousedown', handleOutsideClick);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
 
-    return () => document.removeEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.body.style.overflow = '';
+    };
   }, [isOpen, onClose]);
 
   if (!modalRoot) return null;
