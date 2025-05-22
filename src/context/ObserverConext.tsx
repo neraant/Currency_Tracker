@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, ReactNode, useContext, useMemo } from 'react';
 
 import { Subject } from '@patterns/observer/Subject';
 
@@ -21,13 +21,16 @@ interface SubjectProviderProps {
 }
 
 export const SubjectProvider = ({ children }: SubjectProviderProps) => {
-  const subjects: SubjectsMap = {
-    last_updated: new Subject<string | null>(null),
-    notification: new Subject<{ isPopup: boolean; message: string }>({
-      isPopup: false,
-      message: '',
+  const subjects = useMemo<SubjectsMap>(
+    () => ({
+      last_updated: new Subject<string | null>(null),
+      notification: new Subject<{ isPopup: boolean; message: string }>({
+        isPopup: false,
+        message: '',
+      }),
     }),
-  };
+    []
+  );
 
   return <ObserverContext.Provider value={subjects}>{children}</ObserverContext.Provider>;
 };

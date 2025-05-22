@@ -1,18 +1,17 @@
-import axios from 'axios';
+import { TwelveDataApiResponse } from '@typings/twelvedataapi';
+import { ENV } from '@utils/env';
 
-const API_KEY = process.env.REACT_TWELVEDATA_API_KEY;
-const BASE_URL = process.env.REACT_TWELVEDATA_BASE_UTL;
+import { twelveDataClient } from './clents';
 
 export const fetchChartData = async (symbol: string, period: string) => {
-  if (!API_KEY || !BASE_URL) {
-    throw new Error('Missing environment variables');
-  }
-
   try {
-    const { data } = await axios.get(
-      `${BASE_URL}/time_series?symbol=${symbol}&interval=${period}&apikey=${API_KEY}`
-    );
-
+    const data = await twelveDataClient.get<TwelveDataApiResponse>('/time_series', {
+      params: {
+        symbol,
+        interval: period,
+        apikey: ENV.TWELVEDATA_API_KEY,
+      },
+    });
     return data;
   } catch (error) {
     console.error('Error while fetching data TWELVEDATA: ', error);

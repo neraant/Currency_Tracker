@@ -1,23 +1,23 @@
 import { Component } from 'react';
 
-import { Container } from '@styles/GlobalStyle';
-
 import { Overlay } from '@components/common/Overlay/Overlay';
 import { ChartComponent } from '@components/TimelinePage/ChartComponent/ChartComponent';
 import { CurrencyDropDown } from '@components/TimelinePage/CurrencyDropDown/CurrencyDropDown';
+import { Container } from '@styles/GlobalStyle';
+import { CurrencyCode } from '@typings/currency';
 
 interface ITimelinePageState {
-  selectedCurrency: string;
+  selectedCurrency: CurrencyCode;
   isModal: boolean;
 }
 
 export class TimelinePage extends Component<{}, ITimelinePageState> {
   state: ITimelinePageState = {
-    selectedCurrency: 'USD',
+    selectedCurrency: CurrencyCode.USD,
     isModal: false,
   };
 
-  setCurrency = (newCurrency: string) => {
+  setCurrency = (newCurrency: CurrencyCode) => {
     this.setState({ selectedCurrency: newCurrency });
   };
 
@@ -35,7 +35,7 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
     return (
       <Container>
         <CurrencyDropDown
-          setCurrency={(currency) => this.setCurrency(currency)}
+          setCurrency={(currency: CurrencyCode) => this.setCurrency(currency)}
           selectedCurrency={selectedCurrency}
         />
 

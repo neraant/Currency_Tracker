@@ -1,6 +1,7 @@
 import { ChangeEvent, Component, createRef } from 'react';
 
-import { CURRENCIES } from '@constants/Currencies';
+import { CURRENCIES } from '@constants/currencies';
+import { CurrencyCode } from '@typings/currency';
 
 import {
   CurrencyDropDownInput,
@@ -10,14 +11,14 @@ import {
 } from './styled';
 
 interface ICurrencyDropDownProps {
-  selectedCurrency: string;
-  setCurrency: (newCurrency: string) => void;
+  selectedCurrency: CurrencyCode;
+  setCurrency: (newCurrency: CurrencyCode) => void;
 }
 
 interface ICurrencyDropDownState {
-  currency: string;
+  currency: CurrencyCode;
   isDropped: boolean;
-  filteredCurrencies: string[];
+  filteredCurrencies: CurrencyCode[];
 }
 
 export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrencyDropDownState> {
@@ -68,7 +69,7 @@ export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrenc
   };
 
   handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
+    const input = e.target.value as CurrencyCode;
     const filtered = CURRENCIES.filter((cur) => cur.toLowerCase().includes(input.toLowerCase()));
 
     this.setState({
@@ -77,7 +78,7 @@ export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrenc
     });
   };
 
-  handleSelect = (newCurrency: string) => {
+  handleSelect = (newCurrency: CurrencyCode) => {
     this.props.setCurrency(newCurrency);
     this.setState({
       isDropped: false,

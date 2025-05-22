@@ -1,25 +1,20 @@
 import { useEffect, useState } from 'react';
 
-import { Container } from '@styles/GlobalStyle';
-
-import { Overlay } from '@components/common/Overlay/Overlay';
+import { fetchCurrencyData } from '@api/currencyApi';
 import { ConvertModal } from '@components/HomePage/ConvertModal/ConvertModal';
 import { QuotesList } from '@components/HomePage/QuotesList/QuotesList';
-
-import { useQuery } from '@hooks/useQuery';
-
-import { fetchCurrencyData } from '@api/CurrencyApi';
-
+import { CacheKeys } from '@constants/cacheKeys';
 import { useSubject } from '@context/ObserverConext';
-
-import { Currency } from '../types/currency';
+import { useQuery } from '@hooks/useQuery';
+import { Container } from '@styles/GlobalStyle';
+import { Currency, CurrencyCode } from '@typings/currency';
 
 export const HomePage = () => {
   const [currencies, setCurrencies] = useState<Currency[]>([]);
-  const [clickedCurrency, setClickedCurrency] = useState<string | null>(null);
+  const [clickedCurrency, setClickedCurrency] = useState<CurrencyCode | null>(null);
   const [isModal, setIsModal] = useState(false);
 
-  const { data, isLoading, error } = useQuery('currencies', fetchCurrencyData);
+  const { data, isLoading, error } = useQuery(CacheKeys.CURRENCIES, fetchCurrencyData);
   const subject = useSubject('last_updated');
 
   useEffect(() => {
@@ -30,7 +25,7 @@ export const HomePage = () => {
     setCurrencies(currencies);
   }, [data]);
 
-  const selectCurrency = (currency: string) => {
+  const selectCurrency = (currency: CurrencyCode) => {
     setClickedCurrency(currency);
     setIsModal(true);
   };
@@ -53,8 +48,6 @@ export const HomePage = () => {
         handleCloseModal={handleCloseModal}
         isModal={isModal}
       />
-
-      <Overlay isOpen={isModal} />
     </Container>
   );
 };

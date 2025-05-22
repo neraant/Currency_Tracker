@@ -1,21 +1,11 @@
-import { ChangeEvent, Component, createRef, ReactNode } from 'react';
+import { ChangeEvent, createRef, PureComponent, ReactNode } from 'react';
 
-import { CHART_BAR_FIELDS } from '@constants/Chart';
+import { Modal } from '@components/common/Modal/Modal';
+import { CHART_BAR_FIELDS, INITIAL_BAR_STATE } from '@constants/chart';
+import { ChartFieldName, IChartBar, IChartBarFormData, IFormValidationState } from '@typings/chart';
+import { formatTimestamp } from '@utils/formatTimestamp';
 
-import {
-  ChartButton,
-  ChartCloseButton,
-  ChartForm,
-  ChartInputsContainer,
-  ChartTitle,
-  ChartWrapper,
-} from './styled';
-import {
-  ChartFieldName,
-  IChartBar,
-  IChartBarFormData,
-  IFormValidationState,
-} from '../../../types/chart';
+import { ChartInputsContainer } from './styled';
 import ChartInputComponent from '../ChartInput/ChartInputComponent';
 
 interface IChartModalProps {
@@ -33,7 +23,7 @@ interface IChartModalState {
   validation: IFormValidationState;
 }
 
-export class ChartModal extends Component<IChartModalProps, IChartModalState> {
+export class ChartModal extends PureComponent<IChartModalProps, IChartModalState> {
   currencyModalRef = createRef<HTMLDivElement>();
 
   constructor(props: IChartModalProps) {
@@ -105,17 +95,20 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
     );
   };
 
+  parseToFloat = (values: string[]): number[] => {
+    return [...values.map((value) => parseFloat(value))];
+  };
+
   validateAllFields = (): boolean => {
     const { open, high, low, close } = this.state;
-    const openVal = parseFloat(open);
-    const highVal = parseFloat(high);
-    const lowVal = parseFloat(low);
-    const closeVal = parseFloat(close);
+    const [openVal, highVal, lowVal, closeVal] = this.parseToFloat([open, high, low, close]);
 
     const isOpenValid = !isNaN(openVal);
     const isHighValid = !isNaN(highVal);
     const isLowValid = !isNaN(lowVal);
     const isCloseValid = !isNaN(closeVal);
+
+    const isAllValid = isOpenValid && isHighValid && isLowValid && isCloseValid;
 
     const validations: IFormValidationState = {
       open: isOpenValid,
@@ -125,7 +118,7 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
       allValid: false,
     };
 
-    if (isOpenValid && isHighValid && isLowValid && isCloseValid) {
+    if (isAllValid) {
       if (highVal < Math.max(openVal, lowVal, closeVal)) {
         validations.high = false;
       }
@@ -156,24 +149,9 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
         time,
       });
 
-      this.setState(
-        {
-          open: '',
-          high: '',
-          low: '',
-          close: '',
-          validation: {
-            open: true,
-            high: true,
-            low: true,
-            close: true,
-            allValid: true,
-          },
-        },
-        () => {
-          this.props.handleCloseModal();
-        }
-      );
+      this.setState(INITIAL_BAR_STATE, () => {
+        this.props.handleCloseModal();
+      });
     }
   };
 
@@ -182,18 +160,17 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
     const { timestamp } = defaultValues;
 
     return (
-      <ChartForm ref={this.currencyModalRef} $isModal={isModal}>
-        <ChartWrapper>
-          <ChartTitle>Enter chart data</ChartTitle>
-
-          <ChartCloseButton onClick={handleCloseModal}>&#10005;</ChartCloseButton>
-        </ChartWrapper>
-
+      <Modal
+        title="Edit bar"
+        isOpen={isModal}
+        onClose={handleCloseModal}
+        onSubmit={this.handleSubmit}
+      >
         <ChartInputsContainer>
           <ChartInputComponent
             key="timestamp"
             label="Date"
-            value={timestamp ? new Date(timestamp).toLocaleString() : ''}
+            value={formatTimestamp(timestamp)}
             disabled
           />
 
@@ -212,9 +189,7 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
             );
           })}
         </ChartInputsContainer>
-
-        <ChartButton onClick={this.handleSubmit}>Edit</ChartButton>
-      </ChartForm>
+      </Modal>
     );
   }
 }

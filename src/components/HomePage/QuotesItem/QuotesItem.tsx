@@ -1,3 +1,5 @@
+import { CurrencyCode } from '@typings/currency';
+
 import {
   QuotesCard,
   QuotesCardIcon,
@@ -10,8 +12,8 @@ interface QuotesItemsProps {
   icon: string;
   name: string;
   formattedValue: string;
-  code: string;
-  selectCurrency: (currency: string) => void;
+  code: CurrencyCode;
+  selectCurrency: (currency: CurrencyCode) => void;
 }
 
 export const QuotesItem = ({

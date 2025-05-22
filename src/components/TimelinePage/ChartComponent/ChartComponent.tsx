@@ -1,23 +1,22 @@
-import { Component, Context, ContextType, createRef } from 'react';
-
 import 'chartjs-adapter-luxon';
 
-import { ActiveElement, Chart, ChartEvent, registerables } from 'chart.js';
+import { ContextType, createRef, PureComponent } from 'react';
+
+import { ActiveElement, Chart, registerables } from 'chart.js';
 import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial';
 
-import { DarkTheme } from '@styles/Theme';
-
+import { fetchChartData } from '@api/twelveDataApi';
 import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Popup } from '@components/common/Popup/Popup';
 import { Spinner } from '@components/common/Spinner/Spinner';
-
-import { fetchChartData } from '@api/TwelveDataApi';
-
+import { CHART_HEIGHT, CHART_WIDTH, FULL_DATA_QNTY } from '@constants/chart';
+import { CURRENCY_ICONS, CURRENCY_NAMES } from '@constants/currencies';
 import { ObserverContext } from '@context/ObserverConext';
-
+import { IChartBar, IChartBarFormData, IChartDataPoint, IChartEntry } from '@typings/chart';
+import { CurrencyCode } from '@typings/currency';
+import { getChartConfig } from '@utils/chartConfig';
 import { getRandomData } from '@utils/chartMockData';
-
-import { CURRENCY_ICONS, CURRENCY_NAMES } from '@constants/Currencies';
+import { parseChartData } from '@utils/parseChartData';
 
 import {
   CurrencyImage,
@@ -26,16 +25,12 @@ import {
   CurrencyText,
   CurrencyTitle,
 } from './styled';
-
-import { AxiosError } from 'axios';
-
-import { IChartBar, IChartEntry } from '../../../types/chart';
 import { ChartModal } from '../ChartModal/ChartModal';
 
 Chart.register(...registerables, CandlestickController, CandlestickElement);
 
 interface IChartComponentProps {
-  selectedCurrency: string;
+  selectedCurrency: CurrencyCode;
   isModal: boolean;
   handleCloseModal: () => void;
   handleOpenModal: () => void;
@@ -49,7 +44,7 @@ interface IChartComponentState {
   chartBar: IChartBar;
 }
 
-export class ChartComponent extends Component<IChartComponentProps, IChartComponentState> {
+export class ChartComponent extends PureComponent<IChartComponentProps, IChartComponentState> {
   static contextType = ObserverContext;
   context!: ContextType<typeof ObserverContext>;
 
@@ -85,34 +80,24 @@ export class ChartComponent extends Component<IChartComponentProps, IChartCompon
 
     try {
       const data = await fetchChartData(this.props.selectedCurrency, this.state.date);
+      const isData = Array.isArray(data?.values) && data.values.length > 0;
 
-      if (Array.isArray(data?.values) && data.values.length > 0) {
-        this.setState({ chartData: data.values }, () => {
-          this.renderChart();
-          if (data.values.length === 30) {
-            this.handlePopupOpen();
-          }
-        });
-      } else {
-        const fallback = getRandomData();
-        this.setState({ chartData: fallback }, () => {
-          this.renderChart();
-          if (fallback.length === 30) {
-            this.handlePopupOpen();
-          }
-        });
-      }
+      const chartData = isData ? data.values : getRandomData();
+
+      this.setState({ chartData }, () => {
+        this.renderChart();
+        if (isData && data.values.length === FULL_DATA_QNTY) {
+          this.handlePopupOpen();
+        }
+      });
+
       this.setState({ error: null });
     } catch (error: unknown) {
       console.error('Error while fetching chart data: ', error);
 
-      if (error instanceof AxiosError) {
-        this.setState({ error: error.message });
-      } else if (error instanceof Error) {
-        this.setState({ error: error.message });
-      } else {
-        this.setState({ error: 'An unknown error occurred' });
-      }
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+
+      this.setState({ error: errorMessage });
     } finally {
       this.setState({ isLoading: false });
     }
@@ -128,94 +113,14 @@ export class ChartComponent extends Component<IChartComponentProps, IChartCompon
       this.chartInstance.destroy();
     }
 
-    const parsedData = this.state.chartData.map((entry) => ({
-      x: new Date(entry.datetime).getTime(),
-      o: parseFloat(entry.open),
-      h: parseFloat(entry.high),
-      l: parseFloat(entry.low),
-      c: parseFloat(entry.close),
-    }));
+    const parsedData = parseChartData(this.state.chartData);
 
-    this.chartInstance = new Chart(ctx, {
-      type: 'candlestick',
-      data: {
-        datasets: [
-          {
-            data: parsedData,
-            backgroundColors: {
-              up: DarkTheme.neutral.green300,
-              down: DarkTheme.neutral.red300,
-              unchanged: '',
-            },
-            borderColors: {
-              up: DarkTheme.neutral.green300,
-              down: DarkTheme.neutral.red300,
-              unchanged: '',
-            },
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            enabled: true,
-            mode: 'nearest',
-            intersect: true,
-            borderColor: '#474747',
-            backgroundColor: DarkTheme.background.primary,
-            titleColor: DarkTheme.text.primary,
-            bodyColor: DarkTheme.text.primary,
-            borderWidth: 1,
-            displayColors: false,
-            padding: 12,
-            cornerRadius: 6,
-            titleFont: {
-              size: 13,
-              weight: 'bold',
-            },
-            bodyFont: {
-              size: 12,
-            },
-            callbacks: {
-              label: function (context) {
-                const raw = context.raw as { o: number; h: number; l: number; c: number };
-                const { o, h, l, c } = raw;
-                return `O: ${o}, H: ${h}, L: ${l}, C: ${c}`;
-              },
-            },
-          },
-        },
-        scales: {
-          x: {
-            type: 'time',
-            time: {
-              unit: 'day',
-            },
-            adapters: {
-              date: {
-                zone: 'utc',
-              },
-            },
-          },
-          y: {
-            type: 'linear',
-          },
-        },
-        onClick: (event) => {
-          const elements = this.chartInstance?.getElementsAtEventForMode(
-            event as unknown as Event,
-            'nearest',
-            { intersect: true },
-            false
-          );
-          this.handleBarClick(elements || []);
-        },
-      },
+    const config = getChartConfig({
+      data: parsedData,
+      onBarClick: this.handleBarClick,
     });
+
+    this.chartInstance = new Chart(ctx, config);
   }
 
   handleBarClick = (elements: ActiveElement[]) => {
@@ -225,13 +130,7 @@ export class ChartComponent extends Component<IChartComponentProps, IChartCompon
     const dataset = this.chartInstance?.data.datasets[0];
 
     if (dataset && dataset.data) {
-      const barData = dataset.data[index] as {
-        x: number;
-        o: number;
-        h: number;
-        l: number;
-        c: number;
-      };
+      const barData: IChartDataPoint = dataset.data[index];
 
       const open = parseFloat(barData.o.toFixed(2));
       const high = parseFloat(barData.h.toFixed(2));
@@ -255,13 +154,7 @@ export class ChartComponent extends Component<IChartComponentProps, IChartCompon
     }
   };
 
-  handleEditBar = (newBar: {
-    open: number;
-    high: number;
-    low: number;
-    close: number;
-    time: number;
-  }) => {
+  handleEditBar = (newBar: IChartBarFormData) => {
     const newEntry = {
       datetime: new Date(newBar.time).toISOString(),
       open: newBar.open.toString(),
@@ -308,20 +201,17 @@ export class ChartComponent extends Component<IChartComponentProps, IChartCompon
       <>
         <CurrencyInfoWrapper>
           <CurrencyImage src={CURRENCY_ICONS[selectedCurrency]} alt={selectedCurrency} />
-
           <CurrencyInfoTexts>
             <CurrencyTitle>{CURRENCY_NAMES[selectedCurrency]}</CurrencyTitle>
-
             <CurrencyText>{selectedCurrency}</CurrencyText>
           </CurrencyInfoTexts>
-
           {isLoading && <Spinner size="lg" />}
         </CurrencyInfoWrapper>
 
         {error ? (
           <ErrorFallback errorMessage={error} />
         ) : (
-          <canvas ref={this.chartRef} width={1000} height={400} />
+          <canvas ref={this.chartRef} width={CHART_WIDTH} height={CHART_HEIGHT} />
         )}
 
         <ChartModal

@@ -1,5 +1,3 @@
-import { DefaultTheme } from 'styled-components/dist/models/ThemeProvider';
-
 declare module 'styled-components' {
   export interface DefaultTheme {
     status: {

@@ -1,15 +1,15 @@
 import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Spinner } from '@components/common/Spinner/Spinner';
+import { Currency, CurrencyCode } from '@typings/currency';
 
 import { QuotesListContainer, QuotesListTitle, QuotesListWrapper } from './styled';
-import { Currency } from '../../../types/currency';
 import { QuotesItem } from '../QuotesItem/QuotesItem';
 
 interface QuotesListProps {
   isLoading: boolean;
   currencies: Currency[];
   error: Error | null;
-  selectCurrency: (currency: string) => void;
+  selectCurrency: (currency: CurrencyCode) => void;
 }
 
 export const QuotesList = ({ isLoading, currencies, error, selectCurrency }: QuotesListProps) => {
