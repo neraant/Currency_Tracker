@@ -194,7 +194,6 @@ export class ChartModal extends Component<IChartModalProps, IChartModalState> {
             key="timestamp"
             label="Date"
             value={timestamp ? new Date(timestamp).toLocaleString() : ''}
-            onChange={() => {}}
             disabled
           />
 
