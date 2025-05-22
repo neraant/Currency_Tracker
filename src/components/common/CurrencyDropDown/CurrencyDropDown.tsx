@@ -2,7 +2,7 @@ import { ChangeEvent, Component, createRef, KeyboardEvent, ReactNode } from 'rea
 
 import { CurrencyCode } from '@typings/currency';
 
-import { CURRENCIES } from '@constants/Currencies';
+import { CURRENCIES } from '@constants/currencies';
 
 import { CurrencyDropDownItem, CurrencyDropDownList, CurrencyDropDownWrapper } from './styled';
 

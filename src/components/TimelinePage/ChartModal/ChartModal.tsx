@@ -4,7 +4,7 @@ import { Modal } from '@components/common/Modal/Modal';
 
 import { ChartFieldName, IChartBar, IChartBarFormData, IFormValidationState } from '@typings/chart';
 
-import { CHART_BAR_FIELDS } from '@constants/Chart';
+import { CHART_BAR_FIELDS } from '@constants/chart';
 
 import { ChartInputsContainer } from './styled';
 import ChartInputComponent from '../ChartInput/ChartInputComponent';

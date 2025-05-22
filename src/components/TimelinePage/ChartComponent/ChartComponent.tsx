@@ -19,7 +19,7 @@ import { IChartBar, IChartEntry } from '@typings/chart';
 import { CurrencyCode } from '@typings/currency';
 import { getRandomData } from '@utils/chartMockData';
 
-import { CURRENCY_ICONS, CURRENCY_NAMES } from '@constants/Currencies';
+import { CURRENCY_ICONS, CURRENCY_NAMES } from '@constants/currencies';
 
 import {
   CurrencyImage,

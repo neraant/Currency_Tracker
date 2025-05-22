@@ -13,7 +13,7 @@ import { Layout } from '@components/Layout/Layout';
 
 import { SubjectProvider } from '@context/ObserverConext';
 
-import { ROUTES } from '@constants/Routes';
+import { ROUTES } from '@constants/routes';
 
 export const App = () => {
   return (

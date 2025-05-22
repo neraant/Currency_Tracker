@@ -4,7 +4,7 @@ import { Container } from '@styles/GlobalStyle';
 
 import logo from '@assets/icons/logo_icon.svg';
 
-import { HEADER_NAVLINKS } from '@constants/HeaderNavLinks';
+import { HEADER_NAVLINKS } from '@constants/headerNavLinks';
 
 import { HeaderContainer, HeaderLogo, HeaderNav, HeaderWrapper, NavLink } from './styled';
 import { ToggleButton } from '../ToggleButton/ToggleButton';

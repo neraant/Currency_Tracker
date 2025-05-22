@@ -5,7 +5,7 @@ import {
   CurrencyCode,
 } from '@typings/currency';
 
-import { CURRENCY_NAMES, CURRENCY_ICONS } from '@constants/Currencies';
+import { CURRENCY_NAMES, CURRENCY_ICONS } from '@constants/currencies';
 
 export const formatCurrencyData = (data: CurrencyApiResponse): FormattedCurrencyData => {
   const formatted: Currency[] = [];
