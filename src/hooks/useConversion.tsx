@@ -1,14 +1,13 @@
 import { useState } from 'react';
-
 import { convertCurrency } from '@api/currencyApi';
-
-import { CurrencyCode, MAX_PARSED_VALUE } from '@typings/currency';
+import { CurrencyCode } from '@typings/currency';
+import { INITIAL_CURRENCY, MAX_PARSED_VALUE } from '@constants/currencies';
 
 export const useConversion = (fromCurrency: CurrencyCode | null) => {
   const [amount, setAmount] = useState('');
   const [isAmountValid, setIsAmountValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [convertedAmount, setConvertedAmount] = useState('0.00');
+  const [convertedAmount, setConvertedAmount] = useState(INITIAL_CURRENCY);
 
   const handleChangeAmount = (value: string) => {
     const parsed = parseFloat(value);
@@ -20,7 +19,7 @@ export const useConversion = (fromCurrency: CurrencyCode | null) => {
   };
 
   const resetConversion = () => {
-    setConvertedAmount('0.00');
+    setConvertedAmount(INITIAL_CURRENCY);
     setAmount('');
     setIsAmountValid(true);
   };
@@ -29,7 +28,7 @@ export const useConversion = (fromCurrency: CurrencyCode | null) => {
     const isInvalid = !fromCurrency || !toCurrency || !isAmountValid || !amount;
 
     if (isInvalid) {
-      setConvertedAmount('0.00');
+      setConvertedAmount(INITIAL_CURRENCY);
       return;
     }
 

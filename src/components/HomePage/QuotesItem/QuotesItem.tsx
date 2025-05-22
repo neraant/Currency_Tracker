@@ -1,5 +1,4 @@
 import { CurrencyCode } from '@typings/currency';
-
 import {
   QuotesCard,
   QuotesCardIcon,

@@ -1,5 +1,4 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-
 import { ErrorFallback } from '../ErrorFallback/ErrorFallback';
 
 interface ErrorBoundaryProps {

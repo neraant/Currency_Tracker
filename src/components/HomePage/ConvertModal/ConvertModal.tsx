@@ -1,15 +1,8 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-
+import { ChangeEvent, useEffect, useRef } from 'react';
 import { Modal } from '@components/common/Modal/Modal';
-
 import { useConversion } from '@hooks/useConversion';
 import { useCurrencySelection } from '@hooks/useCurrencySelection';
-import { useDebounce } from '@hooks/useDebounce';
-
-import { convertCurrency } from '@api/currencyApi';
-
 import { Currency, CurrencyCode } from '@typings/currency';
-
 import {
   ConverterColumn,
   ConverterDropDown,
@@ -29,8 +22,6 @@ interface ConvertModelProps {
   handleCloseModal: () => void;
 }
 
-const MAX_PARSED_VALUE = 1_000_000;
-
 export const ConvertModal = ({
   currencies,
   clickedCurrency,
@@ -46,8 +37,6 @@ export const ConvertModal = ({
     handleOpenDropdown,
     handleSelect,
     handleChangeCurrencyCode,
-    closeDropdown,
-    resetCurrency,
   } = useCurrencySelection(currencies, clickedCurrency);
 
   const {
@@ -61,31 +50,10 @@ export const ConvertModal = ({
   } = useConversion(clickedCurrency);
 
   useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      if (isDropped && menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        closeDropdown();
-
-        if (selectedCurrency.trim() === '' && currencies.length > 0 && clickedCurrency) {
-          resetCurrency();
-        }
-      }
-    };
-
     if (!isModal) {
       resetConversion();
     }
-
-    if (isDropped || isModal) {
-      document.addEventListener('mousedown', handleOutsideClick);
-    }
-
-    document.body.style.overflow = isModal ? 'hidden' : '';
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-      document.body.style.overflow = '';
-    };
-  }, [isDropped, isModal, selectedCurrency, currencies, handleCloseModal]);
+  }, [isModal]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChangeCurrencyCode(e.target.value);
@@ -102,6 +70,7 @@ export const ConvertModal = ({
   return (
     <Modal
       isOpen={isModal}
+      title="Convert currency"
       onClose={handleCloseModal}
       onSubmit={handleConvert}
       isLoading={isLoading}

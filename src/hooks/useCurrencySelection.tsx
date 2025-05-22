@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import { Currency, CurrencyCode } from '@typings/currency';
-
 import { useDebounce } from './useDebounce';
 
 export const useCurrencySelection = (

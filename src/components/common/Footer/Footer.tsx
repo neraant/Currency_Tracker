@@ -1,10 +1,7 @@
 import { Container } from '@styles/GlobalStyle';
-
 import logo from '@assets/icons/logo_icon.svg';
-
 import { CURRENT_YEAR } from '@constants/Dates';
 import { FOOTER_MENUS } from '@constants/FooterMenus';
-
 import { FooterMenuBlock } from './FooterMenuBlock';
 import {
   FooterBottomText,

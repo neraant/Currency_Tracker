@@ -1,9 +1,7 @@
 import { CurrencyApiResponse, CurrencyDetail } from '@typings/currency';
 import { ENV } from '@utils/env';
 import { formatCurrencyData } from '@utils/formatCurrencyData';
-
-import { BASE_CURRENCY, CURRENCIES } from '@constants/Currencies';
-
+import { BASE_CURRENCY, CURRENCIES } from '@constants/currencies';
 import { currencyApiClient } from './clents';
 
 export const fetchCurrencyData = async () => {

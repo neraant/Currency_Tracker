@@ -1,5 +1,4 @@
 import { CurrencyCode } from '@typings/currency';
-
 import ArsIcon from '@assets/icons/ARS_Icon.svg';
 import AudIcon from '@assets/icons/AUD_Icon.svg';
 import BtcIcon from '@assets/icons/BTC_Icon.svg';
@@ -47,3 +46,7 @@ export const CURRENCY_NAMES: Record<CurrencyCode, string> = {
 };
 
 export const BASE_CURRENCY = 'BRL';
+
+export const MAX_PARSED_VALUE = 1_000_000;
+
+export const INITIAL_CURRENCY = '0.00';
