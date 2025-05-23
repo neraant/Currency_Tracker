@@ -14,8 +14,6 @@ export enum CacheCode {
   CACHE_CURRENCIES = 'CACHE_CURRENCIES',
 }
 
-export const MAX_PARSED_VALUE = 1_000_000;
-
 export interface Currency {
   code: CurrencyCode;
   name: string;

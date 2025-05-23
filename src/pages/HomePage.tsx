@@ -1,19 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { Container } from '@styles/GlobalStyle';
-
+import { fetchCurrencyData } from '@api/currencyApi';
 import { ConvertModal } from '@components/HomePage/ConvertModal/ConvertModal';
 import { QuotesList } from '@components/HomePage/QuotesList/QuotesList';
-
-import { useQuery } from '@hooks/useQuery';
-
-import { fetchCurrencyData } from '@api/currencyApi';
-
-import { useSubject } from '@context/ObserverConext';
-
-import { Currency, CurrencyCode } from '@typings/currency';
-
 import { CacheKeys } from '@constants/cacheKeys';
+import { useSubject } from '@context/ObserverConext';
+import { useQuery } from '@hooks/useQuery';
+import { Container } from '@styles/GlobalStyle';
+import { Currency, CurrencyCode } from '@typings/currency';
 
 export const HomePage = () => {
   const [currencies, setCurrencies] = useState<Currency[]>([]);

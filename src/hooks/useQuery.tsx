@@ -75,7 +75,9 @@ export function useQuery<T>(
           memoryCache.set(key, parsed);
           return parsed.data;
         }
-      } catch (error) {}
+      } catch (error) {
+        console.error('Error while reading item from LocalStorage: ', error);
+      }
     }
 
     return null;

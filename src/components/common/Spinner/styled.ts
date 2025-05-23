@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface SpinProps {
   $size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';

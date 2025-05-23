@@ -1,8 +1,7 @@
 import { ChangeEvent, Component, createRef, KeyboardEvent, ReactNode } from 'react';
 
+import { CURRENCIES } from '@constants/currencies';
 import { CurrencyCode } from '@typings/currency';
-
-import { CURRENCIES } from '@constants/Currencies';
 
 import { CurrencyDropDownItem, CurrencyDropDownList, CurrencyDropDownWrapper } from './styled';
 
