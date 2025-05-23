@@ -30,7 +30,7 @@ import { ChartModal } from '../ChartModal/ChartModal';
 Chart.register(...registerables, CandlestickController, CandlestickElement);
 
 interface IChartComponentProps {
-  selectedCurrency: CurrencyCode;
+  selectedCurrency: CurrencyCode | string;
   isModal: boolean;
   handleCloseModal: () => void;
   handleOpenModal: () => void;
