@@ -45,8 +45,8 @@ export const HomePage = () => {
       <ConvertModal
         currencies={currencies}
         clickedCurrency={clickedCurrency}
-        handleCloseModal={handleCloseModal}
-        isModal={isModal}
+        onCloseModal={handleCloseModal}
+        isModalOpen={isModal}
       />
     </Container>
   );

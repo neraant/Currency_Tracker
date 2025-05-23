@@ -18,15 +18,15 @@ import {
 interface ConvertModelProps {
   currencies: Currency[];
   clickedCurrency: CurrencyCode | null;
-  isModal: boolean;
-  handleCloseModal: () => void;
+  isModalOpen: boolean;
+  onCloseModal: () => void;
 }
 
 export const ConvertModal = ({
   currencies,
   clickedCurrency,
-  isModal,
-  handleCloseModal,
+  isModalOpen,
+  onCloseModal,
 }: ConvertModelProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -51,10 +51,10 @@ export const ConvertModal = ({
   } = useConversion(clickedCurrency);
 
   useEffect(() => {
-    if (!isModal) {
+    if (!isModalOpen) {
       resetConversion();
     }
-  }, [isModal]);
+  }, [isModalOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -84,9 +84,9 @@ export const ConvertModal = ({
 
   return (
     <Modal
-      isOpen={isModal}
+      isOpen={isModalOpen}
       title="Convert currency"
-      onClose={handleCloseModal}
+      onClose={onCloseModal}
       onSubmit={handleConvert}
       isLoading={isLoading}
     >
