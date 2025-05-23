@@ -1,10 +1,8 @@
 import { ChangeEvent, useEffect, useRef } from 'react';
-
 import { Modal } from '@components/common/Modal/Modal';
 import { useConversion } from '@hooks/useConversion';
 import { useCurrencySelection } from '@hooks/useCurrencySelection';
 import { Currency, CurrencyCode } from '@typings/currency';
-
 import {
   ConverterColumn,
   ConverterDropDown,
@@ -20,8 +18,8 @@ import {
 interface ConvertModelProps {
   currencies: Currency[];
   clickedCurrency: CurrencyCode | null;
-  isModal: boolean;
-  handleCloseModal: () => void;
+  isModalOpen: boolean;
+  onCloseModal: () => void;
 }
 
 const MAX_PARSED_VALUE = 1_000_000;
@@ -29,8 +27,8 @@ const MAX_PARSED_VALUE = 1_000_000;
 export const ConvertModal = ({
   currencies,
   clickedCurrency,
-  isModal,
-  handleCloseModal,
+  isModalOpen,
+  onCloseModal,
 }: ConvertModelProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +39,7 @@ export const ConvertModal = ({
     handleOpenDropdown,
     handleSelect,
     handleChangeCurrencyCode,
+    closeDropdown,
   } = useCurrencySelection(currencies, clickedCurrency);
 
   const {
@@ -54,10 +53,24 @@ export const ConvertModal = ({
   } = useConversion(clickedCurrency);
 
   useEffect(() => {
-    if (!isModal) {
+    if (!isModalOpen) {
       resetConversion();
     }
-  }, [isModal]);
+  }, [isModalOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuRef]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChangeCurrencyCode(e.target.value);
@@ -73,9 +86,9 @@ export const ConvertModal = ({
 
   return (
     <Modal
-      isOpen={isModal}
+      isOpen={isModalOpen}
       title="Convert currency"
-      onClose={handleCloseModal}
+      onClose={onCloseModal}
       onSubmit={handleConvert}
       isLoading={isLoading}
     >

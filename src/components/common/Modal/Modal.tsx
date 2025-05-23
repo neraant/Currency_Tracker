@@ -1,7 +1,5 @@
 import { ReactNode, useEffect, useRef } from 'react';
-
 import { createPortal } from 'react-dom';
-
 import { ModalButton, ModalCloseButton, ModalContainer, ModalTitle } from './styled';
 import { Overlay } from '../Overlay/Overlay';
 import { Spinner } from '../Spinner/Spinner';

@@ -57,8 +57,11 @@ export default [
             },
           ],
           pathGroupsExcludedImportTypes: ['react'],
-          alphabetize: { order: 'asc', caseInsensitive: true },
-          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+          'newlines-between': 'never',
         },
       ],
 

@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-
 import arrowIcon from '@assets/icons/arrow_icon.svg';
 
 interface ConverterDropDownListProps {
