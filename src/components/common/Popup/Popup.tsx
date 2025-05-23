@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
+
 import { useLocation } from 'react-router-dom';
 
-import { useObserver } from '@hooks/useObserver';
-
 import { useSubject } from '@context/ObserverConext';
+import { useObserver } from '@hooks/useObserver';
 
 import { PopupCloseIcon, PopupMessage, PopupWrapper } from './styled';
 

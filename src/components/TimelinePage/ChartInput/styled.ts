@@ -40,9 +40,13 @@ export const ChartInput = styled.input`
 
 export const ChartInputError = styled.span`
   position: absolute;
-  bottom: -${({ theme }) => theme.spacing[5]};
+  bottom: -${({ theme }) => theme.spacing[6]};
   left: 0;
   color: ${({ theme }) => theme.status.error};
-  font-size: ${({ theme }) => theme.typography.fontSize['xs']};
+  font-size: ${({ theme }) => theme.typography.fontSize['md']};
   margin-top: ${({ theme }) => theme.spacing[1]};
+
+  @media (max-width: 620px) {
+    font-size: ${({ theme }) => theme.typography.fontSize['sm']};
+  }
 `;

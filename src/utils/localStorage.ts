@@ -9,7 +9,9 @@ class StorageUtility {
     try {
       const jsonValue = JSON.stringify(data);
       localStorage.setItem(key, jsonValue);
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error while setting item from LocalStorage: ', error);
+    }
   }
 
   static getItem<T>(key: StorageKeysType): T | null {
@@ -18,6 +20,7 @@ class StorageUtility {
       const value = jsonValue != null ? JSON.parse(jsonValue) : null;
       return value;
     } catch (error) {
+      console.error('Error while getting item from LocalStorage: ', error);
       return null;
     }
   }
@@ -25,14 +28,18 @@ class StorageUtility {
   static removeItem(key: StorageKeysType): void {
     try {
       localStorage.removeItem(key);
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error while removing item from LocalStorage: ', error);
+    }
   }
 
   static clear(): void {
     try {
       localStorage.clear();
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error while cleaning LocalStorage: ', error);
+    }
   }
 }
 
-export { StorageUtility, StorageKeys };
+export { StorageKeys, StorageUtility };

@@ -5,7 +5,7 @@ import { ChartInput, ChartInputError, ChartInputWrapper, ChartLabel } from './st
 interface IChartInputProps {
   label: string;
   value: string | number;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   isValid?: boolean;
   disabled?: boolean;
 }
