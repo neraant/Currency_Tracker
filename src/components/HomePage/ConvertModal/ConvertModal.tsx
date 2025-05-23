@@ -22,8 +22,6 @@ interface ConvertModelProps {
   onCloseModal: () => void;
 }
 
-const MAX_PARSED_VALUE = 1_000_000;
-
 export const ConvertModal = ({
   currencies,
   clickedCurrency,

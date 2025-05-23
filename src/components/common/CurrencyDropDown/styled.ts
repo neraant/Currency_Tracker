@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-
 import arrowIcon from '@assets/icons/arrow_icon.svg';
 
 interface ConverterDropDownListProps {
@@ -7,7 +6,7 @@ interface ConverterDropDownListProps {
 }
 
 interface CurrencyDropDownItemProps {
-  $isActive: boolean;
+  $isActive?: boolean;
 }
 
 export const CurrencyDropDownWrapper = styled.div`

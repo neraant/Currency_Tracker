@@ -1,14 +1,12 @@
 import { ChangeEvent, Component, createRef, KeyboardEvent, ReactNode } from 'react';
-
-import { CurrencyCode } from '@typings/currency';
-
 import { CURRENCIES } from '@constants/currencies';
-
+import { CurrencyCode } from '@typings/currency';
 import { CurrencyDropDownItem, CurrencyDropDownList, CurrencyDropDownWrapper } from './styled';
 
 interface ICurrencyDropDownProps {
-  selectedCurrency?: string;
-  setCurrency: (newCurrency: CurrencyCode) => void;
+  selectedCurrency?: CurrencyCode | string;
+  setCurrency: (newCurrency: CurrencyCode | string) => void;
+  onClose?: () => void;
   children: (props: {
     query: string;
     handleDropDown: () => void;
@@ -59,23 +57,36 @@ export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrenc
   handleClickOutside = (event: MouseEvent) => {
     if (this.inputRef.current && !this.inputRef.current.contains(event.target as Node)) {
       const { query } = this.state;
-      const { selectedCurrency } = this.props;
+      const { selectedCurrency, onClose } = this.props;
 
       if (query.trim() !== selectedCurrency) {
-        this.setState({
-          query: selectedCurrency || '',
-          filteredCurrencies: CURRENCIES,
-          isDropped: false,
-          activeIndex: -1,
-        });
+        this.setState(
+          {
+            query: selectedCurrency || '',
+            filteredCurrencies: CURRENCIES,
+            isDropped: false,
+            activeIndex: -1,
+          },
+          () => {
+            if (onClose) onClose();
+          }
+        );
       } else {
-        this.setState({ isDropped: false, activeIndex: -1 });
+        this.setState({ isDropped: false, activeIndex: -1 }, () => {
+          if (onClose) onClose();
+        });
       }
     }
   };
 
   handleDropDown = () => {
-    this.setState((prev) => ({ isDropped: !prev.isDropped, activeIndex: -1 }));
+    this.setState((prev) => {
+      const willBeDropped = !prev.isDropped;
+      if (!willBeDropped && this.props.onClose) {
+        this.props.onClose();
+      }
+      return { isDropped: willBeDropped, activeIndex: -1 };
+    });
   };
 
   handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,13 +97,20 @@ export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrenc
     }
 
     this.debounceTimeout = setTimeout(() => {
-      const filtered = CURRENCIES.filter((cur) => cur.toLowerCase().includes(input.toLowerCase()));
+      const filtered =
+        input.trim() === ''
+          ? CURRENCIES
+          : CURRENCIES.filter((cur) => cur.toLowerCase().includes(input.toLowerCase()));
 
       this.setState({
         filteredCurrencies: filtered,
         isDropped: true,
         activeIndex: -1,
       });
+
+      if (input.trim() === '') {
+        this.props.setCurrency('');
+      }
     }, 300);
 
     this.setState({ query: input });
@@ -147,15 +165,17 @@ export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrenc
         })}
 
         <CurrencyDropDownList $isDropped={isDropped}>
-          {filteredCurrencies.map((currency, index) => (
-            <CurrencyDropDownItem
-              key={currency}
-              onClick={() => this.handleSelect(currency)}
-              $isActive={index === activeIndex}
-            >
-              {currency}
+          {filteredCurrencies.length > 0 ? (
+            filteredCurrencies.map((currency) => (
+              <CurrencyDropDownItem key={currency} onClick={() => this.handleSelect(currency)}>
+                {currency}
+              </CurrencyDropDownItem>
+            ))
+          ) : (
+            <CurrencyDropDownItem style={{ pointerEvents: 'none', opacity: 0.6 }}>
+              Не найдено
             </CurrencyDropDownItem>
-          ))}
+          )}
         </CurrencyDropDownList>
       </CurrencyDropDownWrapper>
     );

@@ -1,9 +1,8 @@
-import mapboxgl from 'mapbox-gl';
 import { Component, createRef, ReactNode } from 'react';
-
+import mapboxgl from 'mapbox-gl';
+import { INITIAL_LAT, INITIAL_LNG, INITIAL_ZOOM } from '@constants/chart';
 import bankLocations from '@data/MockBanks.json';
 import { ENV } from '@utils/env';
-
 import { MapWrapper } from './styled';
 
 interface MapProps {
@@ -38,8 +37,8 @@ export class Map extends Component<MapProps, {}> {
     this.mapInstance = new mapboxgl.Map({
       container: this.mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [27.561481, 53.902496],
-      zoom: 11,
+      center: [INITIAL_LNG, INITIAL_LAT],
+      zoom: INITIAL_ZOOM,
     });
 
     this.mapInstance.addControl(new mapboxgl.NavigationControl(), 'top-left');

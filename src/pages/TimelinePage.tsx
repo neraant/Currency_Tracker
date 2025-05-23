@@ -1,15 +1,12 @@
 import { Component } from 'react';
-
-import { Container } from '@styles/GlobalStyle';
-
 import { CurrencyDropDown } from '@components/common/CurrencyDropDown/CurrencyDropDown';
 import { ChartComponent } from '@components/TimelinePage/ChartComponent/ChartComponent';
 import { ChartSearch } from '@components/TimelinePage/ChartSearch/ChartSearch';
-
+import { Container } from '@styles/GlobalStyle';
 import { CurrencyCode } from '@typings/currency';
 
 interface ITimelinePageState {
-  selectedCurrency: CurrencyCode;
+  selectedCurrency: CurrencyCode | string;
   isModal: boolean;
 }
 
@@ -19,8 +16,12 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
     isModal: false,
   };
 
-  setCurrency = (newCurrency: CurrencyCode) => {
-    this.setState({ selectedCurrency: newCurrency });
+  setCurrency = (newCurrency: CurrencyCode | string) => {
+    if (newCurrency === '') {
+      this.setState({ selectedCurrency: CurrencyCode.USD });
+    } else {
+      this.setState({ selectedCurrency: newCurrency });
+    }
   };
 
   handleCloseModal = () => {
@@ -36,16 +37,22 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
 
     return (
       <Container>
-        <CurrencyDropDown setCurrency={this.setCurrency} selectedCurrency={selectedCurrency}>
-          {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (
-            <ChartSearch
-              query={query}
-              handleDropDown={handleDropDown}
-              handleInputChange={handleInputChange}
-              handleKeyDown={handleKeyDown}
-            />
-          )}
-        </CurrencyDropDown>
+        <div style={{ marginTop: '60px' }}>
+          <CurrencyDropDown
+            onClose={() => this.setCurrency(CurrencyCode.USD)}
+            setCurrency={this.setCurrency}
+            selectedCurrency={selectedCurrency}
+          >
+            {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (
+              <ChartSearch
+                query={query}
+                handleDropDown={handleDropDown}
+                handleInputChange={handleInputChange}
+                handleKeyDown={handleKeyDown}
+              />
+            )}
+          </CurrencyDropDown>
+        </div>
 
         <ChartComponent
           selectedCurrency={selectedCurrency}
