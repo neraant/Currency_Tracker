@@ -37,6 +37,7 @@ export const ConvertModal = ({
     handleOpenDropdown,
     handleSelect,
     handleChangeCurrencyCode,
+    closeDropdown,
   } = useCurrencySelection(currencies, clickedCurrency);
 
   const {
@@ -54,6 +55,20 @@ export const ConvertModal = ({
       resetConversion();
     }
   }, [isModal]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuRef]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChangeCurrencyCode(e.target.value);
