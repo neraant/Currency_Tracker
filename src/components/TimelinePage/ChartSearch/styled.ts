@@ -7,7 +7,6 @@ export const CurrencyDropDownInput = styled.input`
   color: ${({ theme }) => theme.neutral.gray300};
   background-color: ${({ theme }) => theme.background.primary};
   padding: ${({ theme }) => theme.spacing[4]};
-  margin-top: ${({ theme }) => theme.spacing[12]};
   padding-right: ${({ theme }) => theme.spacing[10]};
   width: 100%;
   border-radius: 4px;

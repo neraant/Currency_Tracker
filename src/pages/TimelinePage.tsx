@@ -38,20 +38,22 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
 
     return (
       <Container>
-        <CurrencyDropDown
-          onClose={() => this.setCurrency(CurrencyCode.USD)}
-          setCurrency={this.setCurrency}
-          selectedCurrency={selectedCurrency}
-        >
-          {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (
-            <ChartSearch
-              query={query}
-              handleDropDown={handleDropDown}
-              handleInputChange={handleInputChange}
-              handleKeyDown={handleKeyDown}
-            />
-          )}
-        </CurrencyDropDown>
+        <div style={{ marginTop: '60px' }}>
+          <CurrencyDropDown
+            onClose={() => this.setCurrency(CurrencyCode.USD)}
+            setCurrency={this.setCurrency}
+            selectedCurrency={selectedCurrency}
+          >
+            {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (
+              <ChartSearch
+                query={query}
+                handleDropDown={handleDropDown}
+                handleInputChange={handleInputChange}
+                handleKeyDown={handleKeyDown}
+              />
+            )}
+          </CurrencyDropDown>
+        </div>
 
         <ChartComponent
           selectedCurrency={selectedCurrency}
