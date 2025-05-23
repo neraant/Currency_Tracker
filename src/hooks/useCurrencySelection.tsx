@@ -22,6 +22,12 @@ export const useCurrencySelection = (
     setFilteredCurrencies(filtered);
   }, [debouncedValue, currencies]);
 
+  useEffect(() => {
+    if (!isDropped && !selectedCurrency.trim()) {
+      setSelectedCurrency(CurrencyCode.USD);
+    }
+  }, [isDropped]);
+
   const handleOpenDropdown = () => {
     setIsDropped((prev) => !prev);
   };
@@ -37,6 +43,10 @@ export const useCurrencySelection = (
 
   const closeDropdown = () => {
     setIsDropped(false);
+
+    if (!selectedCurrency) {
+      setSelectedCurrency(CurrencyCode.USD);
+    }
   };
 
   const resetCurrency = () => {
