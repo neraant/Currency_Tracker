@@ -166,8 +166,12 @@ export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrenc
 
         <CurrencyDropDownList $isDropped={isDropped}>
           {filteredCurrencies.length > 0 ? (
-            filteredCurrencies.map((currency) => (
-              <CurrencyDropDownItem key={currency} onClick={() => this.handleSelect(currency)}>
+            filteredCurrencies.map((currency, index) => (
+              <CurrencyDropDownItem
+                key={currency}
+                onClick={() => this.handleSelect(currency)}
+                $isActive={index === activeIndex}
+              >
                 {currency}
               </CurrencyDropDownItem>
             ))
