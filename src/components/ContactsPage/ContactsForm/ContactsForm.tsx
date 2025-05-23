@@ -1,18 +1,15 @@
-import { ReactNode } from 'react';
-
-import { useContactForm } from '@hooks/useContactForm';
+import { FormEvent, ReactNode } from 'react';
 
 import { FormButton, FormTitle, FormWrapper } from './styled';
 
 interface ContactsFormProps {
   children: ReactNode;
+  onSubmit: (e: FormEvent) => void;
 }
 
-const ContactsForm = ({ children }: ContactsFormProps) => {
-  const { handleSubmit } = useContactForm();
-
+const ContactsForm = ({ children, onSubmit }: ContactsFormProps) => {
   return (
-    <FormWrapper onSubmit={handleSubmit} autoComplete="off">
+    <FormWrapper onSubmit={onSubmit} autoComplete="off">
       <FormTitle>Contact form</FormTitle>
       {children}
       <FormButton type="submit">Send message</FormButton>

@@ -1,4 +1,6 @@
-import { ChangeEvent, FocusEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from 'react';
+
+import { useSubject } from '@context/ObserverConext';
 
 import { CONTACT_INPUTS, FieldKey } from '@typings/contacts';
 
@@ -8,6 +10,11 @@ export const useContactForm = () => {
     [CONTACT_INPUTS.EMAIL]: { value: '', isActive: false, isValid: false },
     [CONTACT_INPUTS.MESSAGE]: { value: '', isActive: false, isValid: false },
   });
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const subject = useSubject('notification');
 
   const validateField = (key: FieldKey, value: string) => {
     switch (key) {
@@ -66,35 +73,71 @@ export const useContactForm = () => {
     });
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    setMessageInfo((prev) => {
-      const updated = { ...prev };
-
-      (Object.keys(updated) as FieldKey[]).forEach((key) => {
-        const value = updated[key].value;
-        updated[key] = {
-          ...updated[key],
-          isActive: true,
-          isValid: validateField(key, value),
-        };
-      });
-
-      const allValid = Object.values(updated).every((field) => field.isValid);
-
-      if (allValid) {
-        console.log('VALID');
-      } else {
-        console.log('NOT VALID');
-      }
-
-      return updated;
+  const resetForm = () => {
+    setMessageInfo({
+      [CONTACT_INPUTS.NAME]: { value: '', isActive: false, isValid: false },
+      [CONTACT_INPUTS.EMAIL]: { value: '', isActive: false, isValid: false },
+      [CONTACT_INPUTS.MESSAGE]: { value: '', isActive: false, isValid: false },
     });
   };
 
-  const isFormValid = () => {
-    return Object.values(messageInfo).every((field) => field.isValid && field.value.trim());
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    let updatedInfo: typeof messageInfo;
+    let allValid: boolean;
+
+    // Сначала обновим поля и проверим валидность
+    updatedInfo = Object.keys(messageInfo).reduce(
+      (acc, key) => {
+        const fieldKey = key as FieldKey;
+        const value = messageInfo[fieldKey].value;
+
+        acc[fieldKey] = {
+          value,
+          isActive: true,
+          isValid: validateField(fieldKey, value),
+        };
+
+        return acc;
+      },
+      {} as typeof messageInfo
+    );
+
+    allValid = Object.values(updatedInfo).every((field) => field.isValid);
+
+    setMessageInfo(updatedInfo);
+
+    if (allValid) {
+      const successMsg = 'Success! Your message was sent!';
+      setMessage(successMsg);
+      setIsSubmitted(true);
+      resetForm();
+
+      setTimeout(() => handlePopupOpen(successMsg), 0);
+    } else {
+      const errorMsg = 'Error! Invalid data!';
+      setMessage(errorMsg);
+      setIsSubmitted(false);
+
+      setTimeout(() => handlePopupOpen(errorMsg), 0);
+    }
+  };
+
+  const handlePopupOpen = (msg: string) => {
+    if (subject?.setState) {
+      subject.setState({
+        isPopup: true,
+        message: msg,
+      });
+    }
+  };
+
+  const handlePopupClose = () => {
+    subject.setState({
+      isPopup: false,
+      message: message,
+    });
   };
 
   return {
@@ -103,6 +146,8 @@ export const useContactForm = () => {
     handleFocus,
     handleBlur,
     handleSubmit,
-    isFormValid: isFormValid(),
+    handlePopupClose,
+    isSubmitted,
+    isFormValid: Object.values(messageInfo).every((field) => field.isValid),
   };
 };

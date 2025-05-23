@@ -332,7 +332,7 @@ export class ChartComponent extends Component<IChartComponentProps, IChartCompon
           defaultValues={chartBar}
         />
 
-        <Popup isError={false} handlePopupClose={this.handlePopupClose} />
+        <Popup isError={false} onClose={this.handlePopupClose} />
       </>
     );
   }
