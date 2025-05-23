@@ -40,7 +40,6 @@ export default [
       'prettier/prettier': 'error',
       'react/react-in-jsx-scope': 'off',
 
-      // 📌 Импорт react первым, потом внешние, потом алиасы
       'import/order': [
         'warn',
         {

@@ -19,6 +19,8 @@ import { getRandomData } from '@utils/chartMockData';
 import { parseChartData } from '@utils/parseChartData';
 
 import {
+  CanvasContainer,
+  CanvasGraph,
   CurrencyImage,
   CurrencyInfoTexts,
   CurrencyInfoWrapper,
@@ -211,7 +213,9 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
         {error ? (
           <ErrorFallback errorMessage={error} />
         ) : (
-          <canvas ref={this.chartRef} width={CHART_WIDTH} height={CHART_HEIGHT} />
+          <CanvasContainer>
+            <CanvasGraph ref={this.chartRef} width={CHART_WIDTH} height={CHART_HEIGHT} />
+          </CanvasContainer>
         )}
 
         <ChartModal

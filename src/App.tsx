@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { ErrorBoundary } from '@components/common/ErrorBoundary/ErrorBoundary';
 import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Layout } from '@components/Layout/Layout';
-import { ROUTES } from '@constants/Routes';
+import { ROUTES } from '@constants/routes';
 import { SubjectProvider } from '@context/ObserverConext';
 import { GlobalStyle } from '@styles/GlobalStyle';
 import { DarkTheme } from '@styles/Theme';

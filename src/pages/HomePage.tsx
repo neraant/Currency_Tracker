@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { fetchCurrencyData } from '@api/currencyApi';
+import { UpdateComponent } from '@components/common/UpdateComponent/UpdateComponent';
 import { ConvertModal } from '@components/HomePage/ConvertModal/ConvertModal';
 import { QuotesList } from '@components/HomePage/QuotesList/QuotesList';
 import { CacheKeys } from '@constants/cacheKeys';
@@ -36,6 +37,7 @@ export const HomePage = () => {
 
   return (
     <Container>
+      <UpdateComponent />
       <QuotesList
         currencies={currencies}
         isLoading={isLoading}

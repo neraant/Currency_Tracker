@@ -9,7 +9,7 @@ interface ConverterDropDownListProps {
 export const CurrencyDropDownWrapper = styled.div`
   position: relative;
   width: 100%;
-  margin-bottom: ${({ theme }) => theme.spacing[14]};
+  margin: ${({ theme }) => theme.spacing[14]} 0;
   max-width: 250px;
 
   &::after {
@@ -27,7 +27,7 @@ export const CurrencyDropDownWrapper = styled.div`
   }
 
   @media (max-width: 620px) {
-    margin-bottom: ${({ theme }) => theme.spacing[8]};
+    margin: ${({ theme }) => theme.spacing[8]} 0;
     max-width: 180px;
   }
 `;

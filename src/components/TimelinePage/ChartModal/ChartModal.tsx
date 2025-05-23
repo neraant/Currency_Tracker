@@ -87,6 +87,8 @@ export class ChartModal extends PureComponent<IChartModalProps, IChartModalState
   handleChange = (field: ChartFieldName) => (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
+    if (!/[0-9]/.test(value)) return;
+
     this.setState(
       (prevState) =>
         ({
