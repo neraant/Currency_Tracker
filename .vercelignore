@@ -1,5 +1,4 @@
 node_modules
-src
-public
-webpack.*
-.vercelignore
+*.log
+.env
+.DS_Store
