@@ -1,13 +1,12 @@
-import { ChangeEvent, Component, createRef, KeyboardEvent, ReactNode } from 'react';
-
+import { useState, useRef, useEffect, ChangeEvent, KeyboardEvent, ReactNode } from 'react';
 import { CURRENCIES } from '@constants/currencies';
+import { useClickOutside } from '@hooks/useClickOutside';
 import { CurrencyCode } from '@typings/currency';
-
 import { CurrencyDropDownItem, CurrencyDropDownList, CurrencyDropDownWrapper } from './styled';
 
 interface ICurrencyDropDownProps {
-  selectedCurrency?: CurrencyCode | string;
-  setCurrency: (newCurrency: CurrencyCode | string) => void;
+  selectedCurrency?: CurrencyCode | '';
+  setCurrency: (newCurrency: CurrencyCode | '') => void;
   onClose?: () => void;
   children: (props: {
     query: string;
@@ -17,169 +16,131 @@ interface ICurrencyDropDownProps {
   }) => ReactNode;
 }
 
-interface ICurrencyDropDownState {
-  query: string | '';
-  isDropped: boolean;
-  filteredCurrencies: CurrencyCode[];
-  activeIndex: number;
-}
+export const CurrencyDropDown = ({
+  selectedCurrency = '',
+  setCurrency,
+  onClose,
+  children,
+}: ICurrencyDropDownProps) => {
+  const [query, setQuery] = useState<string>(selectedCurrency);
+  const [isDropped, setIsDropped] = useState<boolean>(false);
+  const [filteredCurrencies, setFilteredCurrencies] = useState<CurrencyCode[]>(CURRENCIES);
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
 
-export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrencyDropDownState> {
-  state: ICurrencyDropDownState = {
-    query: this.props.selectedCurrency || '',
-    isDropped: false,
-    filteredCurrencies: CURRENCIES,
-    activeIndex: -1,
+  const inputRef = useRef<HTMLDivElement>(null);
+  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useClickOutside<HTMLDivElement | null>(inputRef, () => {
+    if (query.trim() !== selectedCurrency) {
+      setQuery(selectedCurrency);
+      setFilteredCurrencies(CURRENCIES);
+    }
+    setIsDropped(false);
+    setActiveIndex(-1);
+    onClose?.();
+  });
+
+  useEffect(() => {
+    if (selectedCurrency !== query) {
+      setQuery(selectedCurrency);
+    }
+  }, [selectedCurrency]);
+
+  const handleDropDown = () => {
+    const willBeDropped = !isDropped;
+    setIsDropped(willBeDropped);
+    setActiveIndex(-1);
+    if (!willBeDropped) onClose?.();
   };
 
-  inputRef = createRef<HTMLDivElement>();
-  debounceTimeout: ReturnType<typeof setTimeout> | null = null;
-
-  componentDidUpdate(prevProps: Readonly<ICurrencyDropDownProps>): void {
-    if (
-      prevProps.selectedCurrency !== this.props.selectedCurrency &&
-      this.state.query !== this.props.selectedCurrency
-    ) {
-      this.setState({ query: this.props.selectedCurrency || '' });
-    }
-  }
-
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout);
-    }
-  }
-
-  handleClickOutside = (event: MouseEvent) => {
-    if (this.inputRef.current && !this.inputRef.current.contains(event.target as Node)) {
-      const { query } = this.state;
-      const { selectedCurrency, onClose } = this.props;
-
-      if (query.trim() !== selectedCurrency) {
-        this.setState(
-          {
-            query: selectedCurrency || '',
-            filteredCurrencies: CURRENCIES,
-            isDropped: false,
-            activeIndex: -1,
-          },
-          () => {
-            if (onClose) onClose();
-          }
-        );
-      } else {
-        this.setState({ isDropped: false, activeIndex: -1 }, () => {
-          if (onClose) onClose();
-        });
-      }
-    }
-  };
-
-  handleDropDown = () => {
-    this.setState((prev) => {
-      const willBeDropped = !prev.isDropped;
-      if (!willBeDropped && this.props.onClose) {
-        this.props.onClose();
-      }
-      return { isDropped: willBeDropped, activeIndex: -1 };
-    });
-  };
-
-  handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
+    setQuery(input);
 
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout);
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
     }
 
-    this.debounceTimeout = setTimeout(() => {
+    debounceTimeout.current = setTimeout(() => {
       const filtered =
         input.trim() === ''
           ? CURRENCIES
           : CURRENCIES.filter((cur) => cur.toLowerCase().includes(input.toLowerCase()));
 
-      this.setState({
-        filteredCurrencies: filtered,
-        isDropped: true,
-        activeIndex: -1,
-      });
+      setFilteredCurrencies(filtered);
+      setIsDropped(true);
+      setActiveIndex(-1);
 
-      if (input.trim() === '') {
-        this.props.setCurrency('');
-      }
+      if (input.trim() === '') setCurrency('');
     }, 300);
-
-    this.setState({ query: input });
   };
 
-  handleSelect = (newCurrency: CurrencyCode) => {
-    this.props.setCurrency(newCurrency);
-    this.setState({
-      isDropped: false,
-      query: newCurrency,
-      filteredCurrencies: CURRENCIES,
-      activeIndex: -1,
-    });
+  const handleSelect = (newCurrency: CurrencyCode) => {
+    setCurrency(newCurrency);
+    setQuery(newCurrency);
+    setIsDropped(false);
+    setFilteredCurrencies(CURRENCIES);
+    setActiveIndex(-1);
   };
 
-  handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    const { activeIndex, filteredCurrencies, isDropped } = this.state;
-
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (!isDropped) return;
 
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      this.setState({
-        activeIndex: activeIndex < filteredCurrencies.length - 1 ? activeIndex + 1 : 0,
-      });
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      this.setState({
-        activeIndex: activeIndex > 0 ? activeIndex - 1 : filteredCurrencies.length - 1,
-      });
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (activeIndex >= 0 && activeIndex < filteredCurrencies.length) {
-        this.handleSelect(filteredCurrencies[activeIndex]);
-      }
-    } else if (e.key === 'Escape') {
-      this.setState({ isDropped: false, activeIndex: -1 });
+    const key = e.key;
+    const maxIndex = filteredCurrencies.length - 1;
+    const nextIndex = activeIndex + 1;
+    const prevIndex = activeIndex - 1;
+
+    switch (key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setActiveIndex((prev) => (prev < maxIndex ? nextIndex : 0));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setActiveIndex((prev) => (prev > 0 ? prevIndex : maxIndex));
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (activeIndex >= 0 && activeIndex <= maxIndex) {
+          handleSelect(filteredCurrencies[activeIndex]);
+        }
+        break;
+      case 'Escape':
+        setIsDropped(false);
+        setActiveIndex(-1);
+        break;
+      default:
+        break;
     }
   };
 
-  render() {
-    const { query, isDropped, filteredCurrencies, activeIndex } = this.state;
-    const { children } = this.props;
+  return (
+    <CurrencyDropDownWrapper ref={inputRef}>
+      {children({
+        query,
+        handleDropDown,
+        handleInputChange,
+        handleKeyDown,
+      })}
 
-    return (
-      <CurrencyDropDownWrapper ref={this.inputRef}>
-        {children({
-          query,
-          handleDropDown: this.handleDropDown,
-          handleInputChange: this.handleInputChange,
-          handleKeyDown: this.handleKeyDown,
-        })}
-
-        <CurrencyDropDownList $isDropped={isDropped}>
-          {filteredCurrencies.length > 0 ? (
-            filteredCurrencies.map((currency) => (
-              <CurrencyDropDownItem key={currency} onClick={() => this.handleSelect(currency)}>
-                {currency}
-              </CurrencyDropDownItem>
-            ))
-          ) : (
-            <CurrencyDropDownItem style={{ pointerEvents: 'none', opacity: 0.6 }}>
-              Не найдено
+      <CurrencyDropDownList $isDropped={isDropped}>
+        {filteredCurrencies.length ? (
+          filteredCurrencies.map((currency, index) => (
+            <CurrencyDropDownItem
+              key={currency}
+              onClick={() => handleSelect(currency)}
+              $isActive={index === activeIndex}
+            >
+              {currency}
             </CurrencyDropDownItem>
-          )}
-        </CurrencyDropDownList>
-      </CurrencyDropDownWrapper>
-    );
-  }
-}
+          ))
+        ) : (
+          <CurrencyDropDownItem style={{ pointerEvents: 'none', opacity: 0.6 }}>
+            Не найдено
+          </CurrencyDropDownItem>
+        )}
+      </CurrencyDropDownList>
+    </CurrencyDropDownWrapper>
+  );
+};

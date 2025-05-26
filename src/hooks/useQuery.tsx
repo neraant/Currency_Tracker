@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { CACHE_TTL } from '@constants/time';
 
 interface useQueryResult<T> {

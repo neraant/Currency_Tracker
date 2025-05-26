@@ -1,10 +1,8 @@
 import 'chartjs-adapter-luxon';
 
 import { ContextType, createRef, PureComponent } from 'react';
-
 import { ActiveElement, Chart, registerables } from 'chart.js';
 import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial';
-
 import { fetchChartData } from '@api/twelveDataApi';
 import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Popup } from '@components/common/Popup/Popup';
@@ -17,8 +15,9 @@ import { CurrencyCode } from '@typings/currency';
 import { getChartConfig } from '@utils/chartConfig';
 import { getRandomData } from '@utils/chartMockData';
 import { parseChartData } from '@utils/parseChartData';
-
 import {
+  CanvasContainer,
+  CanvasGraph,
   CurrencyImage,
   CurrencyInfoTexts,
   CurrencyInfoWrapper,
@@ -30,7 +29,7 @@ import { ChartModal } from '../ChartModal/ChartModal';
 Chart.register(...registerables, CandlestickController, CandlestickElement);
 
 interface IChartComponentProps {
-  selectedCurrency: CurrencyCode | string;
+  selectedCurrency: CurrencyCode | '';
   isModal: boolean;
   handleCloseModal: () => void;
   handleOpenModal: () => void;
@@ -211,17 +210,19 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
         {error ? (
           <ErrorFallback errorMessage={error} />
         ) : (
-          <canvas ref={this.chartRef} width={CHART_WIDTH} height={CHART_HEIGHT} />
+          <CanvasContainer>
+            <CanvasGraph ref={this.chartRef} width={CHART_WIDTH} height={CHART_HEIGHT} />
+          </CanvasContainer>
         )}
 
         <ChartModal
           onSubmit={this.handleEditBar}
-          isModal={isModal}
+          isOpenModal={isModal}
           handleCloseModal={handleCloseModal}
           defaultValues={chartBar}
         />
 
-        <Popup isError={false} handlePopupClose={this.handlePopupClose} />
+        <Popup isError={false} onPopupClose={this.handlePopupClose} />
       </>
     );
   }

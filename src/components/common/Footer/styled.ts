@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
 import arrowIcon from '@assets/icons/arrow_icon.svg';
 
 export const FooterContainer = styled.footer`

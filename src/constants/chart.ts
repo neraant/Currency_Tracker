@@ -25,10 +25,10 @@ export const CHART_WIDTH = 1000;
 
 export const CHART_HEIGHT = 400;
 
-export const INITIAL_LNG = 27.561481;
-
-export const INITIAL_LAT = 53.902496;
-
-export const INITIAL_ZOOM = 11;
-
 export type ChartFieldName = (typeof CHART_BAR_FIELDS)[number]['name'];
+
+export const MAX_COEF = 1.05;
+
+export const MID_COEF = 0.95;
+
+export const MIN_COEF = 0.9;

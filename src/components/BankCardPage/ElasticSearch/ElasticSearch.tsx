@@ -1,8 +1,7 @@
-import { Component, ReactNode } from 'react';
-
+import { PureComponent, ReactNode } from 'react';
 import search_icon from '@assets/icons/search_icon.svg';
 import { CurrencyDropDown } from '@components/common/CurrencyDropDown/CurrencyDropDown';
-
+import { CurrencyCode } from '@typings/currency';
 import {
   SearchButton,
   SearchContainer,
@@ -12,11 +11,11 @@ import {
 } from './styled';
 
 interface ElasticSearchProps {
-  selectedCurrency?: string;
-  setCurrency: (newCurrency: string) => void;
+  selectedCurrency?: CurrencyCode | '';
+  setCurrency: (newCurrency: CurrencyCode | '') => void;
 }
 
-export class ElasticSearch extends Component<ElasticSearchProps, {}> {
+export class ElasticSearch extends PureComponent<ElasticSearchProps, {}> {
   render(): ReactNode {
     const { selectedCurrency, setCurrency } = this.props;
 

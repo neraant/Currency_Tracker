@@ -1,7 +1,6 @@
 import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Spinner } from '@components/common/Spinner/Spinner';
 import { Currency, CurrencyCode } from '@typings/currency';
-
 import { QuotesListContainer, QuotesListTitle, QuotesListWrapper } from './styled';
 import { QuotesItem } from '../QuotesItem/QuotesItem';
 

@@ -19,7 +19,7 @@ export const PopupWrapper = styled.div<PopupWrapperProps>`
   align-items: center;
   gap: ${({ theme }) => theme.spacing[2]};
   transition: all 0.8s ease-in-out;
-  z-index: 50;
+  z-index: 200;
 
   ${({ $isError }) =>
     $isError &&

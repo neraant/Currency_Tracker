@@ -1,7 +1,6 @@
 import { useSubject } from '@context/ObserverConext';
 import { CacheCode, FormattedCurrencyData } from '@typings/currency';
 import { StorageUtility } from '@utils/localStorage';
-
 import { useObserver } from './useObserver';
 import { CachedValue } from './useQuery';
 
