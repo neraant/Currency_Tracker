@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const env = dotenv.config().parsed;
 
@@ -46,6 +47,7 @@ module.exports = {
       '@context': path.resolve(__dirname, 'src/context/'),
       '@patterns': path.resolve(__dirname, 'src/patterns/'),
     },
+    plugins: [new TsconfigPathsPlugin()],
   },
   plugins: [
     new webpack.DefinePlugin(envKeys),
