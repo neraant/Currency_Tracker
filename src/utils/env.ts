@@ -13,17 +13,20 @@ function validateEnvVar(key: string, value: string | undefined): string {
 }
 
 export const ENV: EnvVars = {
-  CURRENCY_API_KEY: validateEnvVar('REACT_CURRENCY_API_KEY', process.env.REACT_CURRENCY_API_KEY),
+  CURRENCY_API_KEY: validateEnvVar(
+    'REACT_APP_CURRENCY_API_KEY',
+    process.env.REACT_APP_CURRENCY_API_KEY
+  ),
   TWELVEDATA_API_KEY: validateEnvVar(
-    'REACT_TWELVEDATA_API_KEY',
-    process.env.REACT_TWELVEDATA_API_KEY
+    'REACT_APP_TWELVEDATA_API_KEY',
+    process.env.REACT_APP_TWELVEDATA_API_KEY
   ),
   CURRENCY_API_BASE_URL: validateEnvVar(
-    'REACT_CURRENCY_API_BASE_URL',
-    process.env.REACT_CURRENCY_API_BASE_URL
+    'REACT_APP_CURRENCY_API_BASE_URL',
+    process.env.REACT_APP_CURRENCY_API_BASE_URL
   ),
   TWELVEDATA_API_BASE_URL: validateEnvVar(
-    'REACT_TWELVEDATA_BASE_URL',
-    process.env.REACT_TWELVEDATA_BASE_URL
+    'REACT_APP_TWELVEDATA_BASE_URL',
+    process.env.REACT_APP_TWELVEDATA_BASE_URL
   ),
 };

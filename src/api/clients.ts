@@ -1,5 +1,4 @@
 import { ENV } from '@utils/env';
-
 import { httpClient } from './httpClient';
 
 export const currencyApiClient = new httpClient({

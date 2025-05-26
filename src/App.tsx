@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-
 import { ErrorBoundary } from '@components/common/ErrorBoundary/ErrorBoundary';
 import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Layout } from '@components/Layout/Layout';

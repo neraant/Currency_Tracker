@@ -1,8 +1,6 @@
-import { ChangeEvent, Component, createRef } from 'react';
-
+import { ChangeEvent, createRef, PureComponent } from 'react';
 import { CURRENCIES } from '@constants/currencies';
 import { CurrencyCode } from '@typings/currency';
-
 import {
   CurrencyDropDownInput,
   CurrencyDropDownItem,
@@ -21,7 +19,10 @@ interface ICurrencyDropDownState {
   filteredCurrencies: CurrencyCode[];
 }
 
-export class CurrencyDropDown extends Component<ICurrencyDropDownProps, ICurrencyDropDownState> {
+export class CurrencyDropDown extends PureComponent<
+  ICurrencyDropDownProps,
+  ICurrencyDropDownState
+> {
   state: ICurrencyDropDownState = {
     currency: this.props.selectedCurrency,
     isDropped: false,
