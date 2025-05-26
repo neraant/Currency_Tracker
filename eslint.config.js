@@ -4,6 +4,7 @@ import pluginPrettier from 'eslint-plugin-prettier';
 import parserTs from '@typescript-eslint/parser';
 import pluginTs from '@typescript-eslint/eslint-plugin';
 import prettierConfig from 'eslint-config-prettier';
+import pluginUnusedImports from 'eslint-plugin-unused-imports';
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
@@ -22,6 +23,7 @@ export default [
       import: pluginImport,
       prettier: pluginPrettier,
       '@typescript-eslint': pluginTs,
+      'unused-imports': pluginUnusedImports,
     },
     settings: {
       react: {
@@ -37,63 +39,19 @@ export default [
     rules: {
       'prettier/prettier': 'error',
       'react/react-in-jsx-scope': 'off',
+
       'import/order': [
         'warn',
         {
-          groups: ['type', ['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
+          groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
           pathGroups: [
             {
-              pattern: '@styles/**',
-              group: 'internal',
+              pattern: 'react',
+              group: 'builtin',
               position: 'before',
             },
             {
-              pattern: '@types/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@components/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@types/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@hooks/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@api/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@context/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@patterns/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@assets/**',
-              group: 'internal',
-              position: 'after',
-            },
-            {
-              pattern: '@constants/**',
-              group: 'internal',
-              position: 'after',
-            },
-            {
-              pattern: '@pages/**',
+              pattern: '@**',
               group: 'internal',
               position: 'after',
             },
@@ -103,7 +61,18 @@ export default [
             order: 'asc',
             caseInsensitive: true,
           },
-          'newlines-between': 'always',
+          'newlines-between': 'never',
+        },
+      ],
+
+      'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
         },
       ],
     },

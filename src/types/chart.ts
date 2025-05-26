@@ -36,3 +36,11 @@ export interface IChartField {
   name: ChartFieldName;
   label: string;
 }
+
+export interface IChartDataPoint {
+  x: number;
+  o: number;
+  h: number;
+  l: number;
+  c: number;
+}

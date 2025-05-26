@@ -1,19 +1,19 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-
 import { ModalButton, ModalCloseButton, ModalContainer, ModalTitle } from './styled';
 import { Overlay } from '../Overlay/Overlay';
 import { Spinner } from '../Spinner/Spinner';
 
 interface ModalProps {
   children: ReactNode;
+  title: string;
   isOpen: boolean;
   isLoading?: boolean;
   onClose: () => void;
   onSubmit: () => void;
 }
 
-export const Modal = ({ children, isOpen, isLoading, onClose, onSubmit }: ModalProps) => {
+export const Modal = ({ children, title, isOpen, isLoading, onClose, onSubmit }: ModalProps) => {
   const modalRoot = document.getElementById('modal-root');
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +40,7 @@ export const Modal = ({ children, isOpen, isLoading, onClose, onSubmit }: ModalP
   return createPortal(
     <>
       <ModalContainer ref={modalRef} $isModal={isOpen}>
-        <ModalTitle>Title</ModalTitle>
+        <ModalTitle>{title}</ModalTitle>
 
         <ModalCloseButton onClick={onClose}>&#10005;</ModalCloseButton>
 

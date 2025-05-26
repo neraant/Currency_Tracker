@@ -1,13 +1,6 @@
 import { TwelveDataApiResponse } from '@typings/twelvedataapi';
 import { ENV } from '@utils/env';
-
-import { twelveDataClient } from './clents';
-
-const API_KEY = process.env.REACT_TWELVEDATA_API_KEY;
-
-if (!API_KEY) {
-  throw new Error('Missing environment variables');
-}
+import { twelveDataClient } from './clients';
 
 export const fetchChartData = async (symbol: string, period: string) => {
   try {

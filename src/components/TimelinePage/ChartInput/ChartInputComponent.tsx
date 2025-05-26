@@ -1,11 +1,10 @@
 import { ChangeEvent, Component } from 'react';
-
 import { ChartInput, ChartInputError, ChartInputWrapper, ChartLabel } from './styled';
 
 interface IChartInputProps {
   label: string;
   value: string | number;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   isValid?: boolean;
   disabled?: boolean;
 }

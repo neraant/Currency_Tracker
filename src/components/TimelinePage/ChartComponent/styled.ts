@@ -54,3 +54,14 @@ export const CurrencyText = styled.span`
     font-size: ${({ theme }) => theme.typography.fontSize['sm']};
   }
 `;
+
+export const CanvasContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
+`;
+
+export const CanvasGraph = styled.canvas`
+  width: 100%;
+  min-width: 600px;
+  min-height: 280px;
+`;

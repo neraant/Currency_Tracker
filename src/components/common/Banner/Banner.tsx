@@ -1,7 +1,5 @@
-import { Container } from '@styles/GlobalStyle';
-
 import logo from '@assets/icons/logo_icon.svg';
-
+import { Container } from '@styles/GlobalStyle';
 import {
   BannerContent,
   BannerImage,

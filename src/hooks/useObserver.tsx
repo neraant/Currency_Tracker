@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { IObserver } from '@patterns/observer/interfaces';
 import { Subject } from '@patterns/observer/Subject';
 

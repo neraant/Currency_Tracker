@@ -1,15 +1,9 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-
+import { ChangeEvent, useEffect, useRef } from 'react';
 import { Modal } from '@components/common/Modal/Modal';
-
+import { useClickOutside } from '@hooks/useClickOutside';
 import { useConversion } from '@hooks/useConversion';
 import { useCurrencySelection } from '@hooks/useCurrencySelection';
-import { useDebounce } from '@hooks/useDebounce';
-
-import { convertCurrency } from '@api/currencyApi';
-
 import { Currency, CurrencyCode } from '@typings/currency';
-
 import {
   ConverterColumn,
   ConverterDropDown,
@@ -25,17 +19,15 @@ import {
 interface ConvertModelProps {
   currencies: Currency[];
   clickedCurrency: CurrencyCode | null;
-  isModal: boolean;
-  handleCloseModal: () => void;
+  isModalOpen: boolean;
+  onCloseModal: () => void;
 }
-
-const MAX_PARSED_VALUE = 1_000_000;
 
 export const ConvertModal = ({
   currencies,
   clickedCurrency,
-  isModal,
-  handleCloseModal,
+  isModalOpen,
+  onCloseModal,
 }: ConvertModelProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +39,6 @@ export const ConvertModal = ({
     handleSelect,
     handleChangeCurrencyCode,
     closeDropdown,
-    resetCurrency,
   } = useCurrencySelection(currencies, clickedCurrency);
 
   const {
@@ -61,29 +52,12 @@ export const ConvertModal = ({
   } = useConversion(clickedCurrency);
 
   useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      if (isDropped && menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        closeDropdown();
-
-        if (selectedCurrency.trim() === '' && currencies.length > 0 && clickedCurrency) {
-          resetCurrency();
-        }
-      }
-    };
-
-    if (!isModal) {
+    if (!isModalOpen) {
       resetConversion();
     }
+  }, [isModalOpen]);
 
-    if (isDropped || isModal) {
-      document.addEventListener('mousedown', handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-      document.body.style.overflow = '';
-    };
-  }, [isDropped, isModal, selectedCurrency, currencies, handleCloseModal]);
+  useClickOutside(menuRef, closeDropdown);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChangeCurrencyCode(e.target.value);
@@ -99,8 +73,9 @@ export const ConvertModal = ({
 
   return (
     <Modal
-      isOpen={isModal}
-      onClose={handleCloseModal}
+      isOpen={isModalOpen}
+      title="Convert currency"
+      onClose={onCloseModal}
       onSubmit={handleConvert}
       isLoading={isLoading}
     >

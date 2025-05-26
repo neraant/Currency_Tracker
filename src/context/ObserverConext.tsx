@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useContext, useMemo } from 'react';
-
 import { Subject } from '@patterns/observer/Subject';
 
 interface ObserverStateMap {

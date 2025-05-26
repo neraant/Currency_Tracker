@@ -1,14 +1,10 @@
-import { Container } from '@styles/GlobalStyle';
-
 import { Popup } from '@components/common/Popup/Popup';
 import ContactsForm from '@components/ContactsPage/ContactsForm/ContactsForm';
 import { ContactsInfo } from '@components/ContactsPage/ContactsInfo/ContactsInfo';
 import { ContactsInput } from '@components/ContactsPage/ContactsInput/ContactsInput';
-
-import { useContactForm } from '@hooks/useContactForm';
-
 import { CONTACT_FIELDS } from '@constants/contacts';
-
+import { useContactForm } from '@hooks/useContactForm';
+import { Container } from '@styles/GlobalStyle';
 import { ContactContainer } from './styled';
 
 export const ContactWrapper = () => {
@@ -41,7 +37,7 @@ export const ContactWrapper = () => {
           ))}
         </ContactsForm>
 
-        <Popup isError={!isSubmitted} onClose={handlePopupClose} />
+        <Popup isError={!isSubmitted} onPopupClose={handlePopupClose} />
       </ContactContainer>
     </Container>
   );

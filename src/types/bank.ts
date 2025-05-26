@@ -1,5 +1,3 @@
-import { CurrencyCode } from './currency';
-
 export interface BankDetail {
   name: string;
   coordinates: {
@@ -7,5 +5,11 @@ export interface BankDetail {
     lng: number;
   };
   address: string;
-  currencies: CurrencyCode[];
+  currencies: string[];
+}
+
+export interface MapConfig {
+  style: string;
+  center: [number, number];
+  zoom: number;
 }

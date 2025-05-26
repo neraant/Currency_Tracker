@@ -1,11 +1,10 @@
+import { CURRENCY_ICONS, CURRENCY_NAMES } from '@constants/currencies';
 import {
   Currency,
   CurrencyApiResponse,
-  FormattedCurrencyData,
   CurrencyCode,
+  FormattedCurrencyData,
 } from '@typings/currency';
-
-import { CURRENCY_NAMES, CURRENCY_ICONS } from '@constants/currencies';
 
 export const formatCurrencyData = (data: CurrencyApiResponse): FormattedCurrencyData => {
   const formatted: Currency[] = [];
@@ -15,8 +14,8 @@ export const formatCurrencyData = (data: CurrencyApiResponse): FormattedCurrency
 
     formatted.push({
       code: currencyCode,
-      name: CURRENCY_NAMES[currencyCode] || code,
-      icon: CURRENCY_ICONS[currencyCode],
+      name: CURRENCY_NAMES[code as CurrencyCode] || code,
+      icon: CURRENCY_ICONS[code as CurrencyCode],
       value: parseFloat(details.value.toFixed(2)),
       formattedValue: `R$ ${details.value.toFixed(2)}`,
     });
