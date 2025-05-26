@@ -9,7 +9,7 @@ import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Footer } from '@components/common/Footer/Footer';
 import { Header } from '@components/common/Header/Header';
 
-import { ROUTES } from '@constants/Routes';
+import { ROUTES } from '@constants/routes';
 
 export const App = () => {
   return (
