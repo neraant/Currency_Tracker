@@ -1,10 +1,8 @@
 import 'chartjs-adapter-luxon';
 
 import { ContextType, createRef, PureComponent } from 'react';
-
 import { ActiveElement, Chart, registerables } from 'chart.js';
 import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial';
-
 import { fetchChartData } from '@api/twelveDataApi';
 import { ErrorFallback } from '@components/common/ErrorFallback/ErrorFallback';
 import { Popup } from '@components/common/Popup/Popup';
@@ -17,7 +15,6 @@ import { CurrencyCode } from '@typings/currency';
 import { getChartConfig } from '@utils/chartConfig';
 import { getRandomData } from '@utils/chartMockData';
 import { parseChartData } from '@utils/parseChartData';
-
 import {
   CanvasContainer,
   CanvasGraph,
@@ -220,12 +217,12 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
 
         <ChartModal
           onSubmit={this.handleEditBar}
-          isModal={isModal}
+          isOpenModal={isModal}
           handleCloseModal={handleCloseModal}
           defaultValues={chartBar}
         />
 
-        <Popup isError={false} handlePopupClose={this.handlePopupClose} />
+        <Popup isError={false} onPopupClose={this.handlePopupClose} />
       </>
     );
   }

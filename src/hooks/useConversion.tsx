@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { convertCurrency } from '@api/currencyApi';
 import { INITIAL_CURRENCY, MAX_PARSED_VALUE } from '@constants/currencies';
 import { CurrencyCode } from '@typings/currency';

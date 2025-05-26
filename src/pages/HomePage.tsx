@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { fetchCurrencyData } from '@api/currencyApi';
 import { UpdateComponent } from '@components/common/UpdateComponent/UpdateComponent';
 import { ConvertModal } from '@components/HomePage/ConvertModal/ConvertModal';
@@ -47,8 +46,8 @@ export const HomePage = () => {
       <ConvertModal
         currencies={currencies}
         clickedCurrency={clickedCurrency}
-        handleCloseModal={handleCloseModal}
-        isModal={isModal}
+        onCloseModal={handleCloseModal}
+        isModalOpen={isModal}
       />
     </Container>
   );

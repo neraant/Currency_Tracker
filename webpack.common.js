@@ -3,8 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-const env = dotenv.config().parsed;
+const env = dotenv.config().parsed || {};
 
 const envKeys = Object.keys(env).reduce((acc, key) => {
   acc[`process.env.${key}`] = JSON.stringify(env[key]);
@@ -16,6 +17,8 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    clean: true,
   },
   module: {
     rules: [
@@ -45,6 +48,7 @@ module.exports = {
       '@context': path.resolve(__dirname, 'src/context/'),
       '@patterns': path.resolve(__dirname, 'src/patterns/'),
     },
+    plugins: [new TsconfigPathsPlugin()],
   },
   plugins: [
     new webpack.DefinePlugin(envKeys),
