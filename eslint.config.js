@@ -58,6 +58,31 @@ export default [
               position: 'before',
             },
             {
+              pattern: '@types/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '@hooks/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '@api/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '@context/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '@patterns/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
               pattern: '@assets/**',
               group: 'internal',
               position: 'after',
@@ -78,7 +103,7 @@ export default [
             order: 'asc',
             caseInsensitive: true,
           },
-          'newlines-between': 'always',
+          'newlines-between': 'never',
         },
       ],
     },

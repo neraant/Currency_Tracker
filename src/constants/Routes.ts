@@ -1,8 +1,8 @@
-import { BankCardPage } from '@pages/BankCardPage/BankCardPage';
-import { ContactsPage } from '@pages/ContactsPage/ContactsPage';
-import { HomePage } from '@pages/HomePage/HomePage';
-import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage';
-import { TimelinePage } from '@pages/TimelinePage/TimelinePage';
+import { BankCardPage } from '@pages/BankCardPage';
+import { ContactsPage } from '@pages/ContactsPage';
+import { HomePage } from '@pages/HomePage';
+import { NotFoundPage } from '@pages/NotFoundPage';
+import { TimelinePage } from '@pages/TimelinePage';
 
 export const ROUTES = [
   {

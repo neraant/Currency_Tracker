@@ -1,0 +1,52 @@
+import { useEffect, useState } from 'react';
+import { Container } from '@styles/GlobalStyle';
+import { ConvertModal } from '@components/HomePage/ConvertModal/ConvertModal';
+import { QuotesList } from '@components/HomePage/QuotesList/QuotesList';
+import { useQuery } from '@hooks/useQuery';
+import { fetchCurrencyData } from '@api/currencyApi';
+import { useSubject } from '@context/ObserverConext';
+import { Currency, CurrencyCode } from '@typings/currency';
+import { CacheKeys } from '@constants/cacheKeys';
+
+export const HomePage = () => {
+  const [currencies, setCurrencies] = useState<Currency[]>([]);
+  const [clickedCurrency, setClickedCurrency] = useState<CurrencyCode | null>(null);
+  const [isModal, setIsModal] = useState(false);
+
+  const { data, isLoading, error } = useQuery(CacheKeys.CURRENCIES, fetchCurrencyData);
+  const subject = useSubject('last_updated');
+
+  useEffect(() => {
+    if (!data) return;
+    const { currencies, last_updated_at } = data;
+
+    subject.setState(last_updated_at ?? null);
+    setCurrencies(currencies);
+  }, [data]);
+
+  const selectCurrency = (currency: CurrencyCode) => {
+    setClickedCurrency(currency);
+    setIsModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModal(false);
+  };
+
+  return (
+    <Container>
+      <QuotesList
+        currencies={currencies}
+        isLoading={isLoading}
+        error={error}
+        selectCurrency={selectCurrency}
+      />
+      <ConvertModal
+        currencies={currencies}
+        clickedCurrency={clickedCurrency}
+        onCloseModal={handleCloseModal}
+        isModalOpen={isModal}
+      />
+    </Container>
+  );
+};

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { NotFoundTitle } from './styled';
 
 export const NotFoundSection = () => {

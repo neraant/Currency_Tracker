@@ -95,6 +95,7 @@ export const DarkTheme: DefaultTheme = {
     8: `${BASE_SPACING * 8}px`, // 32px
     10: `${BASE_SPACING * 10}px`, // 40px
     12: `${BASE_SPACING * 12}px`, // 48px
+    14: `${BASE_SPACING * 14}px`, // 56px
     16: `${BASE_SPACING * 16}px`, // 64px
     20: `${BASE_SPACING * 20}px`, // 80px
     24: `${BASE_SPACING * 24}px`, // 96px
