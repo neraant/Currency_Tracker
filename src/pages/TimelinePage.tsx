@@ -41,6 +41,7 @@ export class TimelinePage extends PureComponent<{}, ITimelinePageState> {
                 handleDropDown={handleDropDown}
                 handleInputChange={handleInputChange}
                 handleKeyDown={handleKeyDown}
+                selectedCurrency={selectedCurrency}
               />
             )}
           </CurrencyDropDown>

@@ -4,11 +4,11 @@ export const FOOTER_MENUS = [
     links: [
       {
         label: 'Market',
-        link: '#',
+        link: '/not-found',
       },
       {
         label: 'Service',
-        link: '#',
+        link: '/not-found',
       },
     ],
   },
@@ -17,11 +17,11 @@ export const FOOTER_MENUS = [
     links: [
       {
         label: 'Sparks',
-        link: '#',
+        link: '/not-found',
       },
       {
         label: 'Snaps',
-        link: '#',
+        link: '/not-found',
       },
     ],
   },
@@ -30,11 +30,11 @@ export const FOOTER_MENUS = [
     links: [
       {
         label: 'Ideas',
-        link: '#',
+        link: '/not-found',
       },
       {
         label: 'Streams',
-        link: '#',
+        link: '/not-found',
       },
     ],
   },

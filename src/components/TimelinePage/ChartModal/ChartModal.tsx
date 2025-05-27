@@ -3,6 +3,7 @@ import { Modal } from '@components/common/Modal/Modal';
 import { CHART_BAR_FIELDS, INITIAL_BAR_STATE } from '@constants/chart';
 import { ChartFieldName, IChartBar, IChartBarFormData, IFormValidationState } from '@typings/chart';
 import { formatTimestamp } from '@utils/formatTimestamp';
+import { isValidAmount } from '@utils/isValidAmount';
 import { parseToFloat } from '@utils/parseToFloat';
 import { ChartInputsContainer } from './styled';
 import ChartInputComponent from '../ChartInput/ChartInputComponent';
@@ -66,14 +67,16 @@ export class ChartModal extends PureComponent<IChartModalProps, IChartModalState
   handleChange = (field: ChartFieldName) => (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (!/[0-9]/.test(value)) return;
+    const isValueValid = isValidAmount(value);
 
-    this.setState(
-      (prevState) =>
-        ({
-          [field]: value,
-        }) as Pick<IChartModalState, ChartFieldName>
-    );
+    if (isValueValid) {
+      this.setState(
+        (prevState) =>
+          ({
+            [field]: value,
+          }) as Pick<IChartModalState, ChartFieldName>
+      );
+    }
   };
 
   validateAllFields = (): boolean => {
@@ -132,16 +135,23 @@ export class ChartModal extends PureComponent<IChartModalProps, IChartModalState
     }
   };
 
+  modalClose = () => {
+    this.setState(INITIAL_BAR_STATE, () => {
+      this.props.handleCloseModal();
+    });
+  };
+
   render(): ReactNode {
-    const { isOpenModal, handleCloseModal, defaultValues } = this.props;
+    const { isOpenModal, defaultValues } = this.props;
     const { timestamp } = defaultValues;
 
     return (
       <Modal
         title="Edit bar"
         isOpen={isOpenModal}
-        onClose={handleCloseModal}
+        onClose={this.modalClose}
         onSubmit={this.handleSubmit}
+        buttonText="Edit bar"
       >
         <ChartInputsContainer>
           <ChartInputComponent

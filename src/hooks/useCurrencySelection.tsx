@@ -8,25 +8,38 @@ export const useCurrencySelection = (
 ) => {
   const [isDropped, setIsDropped] = useState(false);
   const [filteredCurrencies, setFilteredCurrencies] = useState<Currency[]>([]);
-  const [selectedCurrency, setSelectedCurrency] = useState<CurrencyCode>(CurrencyCode.USD);
+  const [selectedCurrency, setSelectedCurrency] = useState<CurrencyCode | ''>('');
+  const [searchValue, setSearchValue] = useState('');
 
-  const { debouncedValue } = useDebounce(selectedCurrency, 400);
+  const { debouncedValue } = useDebounce(searchValue, 400);
+
+  useEffect(() => {
+    if (initialCurrency) {
+      setSelectedCurrency(initialCurrency);
+    }
+  }, [initialCurrency]);
 
   useEffect(() => {
     const normalizedValue = debouncedValue.trim().toLowerCase();
 
-    const filtered = currencies.filter(({ code }) =>
-      normalizedValue ? code.toLowerCase().includes(normalizedValue) : true
-    );
+    const filtered = currencies.filter(({ code, name }) => {
+      if (!normalizedValue) return true;
+
+      return (
+        code.toLowerCase().includes(normalizedValue) ||
+        name?.toLowerCase().includes(normalizedValue)
+      );
+    });
 
     setFilteredCurrencies(filtered);
   }, [debouncedValue, currencies]);
 
   useEffect(() => {
-    if (!isDropped && !selectedCurrency.trim()) {
-      setSelectedCurrency(CurrencyCode.USD);
+    if (isDropped) {
+      setFilteredCurrencies(currencies);
+      setSearchValue('');
     }
-  }, [isDropped]);
+  }, [isDropped, currencies]);
 
   const handleOpenDropdown = () => {
     setIsDropped((prev) => !prev);
@@ -34,34 +47,41 @@ export const useCurrencySelection = (
 
   const handleSelect = (currency: CurrencyCode) => {
     setSelectedCurrency(currency);
+    setSearchValue('');
     setIsDropped(false);
   };
 
-  const handleChangeCurrencyCode = (value: string) => {
-    setSelectedCurrency(value as CurrencyCode);
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
   };
 
   const closeDropdown = () => {
     setIsDropped(false);
-
-    if (!selectedCurrency) {
-      setSelectedCurrency(CurrencyCode.USD);
-    }
+    setSearchValue('');
   };
 
   const resetCurrency = () => {
     if (initialCurrency) {
       setSelectedCurrency(initialCurrency);
+    } else {
+      setSelectedCurrency('');
     }
+    setSearchValue('');
   };
+
+  const displayText = selectedCurrency || 'Select currency';
+  const hasSelection = Boolean(selectedCurrency);
 
   return {
     isDropped,
     filteredCurrencies,
     selectedCurrency,
+    searchValue,
+    displayText,
+    hasSelection,
     handleOpenDropdown,
     handleSelect,
-    handleChangeCurrencyCode,
+    handleSearch,
     closeDropdown,
     resetCurrency,
   };

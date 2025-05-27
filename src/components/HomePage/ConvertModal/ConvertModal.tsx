@@ -35,10 +35,14 @@ export const ConvertModal = ({
     isDropped,
     filteredCurrencies,
     selectedCurrency,
+    searchValue,
+    displayText,
+    hasSelection,
     handleOpenDropdown,
     handleSelect,
-    handleChangeCurrencyCode,
+    handleSearch,
     closeDropdown,
+    resetCurrency,
   } = useCurrencySelection(currencies, clickedCurrency);
 
   const {
@@ -49,18 +53,19 @@ export const ConvertModal = ({
     handleChangeAmount,
     convertAmount,
     resetConversion,
-  } = useConversion(clickedCurrency);
+  } = useConversion(clickedCurrency, selectedCurrency);
 
   useEffect(() => {
     if (!isModalOpen) {
       resetConversion();
+      resetCurrency();
     }
   }, [isModalOpen]);
 
   useClickOutside(menuRef, closeDropdown);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleChangeCurrencyCode(e.target.value);
+    handleSearch(e.target.value);
   };
 
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -71,6 +76,9 @@ export const ConvertModal = ({
     convertAmount(selectedCurrency);
   };
 
+  const inputDisplayValue = isDropped ? searchValue : displayText;
+  const inputPlaceholder = hasSelection ? selectedCurrency : 'Select currency';
+
   return (
     <Modal
       isOpen={isModalOpen}
@@ -78,6 +86,7 @@ export const ConvertModal = ({
       onClose={onCloseModal}
       onSubmit={handleConvert}
       isLoading={isLoading}
+      buttonText="Convert"
     >
       <ConverterWrapper>
         <ConverterColumn>
@@ -86,9 +95,11 @@ export const ConvertModal = ({
           <ConverterDropDown ref={menuRef}>
             <ConverterDropDownInput
               type="text"
-              value={selectedCurrency}
+              value={inputDisplayValue}
+              placeholder={inputPlaceholder}
               onChange={handleInputChange}
               onClick={handleOpenDropdown}
+              autoComplete="off"
             />
 
             <ConverterDropDownList $isDropped={isDropped}>

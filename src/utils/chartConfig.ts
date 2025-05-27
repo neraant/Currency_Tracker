@@ -1,5 +1,4 @@
 import { ActiveElement, ChartConfiguration } from 'chart.js';
-
 import { DarkTheme } from '@styles/Theme';
 import { IChartDataPoint } from '@typings/chart';
 
@@ -87,6 +86,22 @@ export const getChartConfig = ({
           [];
 
         onBarClick(elements);
+      },
+      onHover: (event, activeElements, chart) => {
+        const canvas = chart.canvas;
+
+        const elements = chart.getElementsAtEventForMode(
+          event as any,
+          'nearest',
+          { intersect: true },
+          false
+        );
+
+        if (elements && elements.length > 0) {
+          canvas.style.cursor = 'pointer';
+        } else {
+          canvas.style.cursor = 'default';
+        }
       },
     },
   };

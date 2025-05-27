@@ -1,12 +1,9 @@
 [
   {
     "name": "Сбер Банк",
-    "coordinates": {
-      "lat": 53.909956,
-      "lng": 27.576363
-    },
+    "coordinates": { "lat": 53.909956, "lng": 27.576363 },
     "address": "просп. Независимости, 39",
-    "currencies": ["USD", "EUR"],
+    "currencies": ["USD", "EUR", "CAD"],
     "workingHours": {
       "mon-fri": "09:00–18:00",
       "sat": "10:00–14:00",
@@ -17,12 +14,9 @@
   },
   {
     "name": "Беларусбанк",
-    "coordinates": {
-      "lat": 53.911592,
-      "lng": 27.579248
-    },
+    "coordinates": { "lat": 53.911592, "lng": 27.579248 },
     "address": "просп. Независимости, 44",
-    "currencies": ["BTC", "USD", "EUR"],
+    "currencies": ["BTC", "USD", "EUR", "AUD"],
     "workingHours": {
       "mon-fri": "08:30–19:00",
       "sat": "09:00–15:00",
@@ -33,12 +27,9 @@
   },
   {
     "name": "ВТБ",
-    "coordinates": {
-      "lat": 53.915956,
-      "lng": 27.588013
-    },
+    "coordinates": { "lat": 53.915956, "lng": 27.588013 },
     "address": "ул. Гикало, 3",
-    "currencies": ["JPY", "USD"],
+    "currencies": ["JPY", "USD", "ARS"],
     "workingHours": {
       "mon-fri": "09:00–17:00",
       "sat": "выходной",
@@ -49,12 +40,9 @@
   },
   {
     "name": "Технобанк",
-    "coordinates": {
-      "lat": 53.918329,
-      "lng": 27.585864
-    },
+    "coordinates": { "lat": 53.918329, "lng": 27.585864 },
     "address": "ул. Якуба Коласа, 4",
-    "currencies": ["BWR", "JPY", "ARS"],
+    "currencies": ["BWR", "JPY", "ARS", "CAD"],
     "workingHours": {
       "mon-fri": "10:00–19:00",
       "sat": "10:00–14:00",
@@ -65,12 +53,9 @@
   },
   {
     "name": "Банк РРБ",
-    "coordinates": {
-      "lat": 53.907866,
-      "lng": 27.590725
-    },
+    "coordinates": { "lat": 53.907866, "lng": 27.590725 },
     "address": "Краснозвёздная ул., 18",
-    "currencies": ["ASD", "ARS", "EUR"],
+    "currencies": ["ASD", "ARS", "EUR", "GBP"],
     "workingHours": {
       "mon-fri": "09:00–17:30",
       "sat": "выходной",
@@ -81,12 +66,9 @@
   },
   {
     "name": "Приорбанк",
-    "coordinates": {
-      "lat": 53.901644,
-      "lng": 27.547659
-    },
+    "coordinates": { "lat": 53.901644, "lng": 27.547659 },
     "address": "ул. Немига, 30, корп. 1",
-    "currencies": ["CNY", "GBP"],
+    "currencies": ["CNY", "GBP", "AUD"],
     "workingHours": {
       "mon-fri": "08:00–18:00",
       "sat": "09:00–13:00",

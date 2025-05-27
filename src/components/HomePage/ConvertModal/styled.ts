@@ -165,6 +165,8 @@ export const ConverterOutput = styled.input`
   border-radius: 4px;
   border: none;
   outline: 1px solid ${({ theme }) => theme.border.primary};
+  cursor: not-allowed;
+  opacity: 0.8;
 
   @media (max-width: 620px) {
     font-size: ${({ theme }) => theme.typography.fontSize['lg']};
