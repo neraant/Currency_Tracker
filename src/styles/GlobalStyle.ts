@@ -29,6 +29,11 @@ export const GlobalStyle = createGlobalStyle`
 		border: none;
 		outline: none;
 	}
+	input {
+		background: none;
+		border: none;
+		outline: none;
+	}
 `;
 
 export const Container = styled.div`

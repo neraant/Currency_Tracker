@@ -16,7 +16,7 @@ export const ModalContainer = styled.div<ModalContainerProps>`
   padding: ${({ theme }) => theme.spacing[8]};
   border-radius: 12px;
   border: 1px solid ${({ theme }) => theme.border.primary};
-  z-index: 20;
+  z-index: 500;
   min-height: 250px;
   transform: translate(-50%, -45%);
   opacity: 0;

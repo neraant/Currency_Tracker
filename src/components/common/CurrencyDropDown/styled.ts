@@ -6,11 +6,15 @@ interface ConverterDropDownListProps {
   $isDropped: boolean;
 }
 
+interface CurrencyDropDownItemProps {
+  $isActive?: boolean;
+}
+
 export const CurrencyDropDownWrapper = styled.div`
   position: relative;
   width: 100%;
-  margin: ${({ theme }) => theme.spacing[14]} 0;
-  max-width: 250px;
+  max-width: 450px;
+  z-index: 100;
 
   &::after {
     content: '';
@@ -27,35 +31,14 @@ export const CurrencyDropDownWrapper = styled.div`
   }
 
   @media (max-width: 620px) {
-    margin: ${({ theme }) => theme.spacing[8]} 0;
-    max-width: 180px;
-  }
-`;
-
-export const CurrencyDropDownInput = styled.input`
-  position: relative;
-  font-size: ${({ theme }) => theme.typography.fontSize['xl']};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.light};
-  color: ${({ theme }) => theme.neutral.gray300};
-  background-color: ${({ theme }) => theme.background.primary};
-  padding: ${({ theme }) => theme.spacing[4]};
-  padding-right: ${({ theme }) => theme.spacing[10]};
-  width: 100%;
-  border-radius: 4px;
-  border: none;
-  border: none;
-  outline: none;
-
-  @media (max-width: 620px) {
-    font-size: ${({ theme }) => theme.typography.fontSize['lg']};
-    padding: ${({ theme }) => theme.spacing[2]};
+    max-width: 250px;
   }
 `;
 
 export const CurrencyDropDownList = styled.ul<ConverterDropDownListProps>`
   position: absolute;
   left: 0;
-  top: 64px;
+  top: calc(100% + 2px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -79,13 +62,9 @@ export const CurrencyDropDownList = styled.ul<ConverterDropDownListProps>`
       opacity: 1;
       transform: scaleY(1);
     `}
-
-  @media (max-width: 620px) {
-    top: 44px;
-  }
 `;
 
-export const CurrencyDropDownItem = styled.li`
+export const CurrencyDropDownItem = styled.li<CurrencyDropDownItemProps>`
   font-size: ${({ theme }) => theme.typography.fontSize['sm']};
   font-weight: ${({ theme }) => theme.typography.fontWeight.light};
   color: ${({ theme }) => theme.neutral.gray300};
@@ -100,4 +79,10 @@ export const CurrencyDropDownItem = styled.li`
   &:hover {
     background-color: ${({ theme }) => theme.border.primary};
   }
+
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      background-color: ${({ theme }) => theme.border.primary};
+    `}
 `;

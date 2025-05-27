@@ -1,24 +1,23 @@
-import { Component } from 'react';
-
-import { Overlay } from '@components/common/Overlay/Overlay';
+import { PureComponent } from 'react';
+import { CurrencyDropDown } from '@components/common/CurrencyDropDown/CurrencyDropDown';
 import { ChartComponent } from '@components/TimelinePage/ChartComponent/ChartComponent';
-import { CurrencyDropDown } from '@components/TimelinePage/CurrencyDropDown/CurrencyDropDown';
+import { ChartSearch } from '@components/TimelinePage/ChartSearch/ChartSearch';
 import { Container } from '@styles/GlobalStyle';
 import { CurrencyCode } from '@typings/currency';
 
 interface ITimelinePageState {
-  selectedCurrency: CurrencyCode;
+  selectedCurrency: CurrencyCode | '';
   isModal: boolean;
 }
 
-export class TimelinePage extends Component<{}, ITimelinePageState> {
+export class TimelinePage extends PureComponent<{}, ITimelinePageState> {
   state: ITimelinePageState = {
     selectedCurrency: CurrencyCode.USD,
     isModal: false,
   };
 
-  setCurrency = (newCurrency: CurrencyCode) => {
-    this.setState({ selectedCurrency: newCurrency });
+  setCurrency = (newCurrency: CurrencyCode | '') => {
+    this.setState({ selectedCurrency: newCurrency || CurrencyCode.USD });
   };
 
   handleCloseModal = () => {
@@ -34,10 +33,18 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
 
     return (
       <Container>
-        <CurrencyDropDown
-          setCurrency={(currency: CurrencyCode) => this.setCurrency(currency)}
-          selectedCurrency={selectedCurrency}
-        />
+        <div style={{ marginTop: '60px' }}>
+          <CurrencyDropDown setCurrency={this.setCurrency} selectedCurrency={selectedCurrency}>
+            {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (
+              <ChartSearch
+                query={query}
+                handleDropDown={handleDropDown}
+                handleInputChange={handleInputChange}
+                handleKeyDown={handleKeyDown}
+              />
+            )}
+          </CurrencyDropDown>
+        </div>
 
         <ChartComponent
           selectedCurrency={selectedCurrency}
@@ -45,8 +52,6 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
           handleCloseModal={this.handleCloseModal}
           handleOpenModal={this.handleOpenModal}
         />
-
-        <Overlay isOpen={isModal} />
       </Container>
     );
   }

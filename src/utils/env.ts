@@ -3,6 +3,7 @@ type EnvVars = {
   TWELVEDATA_API_KEY: string;
   CURRENCY_API_BASE_URL: string;
   TWELVEDATA_API_BASE_URL: string;
+  MAPBOXGL_ACCESS_TOKEN: string;
 };
 
 function validateEnvVar(key: string, value: string | undefined): string {
@@ -28,5 +29,9 @@ export const ENV: EnvVars = {
   TWELVEDATA_API_BASE_URL: validateEnvVar(
     'REACT_APP_TWELVEDATA_BASE_URL',
     process.env.REACT_APP_TWELVEDATA_BASE_URL
+  ),
+  MAPBOXGL_ACCESS_TOKEN: validateEnvVar(
+    'REACT_APP_MAPBOXGL_ACCESS_TOKEN',
+    process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
   ),
 };

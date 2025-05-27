@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useRef } from 'react';
 import { Modal } from '@components/common/Modal/Modal';
+import { useClickOutside } from '@hooks/useClickOutside';
 import { useConversion } from '@hooks/useConversion';
 import { useCurrencySelection } from '@hooks/useCurrencySelection';
 import { Currency, CurrencyCode } from '@typings/currency';
@@ -56,19 +57,7 @@ export const ConvertModal = ({
     }
   }, [isModalOpen]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        closeDropdown();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [menuRef]);
+  useClickOutside(menuRef, closeDropdown);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChangeCurrencyCode(e.target.value);

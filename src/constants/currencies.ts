@@ -21,7 +21,7 @@ export const CURRENCIES: CurrencyCode[] = [
   CurrencyCode.GBP,
 ];
 
-export const CURRENCY_ICONS: Record<CurrencyCode, string> = {
+export const CURRENCY_ICONS: Record<CurrencyCode | string, string> = {
   [CurrencyCode.USD]: UsdIcon,
   [CurrencyCode.ARS]: ArsIcon,
   [CurrencyCode.CAD]: CadIcon,
@@ -33,7 +33,7 @@ export const CURRENCY_ICONS: Record<CurrencyCode, string> = {
   [CurrencyCode.GBP]: GbpIcon,
 };
 
-export const CURRENCY_NAMES: Record<CurrencyCode, string> = {
+export const CURRENCY_NAMES: Record<CurrencyCode | string, string> = {
   [CurrencyCode.USD]: 'Commercial Dollar',
   [CurrencyCode.ARS]: 'Argentine Peso',
   [CurrencyCode.CAD]: 'Canadian Dollar',
@@ -43,6 +43,7 @@ export const CURRENCY_NAMES: Record<CurrencyCode, string> = {
   [CurrencyCode.EUR]: 'Euro',
   [CurrencyCode.BTC]: 'Bitcoin',
   [CurrencyCode.GBP]: 'Libra',
+  '': '',
 };
 
 export const BASE_CURRENCY = 'BRL';
