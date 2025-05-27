@@ -1,10 +1,12 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { STORAGE_KEYS } from '@constants/localStorage';
 import { DarkTheme, LightTheme } from '@styles/Theme';
+import { AppTheme } from '@typings/theme';
 import { StorageUtility } from '@utils/localStorage';
 
 interface ThemeContextType {
-  isDarkTheme: boolean;
+  theme: AppTheme;
   toggleTheme: () => void;
 }
 
@@ -17,19 +19,19 @@ export const useThemeToggle = () => {
 };
 
 export const ThemeToggleProvider = ({ children }: { children: ReactNode }) => {
-  const [isDarkTheme, setIsDarkTheme] = useState(StorageUtility.getItem<boolean>('THEME') ?? true);
+  const [theme, setTheme] = useState(
+    StorageUtility.getItem<AppTheme>(STORAGE_KEYS.THEME) ?? 'dark'
+  );
 
   const toggleTheme = () => {
-    setIsDarkTheme((prev) => {
-      const next = !prev;
-      StorageUtility.setItem<boolean>('THEME', next);
-      return next;
-    });
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    StorageUtility.setItem<AppTheme>(STORAGE_KEYS.THEME, next);
   };
 
   return (
-    <ThemeToggleContext.Provider value={{ isDarkTheme, toggleTheme }}>
-      <ThemeProvider theme={isDarkTheme ? DarkTheme : LightTheme}>{children}</ThemeProvider>
+    <ThemeToggleContext.Provider value={{ theme, toggleTheme }}>
+      <ThemeProvider theme={theme === 'dark' ? DarkTheme : LightTheme}>{children}</ThemeProvider>
     </ThemeToggleContext.Provider>
   );
 };
