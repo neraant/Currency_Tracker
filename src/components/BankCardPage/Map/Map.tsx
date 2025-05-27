@@ -1,5 +1,6 @@
 import { createRef, PureComponent, ReactNode } from 'react';
 import mapboxgl from 'mapbox-gl';
+import bankIcon from '@assets/icons/bank_icon.svg';
 import { MAP_ACCESS_TOKEN } from '@constants/map';
 import rawBankLocations from '@data/MockBanks.json';
 import { BankDetail } from '@typings/bank';
@@ -64,13 +65,35 @@ export class Map extends PureComponent<MapProps, {}> {
   }
 
   createMarker(bank: BankDetail, map: mapboxgl.Map): mapboxgl.Marker {
-    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
-        <h4>${bank.name}</h4>
-        <p>${bank.address}</p>
-        <p><strong>Валюты:</strong> ${bank.currencies.join(', ')}</p>
-      `);
+    let workingHoursHtml = '';
 
-    return new mapboxgl.Marker()
+    if (bank.workingHours) {
+      const hoursList = Object.entries(bank.workingHours)
+        .map(([day, hours]) => `<li>${day}: ${hours}</li>`)
+        .join('');
+      workingHoursHtml = `
+      <p><strong>График работы:</strong></p>
+      <ul>${hoursList}</ul>
+    `;
+    }
+
+    const popupHtml = `
+    <div>
+      <h4>${bank.name}</h4>
+      <p>${bank.address}</p>
+      <p><strong>Валюты:</strong> ${bank.currencies.join(', ')}</p>
+      ${bank.phone ? `<p><strong>Тел.:</strong> ${bank.phone}</p>` : ''}
+      ${workingHoursHtml}
+    </div>
+  `;
+
+    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupHtml);
+
+    const el = document.createElement('div');
+    el.className = 'custom-marker';
+    el.innerHTML = `<img src="${bankIcon}" alt="bank" style="width: 20px; height: 20px;" />`;
+
+    return new mapboxgl.Marker(el)
       .setLngLat([bank.coordinates.lng, bank.coordinates.lat])
       .setPopup(popup)
       .addTo(map);
