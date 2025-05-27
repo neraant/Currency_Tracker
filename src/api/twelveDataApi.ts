@@ -1,6 +1,6 @@
 import { TwelveDataApiResponse } from '@typings/twelvedataapi';
 import { ENV } from '@utils/env';
-import { twelveDataClient } from './clents';
+import { twelveDataClient } from './clients';
 
 export const fetchChartData = async (symbol: string, period: string) => {
   try {

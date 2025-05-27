@@ -1,5 +1,4 @@
 import { ActiveElement, ChartConfiguration } from 'chart.js';
-
 import { DarkTheme } from '@styles/Theme';
 import { IChartDataPoint } from '@typings/chart';
 

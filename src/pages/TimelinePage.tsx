@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { CurrencyDropDown } from '@components/common/CurrencyDropDown/CurrencyDropDown';
 import { ChartComponent } from '@components/TimelinePage/ChartComponent/ChartComponent';
 import { ChartSearch } from '@components/TimelinePage/ChartSearch/ChartSearch';
@@ -6,22 +6,18 @@ import { Container } from '@styles/GlobalStyle';
 import { CurrencyCode } from '@typings/currency';
 
 interface ITimelinePageState {
-  selectedCurrency: CurrencyCode | string;
+  selectedCurrency: CurrencyCode | '';
   isModal: boolean;
 }
 
-export class TimelinePage extends Component<{}, ITimelinePageState> {
+export class TimelinePage extends PureComponent<{}, ITimelinePageState> {
   state: ITimelinePageState = {
     selectedCurrency: CurrencyCode.USD,
     isModal: false,
   };
 
-  setCurrency = (newCurrency: CurrencyCode | string) => {
-    if (newCurrency === '') {
-      this.setState({ selectedCurrency: CurrencyCode.USD });
-    } else {
-      this.setState({ selectedCurrency: newCurrency });
-    }
+  setCurrency = (newCurrency: CurrencyCode | '') => {
+    this.setState({ selectedCurrency: newCurrency || CurrencyCode.USD });
   };
 
   handleCloseModal = () => {
@@ -38,11 +34,7 @@ export class TimelinePage extends Component<{}, ITimelinePageState> {
     return (
       <Container>
         <div style={{ marginTop: '60px' }}>
-          <CurrencyDropDown
-            onClose={() => this.setCurrency(CurrencyCode.USD)}
-            setCurrency={this.setCurrency}
-            selectedCurrency={selectedCurrency}
-          >
+          <CurrencyDropDown setCurrency={this.setCurrency} selectedCurrency={selectedCurrency}>
             {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (
               <ChartSearch
                 query={query}

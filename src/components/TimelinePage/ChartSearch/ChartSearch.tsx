@@ -1,5 +1,4 @@
-import { ChangeEvent, Component, KeyboardEvent, ReactNode } from 'react';
-
+import { ChangeEvent, KeyboardEvent, PureComponent, ReactNode } from 'react';
 import { CurrencyDropDownInput } from './styled';
 
 interface ChartSearchProps {
@@ -9,7 +8,7 @@ interface ChartSearchProps {
   query: string;
 }
 
-export class ChartSearch extends Component<ChartSearchProps, {}> {
+export class ChartSearch extends PureComponent<ChartSearchProps, {}> {
   render(): ReactNode {
     const { handleDropDown, handleInputChange, handleKeyDown, query } = this.props;
     return (

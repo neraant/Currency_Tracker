@@ -8,7 +8,7 @@ export const OverlayContainer = styled.div<OverlayProps>`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 150;
   width: 100dvw;
   height: 100dvh;
   background-color: ${({ theme }) => theme.neutral.black};

@@ -1,15 +1,14 @@
-import { ChangeEvent, createRef, PureComponent, ReactNode } from 'react';
-
+import { ChangeEvent, PureComponent, ReactNode } from 'react';
 import { Modal } from '@components/common/Modal/Modal';
 import { CHART_BAR_FIELDS, INITIAL_BAR_STATE } from '@constants/chart';
 import { ChartFieldName, IChartBar, IChartBarFormData, IFormValidationState } from '@typings/chart';
 import { formatTimestamp } from '@utils/formatTimestamp';
-
+import { parseToFloat } from '@utils/parseToFloat';
 import { ChartInputsContainer } from './styled';
 import ChartInputComponent from '../ChartInput/ChartInputComponent';
 
 interface IChartModalProps {
-  isModal: boolean;
+  isOpenModal: boolean;
   handleCloseModal: () => void;
   onSubmit: (data: IChartBarFormData) => void;
   defaultValues: IChartBar;
@@ -24,8 +23,6 @@ interface IChartModalState {
 }
 
 export class ChartModal extends PureComponent<IChartModalProps, IChartModalState> {
-  currencyModalRef = createRef<HTMLDivElement>();
-
   constructor(props: IChartModalProps) {
     super(props);
 
@@ -46,16 +43,8 @@ export class ChartModal extends PureComponent<IChartModalProps, IChartModalState
     };
   }
 
-  componentDidMount(): void {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  componentWillUnmount(): void {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-
   componentDidUpdate(prevProps: IChartModalProps) {
-    if (this.props.isModal && this.props.defaultValues !== prevProps.defaultValues) {
+    if (this.props.isOpenModal && this.props.defaultValues !== prevProps.defaultValues) {
       const { open = '', high = '', low = '', close = '' } = this.props.defaultValues;
 
       this.setState({
@@ -74,16 +63,6 @@ export class ChartModal extends PureComponent<IChartModalProps, IChartModalState
     }
   }
 
-  handleClickOutside = (e: MouseEvent) => {
-    if (
-      this.props.isModal &&
-      this.currencyModalRef.current &&
-      !this.currencyModalRef.current.contains(e.target as Node)
-    ) {
-      this.props.handleCloseModal();
-    }
-  };
-
   handleChange = (field: ChartFieldName) => (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -97,13 +76,9 @@ export class ChartModal extends PureComponent<IChartModalProps, IChartModalState
     );
   };
 
-  parseToFloat = (values: string[]): number[] => {
-    return [...values.map((value) => parseFloat(value))];
-  };
-
   validateAllFields = (): boolean => {
     const { open, high, low, close } = this.state;
-    const [openVal, highVal, lowVal, closeVal] = this.parseToFloat([open, high, low, close]);
+    const [openVal, highVal, lowVal, closeVal] = parseToFloat([open, high, low, close]);
 
     const isOpenValid = !isNaN(openVal);
     const isHighValid = !isNaN(highVal);
@@ -158,13 +133,13 @@ export class ChartModal extends PureComponent<IChartModalProps, IChartModalState
   };
 
   render(): ReactNode {
-    const { isModal, handleCloseModal, defaultValues } = this.props;
+    const { isOpenModal, handleCloseModal, defaultValues } = this.props;
     const { timestamp } = defaultValues;
 
     return (
       <Modal
         title="Edit bar"
-        isOpen={isModal}
+        isOpen={isOpenModal}
         onClose={handleCloseModal}
         onSubmit={this.handleSubmit}
       >

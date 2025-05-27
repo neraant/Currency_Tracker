@@ -51,3 +51,9 @@ export const BASE_CURRENCY = 'BRL';
 export const MAX_PARSED_VALUE = 1_000_000;
 
 export const INITIAL_CURRENCY = '0.00';
+
+export const MAX_COED = 1.05;
+
+export const MID_COED = 0.95;
+
+export const MIN_COED = 0.9;

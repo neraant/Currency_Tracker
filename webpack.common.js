@@ -1,21 +1,15 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const webpack = require('webpack');
-const dotenv = require('dotenv');
-
-const env = dotenv.config().parsed;
-
-const envKeys = Object.keys(env).reduce((acc, key) => {
-  acc[`process.env.${key}`] = JSON.stringify(env[key]);
-  return acc;
-}, {});
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    clean: true,
   },
   module: {
     rules: [
@@ -46,12 +40,13 @@ module.exports = {
       '@patterns': path.resolve(__dirname, 'src/patterns/'),
       '@data': path.resolve(__dirname, 'src/data/'),
     },
+    plugins: [new TsconfigPathsPlugin()],
   },
   plugins: [
-    new webpack.DefinePlugin(envKeys),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      inject: 'body',
     }),
   ],
 };

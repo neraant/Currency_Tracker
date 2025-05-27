@@ -1,5 +1,6 @@
 const StorageKeys = {
   CACHE_CURRENCIES: 'CACHE_CURRENCIES',
+  THEME: 'THEME',
 } as const;
 
 export type StorageKeysType = (typeof StorageKeys)[keyof typeof StorageKeys];

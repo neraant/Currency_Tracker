@@ -29,7 +29,7 @@ import { ChartModal } from '../ChartModal/ChartModal';
 Chart.register(...registerables, CandlestickController, CandlestickElement);
 
 interface IChartComponentProps {
-  selectedCurrency: CurrencyCode | string;
+  selectedCurrency: CurrencyCode | '';
   isModal: boolean;
   handleCloseModal: () => void;
   handleOpenModal: () => void;
@@ -217,12 +217,12 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
 
         <ChartModal
           onSubmit={this.handleEditBar}
-          isModal={isModal}
+          isOpenModal={isModal}
           handleCloseModal={handleCloseModal}
           defaultValues={chartBar}
         />
 
-        <Popup isError={false} onClose={this.handlePopupClose} />
+        <Popup isError={false} onPopupClose={this.handlePopupClose} />
       </>
     );
   }
