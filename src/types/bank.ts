@@ -6,6 +6,10 @@ export interface BankDetail {
   };
   address: string;
   currencies: string[];
+  phone?: string;
+  workingHours?: {
+    [day: string]: string;
+  };
 }
 
 export interface MapConfig {
