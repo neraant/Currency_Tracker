@@ -217,4 +217,57 @@ describe('ConvertModal', () => {
 
     expect(mockHandleSelect).toHaveBeenCalledWith('EUR');
   });
+
+  it('Converter: resets conversions and currency on modal close', () => {
+    const mockResetConversion = jest.fn();
+    const mockResetCurrency = jest.fn();
+
+    const conversionMock = {
+      ...defaultConversionMock,
+      resetConversion: mockResetConversion,
+    };
+
+    const selectionMock = {
+      ...defaultSelectionMock,
+      resetCurrency: mockResetCurrency,
+    };
+
+    const { rerender } = setup({
+      conversionMock,
+      selectionMock,
+    });
+
+    rerender(
+      <ThemeProvider theme={theme}>
+        <ConvertModal
+          currencies={[]}
+          clickedCurrency={CurrencyCode.EUR}
+          isModalOpen={false}
+          onCloseModal={onCloseModal}
+        />
+      </ThemeProvider>
+    );
+
+    expect(mockResetConversion).toHaveBeenCalled();
+    expect(mockResetCurrency).toHaveBeenCalled();
+  });
+
+  it('Converter: closes dropdown when clicking outside', () => {
+    const mockCloseDropdown = jest.fn();
+
+    const selectionMock = {
+      ...defaultSelectionMock,
+      isDropped: true,
+      closeDropdown: mockCloseDropdown,
+    };
+
+    const { getByTestId, container } = setup({ selectionMock });
+
+    const currencyInput = getByTestId('currency-input');
+    fireEvent.click(currencyInput);
+
+    fireEvent.mouseDown(container);
+
+    expect(mockCloseDropdown).toHaveBeenCalled();
+  });
 });

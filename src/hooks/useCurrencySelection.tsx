@@ -58,6 +58,7 @@ export const useCurrencySelection = (
   const closeDropdown = () => {
     setIsDropped(false);
     setSearchValue('');
+    console.log('closed');
   };
 
   const resetCurrency = () => {
