@@ -93,6 +93,10 @@ export const DarkTheme: DefaultTheme = {
     24: `${BASE_SPACING * 24}px`,
     32: `${BASE_SPACING * 32}px`,
   },
+  scrollbar: {
+    thumb: '#404040',
+    thumbHover: '#616060',
+  },
 };
 
 export const LightTheme: DefaultTheme = {
