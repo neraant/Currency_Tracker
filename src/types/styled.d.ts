@@ -58,5 +58,9 @@ declare module 'styled-components' {
     spacing: {
       [key: string]: string;
     };
+    scrollbar: {
+      thumb: string;
+      thumbHover: string;
+    };
   }
 }

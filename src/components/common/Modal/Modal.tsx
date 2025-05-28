@@ -9,11 +9,20 @@ interface ModalProps {
   title: string;
   isOpen: boolean;
   isLoading?: boolean;
+  buttonText: string;
   onClose: () => void;
   onSubmit: () => void;
 }
 
-export const Modal = ({ children, title, isOpen, isLoading, onClose, onSubmit }: ModalProps) => {
+export const Modal = ({
+  children,
+  title,
+  isOpen,
+  isLoading,
+  buttonText,
+  onClose,
+  onSubmit,
+}: ModalProps) => {
   const modalRoot = document.getElementById('modal-root');
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +55,9 @@ export const Modal = ({ children, title, isOpen, isLoading, onClose, onSubmit }:
 
         {children}
 
-        <ModalButton onClick={onSubmit}>{isLoading ? <Spinner /> : 'Submit'}</ModalButton>
+        <ModalButton onClick={onSubmit}>
+          {isLoading ? <Spinner size="sm" /> : buttonText}
+        </ModalButton>
       </ModalContainer>
 
       <Overlay isOpen={isOpen} onClick={onClose} />

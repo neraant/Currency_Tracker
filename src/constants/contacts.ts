@@ -1,9 +1,9 @@
-import { CONTACT_INPUTS, FieldKey } from '@typings/contacts';
+import { contactInputs, FieldKey } from '@typings/contacts';
 
 export const CONTACT_FIELDS: FieldKey[] = [
-  CONTACT_INPUTS.NAME,
-  CONTACT_INPUTS.EMAIL,
-  CONTACT_INPUTS.MESSAGE,
+  contactInputs.NAME,
+  contactInputs.EMAIL,
+  contactInputs.MESSAGE,
 ];
 
 export const CONTACT_INFO = [

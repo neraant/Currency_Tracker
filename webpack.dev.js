@@ -1,23 +1,15 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
-const webpack = require('webpack');
-const dotenv = require('dotenv');
-
-const env = dotenv.config().parsed || {};
-
-const envKeys = Object.keys(env).reduce((acc, key) => {
-  acc[`process.env.${key}`] = JSON.stringify(env[key]);
-  return acc;
-}, {});
+const Dotenv = require('dotenv-webpack');
 
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(env),
-      ...envKeys,
+    new Dotenv({
+      path: path.resolve(__dirname, '.env'),
+      systemvars: true,
     }),
   ],
   devServer: {

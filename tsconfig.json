@@ -25,5 +25,5 @@
       "@utils/*": ["utils/*"]
     }
   },
-  "include": ["src", "src/types/vite-env.d.ts"]
+  "include": ["src", "src/types/env.d.ts"]
 }

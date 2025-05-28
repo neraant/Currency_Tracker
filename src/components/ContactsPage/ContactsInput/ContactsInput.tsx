@@ -1,40 +1,50 @@
-import { ChangeEvent, FocusEvent, forwardRef } from 'react';
-
-import { ContactInputContainer, ContactInput, ContactLabel } from './styled';
+import { InputHTMLAttributes, useState } from 'react';
+import { ContactInputContainer, ContactInput, ContactLabel, ErrorText } from './styled';
 
 interface ContactsInputProps {
-  value: string;
   label: string;
-  isActive: boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  name: string;
+  error?: string;
 }
 
 export const ContactsInput = ({
-  value,
   label,
-  isActive,
-  onChange,
+  name,
+  error,
+  value,
   onFocus,
   onBlur,
-}: ContactsInputProps) => {
+  ...rest
+}: ContactsInputProps & InputHTMLAttributes<HTMLInputElement>) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const isActive = isFocused || !!value;
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(false);
+    onBlur?.(e);
+  };
+
   return (
     <ContactInputContainer>
-      <ContactLabel $isActive={isActive} htmlFor={label}>
+      <ContactLabel $isActive={isActive} htmlFor={name}>
         {label}
       </ContactLabel>
-
       <ContactInput
+        id={name}
+        name={name}
         $isActive={isActive}
-        id={label}
-        name={label}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         value={value}
-        onChange={onChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        {...rest}
         autoComplete="nope"
       />
+      {error && <ErrorText>{error}</ErrorText>}
     </ContactInputContainer>
   );
 };

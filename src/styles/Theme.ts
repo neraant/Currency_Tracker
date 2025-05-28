@@ -117,4 +117,8 @@ export const LightTheme: DefaultTheme = {
   border: {
     primary: '#cccccc',
   },
+  scrollbar: {
+    thumb: '#404040',
+    thumbHover: '#616060',
+  },
 };

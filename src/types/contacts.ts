@@ -1,7 +1,13 @@
-export type FieldKey = `${CONTACT_INPUTS}`;
+export type FieldKey = `${contactInputs}`;
 
-export enum CONTACT_INPUTS {
+export enum contactInputs {
   NAME = 'name',
   EMAIL = 'email',
   MESSAGE = 'message',
+}
+
+export interface RegisterInterface {
+  name: string;
+  email: string;
+  message: string;
 }

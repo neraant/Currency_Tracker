@@ -34,6 +34,18 @@ export const GlobalStyle = createGlobalStyle`
 		border: none;
 		outline: none;
 	}
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: ${({ theme }) => theme.background.primary};
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background: ${({ theme }) => theme.scrollbar.thumb};
+	}
 `;
 
 export const Container = styled.div`

@@ -7,7 +7,7 @@ export const FormWrapper = styled.form`
   background: ${({ theme }) => theme.neutral.preblack};
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[5]};
+  gap: ${({ theme }) => theme.spacing[8]};
   max-width: 500px;
   flex: 1;
 

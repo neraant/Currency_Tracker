@@ -53,3 +53,13 @@ export const ContactInputContainer = styled.div`
   position: relative;
   width: 100%;
 `;
+
+export const ErrorText = styled.span`
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+  font-size: ${({ theme }) => theme.typography.fontSize['sm']};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.light};
+  color: ${({ theme }) => theme.status.error};
+  text-transform: lowercase;
+`;

@@ -12,6 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
     "axios": "^1.9.0",
     "chart.js": "^4.4.9",
     "chartjs": "^0.3.24",
@@ -21,9 +22,11 @@
     "mapbox-gl": "^3.12.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.56.4",
     "react-router-dom": "^7.6.0",
     "styled-components": "^6.1.18",
-    "terser-webpack-plugin": "^5.3.14"
+    "terser-webpack-plugin": "^5.3.14",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.27.1",
@@ -43,6 +46,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "cypress": "^14.3.3",
     "dotenv": "^16.5.0",
+    "dotenv-webpack": "^8.1.0",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-import-resolver-typescript": "^4.3.4",
