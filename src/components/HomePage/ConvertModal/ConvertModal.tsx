@@ -85,15 +85,20 @@ export const ConvertModal = ({
 
           <ConverterDropDown ref={menuRef}>
             <ConverterDropDownInput
+              data-testid="currency-input"
               type="text"
               value={selectedCurrency}
               onChange={handleInputChange}
               onClick={handleOpenDropdown}
             />
 
-            <ConverterDropDownList $isDropped={isDropped}>
+            <ConverterDropDownList $isDropped={isDropped} data-testid="dropdown-list">
               {filteredCurrencies.map(({ code }) => (
-                <ConverterDropDownItem key={code} onClick={() => handleSelect(code)}>
+                <ConverterDropDownItem
+                  key={code}
+                  onClick={() => handleSelect(code)}
+                  data-testid={`dropdown-item-${code}`}
+                >
                   {code}
                 </ConverterDropDownItem>
               ))}
@@ -103,13 +108,14 @@ export const ConvertModal = ({
 
         <ConverterColumn>
           <ConverterInput
+            data-testid="amount-input"
             placeholder="0.00"
             value={amount}
             onChange={handleAmountChange}
             $isValid={isAmountValid}
           />
 
-          <ConverterOutput disabled value={convertedAmount} />
+          <ConverterOutput data-testid="converted-output" disabled value={convertedAmount} />
         </ConverterColumn>
       </ConverterWrapper>
     </Modal>

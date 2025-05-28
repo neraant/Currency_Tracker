@@ -10,6 +10,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./src",
+    "types": ["jest", "@testing-library/jest-dom"],
     "paths": {
       "@styles/*": ["styles/*"],
       "@components/*": ["components/*"],
@@ -25,5 +26,5 @@
       "@utils/*": ["utils/*"]
     }
   },
-  "include": ["src", "src/types/env.d.ts"]
+  "include": ["src", "src/types/env.d.ts", "jest.setup.ts"]
 }

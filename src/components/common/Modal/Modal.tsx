@@ -46,7 +46,9 @@ export const Modal = ({ children, title, isOpen, isLoading, onClose, onSubmit }:
 
         {children}
 
-        <ModalButton onClick={onSubmit}>{isLoading ? <Spinner /> : 'Submit'}</ModalButton>
+        <ModalButton disabled={isLoading} onClick={onSubmit}>
+          {isLoading ? <Spinner /> : 'Submit'}
+        </ModalButton>
       </ModalContainer>
 
       <Overlay isOpen={isOpen} onClick={onClose} />
