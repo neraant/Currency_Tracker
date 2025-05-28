@@ -1,8 +1,6 @@
-const StorageKeys = {
-  CACHE_CURRENCIES: 'CACHE_CURRENCIES',
-} as const;
+import { STORAGE_KEYS } from '@constants/localStorage';
 
-export type StorageKeysType = (typeof StorageKeys)[keyof typeof StorageKeys];
+export type StorageKeysType = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
 
 class StorageUtility {
   static setItem<T>(key: StorageKeysType, data: T): void {
@@ -42,4 +40,4 @@ class StorageUtility {
   }
 }
 
-export { StorageKeys, StorageUtility };
+export { StorageUtility };

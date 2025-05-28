@@ -1,0 +1,4 @@
+export const STORAGE_KEYS = {
+  CACHE_CURRENCIES: 'CACHE_CURRENCIES',
+  THEME: 'THEME',
+} as const;
