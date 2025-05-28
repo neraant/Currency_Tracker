@@ -23,7 +23,11 @@ export class ElasticSearch extends PureComponent<ElasticSearchProps, {}> {
       <SearchContainer>
         <SearchTitle>Search currency in the bank</SearchTitle>
         <SearchInputContainer>
-          <CurrencyDropDown selectedCurrency={selectedCurrency} setCurrency={setCurrency}>
+          <CurrencyDropDown
+            selectedCurrency={selectedCurrency}
+            setCurrency={setCurrency}
+            canBeEmpty
+          >
             {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (
               <SearchInput
                 value={query}

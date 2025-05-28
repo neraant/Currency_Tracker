@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink as RouterNavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const HeaderLogo = styled.img`
@@ -36,10 +36,15 @@ export const HeaderNav = styled.nav`
   }
 `;
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(RouterNavLink)`
   font-size: ${({ theme }) => theme.typography.fontSize.xl};
   font-weight: ${({ theme }) => theme.typography.fontWeight.light};
   transition: all 0.3s ease-in-out;
+
+  &.active {
+    font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+    border-bottom: 1px solid ${({ theme }) => theme.text.primary};
+  }
 
   &:hover {
     opacity: 0.7;

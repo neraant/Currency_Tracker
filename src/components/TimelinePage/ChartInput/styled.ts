@@ -32,6 +32,11 @@ export const ChartInput = styled.input`
   border-radius: 4px;
   border: 1px solid ${({ theme }) => theme.border.primary};
 
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
   @media (max-width: 620px) {
     font-size: ${({ theme }) => theme.typography.fontSize['lg']};
     padding: ${({ theme }) => theme.spacing[2]};

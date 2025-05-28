@@ -6,6 +6,7 @@ import { CurrencyDropDownItem, CurrencyDropDownList, CurrencyDropDownWrapper } f
 
 interface ICurrencyDropDownProps {
   selectedCurrency?: CurrencyCode | '';
+  canBeEmpty?: boolean;
   setCurrency: (newCurrency: CurrencyCode | '') => void;
   onClose?: () => void;
   children: (props: {
@@ -18,11 +19,12 @@ interface ICurrencyDropDownProps {
 
 export const CurrencyDropDown = ({
   selectedCurrency = '',
+  canBeEmpty,
   setCurrency,
   onClose,
   children,
 }: ICurrencyDropDownProps) => {
-  const [query, setQuery] = useState<string>(selectedCurrency);
+  const [query, setQuery] = useState<string>('');
   const [isDropped, setIsDropped] = useState<boolean>(false);
   const [filteredCurrencies, setFilteredCurrencies] = useState<CurrencyCode[]>(CURRENCIES);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
@@ -31,10 +33,17 @@ export const CurrencyDropDown = ({
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useClickOutside<HTMLDivElement | null>(inputRef, () => {
-    if (query.trim() !== selectedCurrency) {
+    const trimmedQuery = query.trim();
+
+    if (!canBeEmpty && trimmedQuery !== selectedCurrency) {
       setQuery(selectedCurrency);
       setFilteredCurrencies(CURRENCIES);
     }
+
+    if (canBeEmpty && trimmedQuery === '') {
+      setCurrency('');
+    }
+
     setIsDropped(false);
     setActiveIndex(-1);
     onClose?.();
@@ -50,6 +59,7 @@ export const CurrencyDropDown = ({
     const willBeDropped = !isDropped;
     setIsDropped(willBeDropped);
     setActiveIndex(-1);
+    setQuery('');
     if (!willBeDropped) onClose?.();
   };
 
@@ -70,8 +80,6 @@ export const CurrencyDropDown = ({
       setFilteredCurrencies(filtered);
       setIsDropped(true);
       setActiveIndex(-1);
-
-      if (input.trim() === '') setCurrency('');
     }, 300);
   };
 
@@ -137,7 +145,7 @@ export const CurrencyDropDown = ({
           ))
         ) : (
           <CurrencyDropDownItem style={{ pointerEvents: 'none', opacity: 0.6 }}>
-            Не найдено
+            Not found
           </CurrencyDropDownItem>
         )}
       </CurrencyDropDownList>
