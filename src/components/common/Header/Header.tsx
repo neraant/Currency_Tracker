@@ -10,13 +10,13 @@ export const Header = () => {
     <HeaderContainer>
       <Container>
         <HeaderWrapper>
-          <Link to="/">
+          <Link to="/" data-testid="link-home">
             <HeaderLogo src={logo} alt="logo" />
           </Link>
 
           <HeaderNav>
-            {HEADER_NAVLINKS.map(({ label, link }, index) => (
-              <NavLink to={link} key={index}>
+            {HEADER_NAVLINKS.map(({ label, link, testId }, index) => (
+              <NavLink data-testid={testId} to={link} key={index}>
                 {label}
               </NavLink>
             ))}

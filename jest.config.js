@@ -4,8 +4,11 @@ export default {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.js$': 'babel-jest',
   },
   moduleNameMapper: {
+    'styled-components': '<rootDir>/src/__mock__styled-components.js',
+
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(svg|png|jpg|jpeg|gif)$': 'identity-obj-proxy',
 
@@ -30,4 +33,13 @@ export default {
     '<rootDir>/src/**/*.{test,spec}.{ts,tsx}',
   ],
   roots: ['<rootDir>/src'],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  globals: {
+    'ts-jest': {
+      useESM: true,
+      tsconfig: {
+        jsx: 'react-jsx',
+      },
+    },
+  },
 };
