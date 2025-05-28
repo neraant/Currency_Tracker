@@ -1,5 +1,4 @@
 import { ChangeEvent, Component } from 'react';
-
 import { ChartInput, ChartInputError, ChartInputWrapper, ChartLabel } from './styled';
 
 interface IChartInputProps {

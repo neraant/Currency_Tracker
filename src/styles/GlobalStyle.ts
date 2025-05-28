@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
 		outline: none;
 	}
 	input {
-		background: none;
+		background: transparent;
 		border: none;
 		outline: none;
 	}

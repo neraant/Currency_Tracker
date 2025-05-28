@@ -1,7 +1,6 @@
 import { useLastUpdate } from '@hooks/useLastUpdate';
 import { Container } from '@styles/GlobalStyle';
 import { formatTime } from '@utils/formatTime';
-
 import { LargeCircle, SmallCircle, UpdateText, UpdateWrapper } from './styled';
 
 export const UpdateComponent = () => {
