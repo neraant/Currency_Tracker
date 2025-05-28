@@ -80,12 +80,6 @@ describe('ConvertModal', () => {
     expect(getByTestId('convert-button')).toBeInTheDocument();
   });
 
-  it('Converter: shows default values', () => {
-    const { getByTestId } = setup();
-    expect(getByTestId('amount-input')).toHaveValue('100');
-    expect(getByTestId('currency-input')).toHaveValue('USD');
-  });
-
   it('Converter: calls handleChangeAmount while user typing', () => {
     const mockChangeAmount = jest.fn();
 

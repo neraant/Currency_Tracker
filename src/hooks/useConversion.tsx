@@ -1,21 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { convertCurrency } from '@api/currencyApi';
-import { INITIAL_CURRENCY, MAX_PARSED_VALUE } from '@constants/currencies';
+import { INITIAL_CURRENCY } from '@constants/currencies';
 import { CurrencyCode } from '@typings/currency';
+import { isValidAmount } from '@utils/isValidAmount';
 
-export const useConversion = (fromCurrency: CurrencyCode | null) => {
+export const useConversion = (
+  fromCurrency: CurrencyCode | null,
+  selectedCurrency: CurrencyCode | ''
+) => {
   const [amount, setAmount] = useState('');
   const [isAmountValid, setIsAmountValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [convertedAmount, setConvertedAmount] = useState(INITIAL_CURRENCY);
 
+  useEffect(() => {
+    if (selectedCurrency) {
+      resetConversion();
+    }
+  }, [selectedCurrency]);
+
   const handleChangeAmount = (value: string) => {
     const parsed = parseFloat(value);
 
-    if (parsed > MAX_PARSED_VALUE) return;
+    const isValueValid = isValidAmount(value);
 
-    setAmount(value);
-    setIsAmountValid(!isNaN(parsed) && parsed >= 0);
+    if (isValueValid) {
+      setAmount(value);
+      setIsAmountValid(!isNaN(parsed) && parsed >= 0);
+    }
   };
 
   const resetConversion = () => {

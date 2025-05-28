@@ -70,7 +70,7 @@ export const ModalButton = styled.button`
   background-color: ${({ theme }) => theme.neutral.white};
   transition: all 0.3s ease-in-out;
   border: 1px solid ${({ theme }) => theme.neutral.white};
-  padding: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[3]} 0;
   border-radius: 8px;
   cursor: pointer;
 
