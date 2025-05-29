@@ -48,14 +48,16 @@ export const Modal = ({
 
   return createPortal(
     <>
-      <ModalContainer ref={modalRef} $isModal={isOpen}>
+      <ModalContainer ref={modalRef} $isModal={isOpen} data-testid="modal">
         <ModalTitle>{title}</ModalTitle>
 
-        <ModalCloseButton onClick={onClose}>&#10005;</ModalCloseButton>
+        <ModalCloseButton data-testid="modal-close-button" onClick={onClose}>
+          &#10005;
+        </ModalCloseButton>
 
         {children}
 
-        <ModalButton disabled={isLoading} onClick={onSubmit}>
+        <ModalButton data-testid="modal-submit-button" disabled={isLoading} onClick={onSubmit}>
           {isLoading ? <Spinner size="sm" /> : buttonText}
         </ModalButton>
       </ModalContainer>

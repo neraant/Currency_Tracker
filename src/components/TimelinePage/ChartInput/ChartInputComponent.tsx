@@ -15,8 +15,8 @@ export default class ChartInputComponent extends Component<IChartInputProps, {}>
 
     return (
       <ChartInputWrapper>
-        <ChartLabel>{label}</ChartLabel>
-        <ChartInput value={value} onChange={onChange} disabled={disabled || false} />
+        <ChartLabel htmlFor={label}>{label}</ChartLabel>
+        <ChartInput id={label} value={value} onChange={onChange} disabled={disabled || false} />
         {!isValid && <ChartInputError>Invalid value</ChartInputError>}
       </ChartInputWrapper>
     );

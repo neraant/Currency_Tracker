@@ -6,5 +6,5 @@ interface SpinnerProps {
 }
 
 export const Spinner = ({ size, color }: SpinnerProps) => {
-  return <Spin $size={size} $color={color} />;
+  return <Spin role="status" $size={size} $color={color} />;
 };

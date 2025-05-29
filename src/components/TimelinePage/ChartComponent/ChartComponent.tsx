@@ -170,7 +170,13 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
 
         return { chartData: updatedData };
       },
-      () => this.renderChart()
+      () => {
+        if (this.chartInstance) {
+          const parsedData = parseChartData(this.state.chartData);
+          this.chartInstance.data.datasets[0].data = parsedData;
+          this.chartInstance.update('active');
+        }
+      }
     );
   };
 

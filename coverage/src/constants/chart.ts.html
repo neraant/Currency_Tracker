@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,14 +97,14 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -118,27 +118,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const CHART_BAR_FIELDS = <span class="cstat-no" title="statement not covered" >[</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const CHART_BAR_FIELDS = [
   { name: 'open', label: 'Open' },
   { name: 'high', label: 'High' },
   { name: 'low', label: 'Low' },
   { name: 'close', label: 'Close' },
 ] as const;
 &nbsp;
-export const INITIAL_BAR_STATE = <span class="cstat-no" title="statement not covered" >{</span>
+export const INITIAL_BAR_STATE = {
   open: '',
   high: '',
   low: '',
@@ -152,19 +152,19 @@ export const INITIAL_BAR_STATE = <span class="cstat-no" title="statement not cov
   },
 };
 &nbsp;
-export const FULL_DATA_QNTY = <span class="cstat-no" title="statement not covered" >30;</span>
+export const FULL_DATA_QNTY = 30;
 &nbsp;
-export const CHART_WIDTH = <span class="cstat-no" title="statement not covered" >1000;</span>
+export const CHART_WIDTH = 1000;
 &nbsp;
-export const CHART_HEIGHT = <span class="cstat-no" title="statement not covered" >400;</span>
+export const CHART_HEIGHT = 400;
 &nbsp;
 export type ChartFieldName = (typeof CHART_BAR_FIELDS)[number]['name'];
 &nbsp;
-export const MAX_COEF = <span class="cstat-no" title="statement not covered" >1.05;</span>
+export const MAX_COEF = 1.05;
 &nbsp;
-export const MID_COEF = <span class="cstat-no" title="statement not covered" >0.95;</span>
+export const MID_COEF = 0.95;
 &nbsp;
-export const MIN_COEF = <span class="cstat-no" title="statement not covered" >0.9;</span>
+export const MIN_COEF = 0.9;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -172,7 +172,7 @@ export const MIN_COEF = <span class="cstat-no" title="statement not covered" >0.
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-28T21:03:56.523Z
+                at 2025-05-29T21:17:10.246Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

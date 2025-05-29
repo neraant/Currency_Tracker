@@ -75,12 +75,12 @@ describe('ConvertModal', () => {
     );
   };
 
-  it('Converter: renders modal', () => {
+  test('Converter: renders modal', () => {
     const { getByTestId } = setup();
     expect(getByTestId('convert-button')).toBeInTheDocument();
   });
 
-  it('Converter: calls handleChangeAmount while user typing', () => {
+  test('Converter: calls handleChangeAmount while user typing', () => {
     const mockChangeAmount = jest.fn();
 
     const conversionMock = {
@@ -96,7 +96,7 @@ describe('ConvertModal', () => {
     expect(mockChangeAmount).toHaveBeenCalledWith('200');
   });
 
-  it('Converter: check invalid input data', () => {
+  test('Converter: check invalid input data', () => {
     const mockChangeAmount = jest.fn();
     const mockConvertAmount = jest.fn();
 
@@ -123,7 +123,7 @@ describe('ConvertModal', () => {
     expect(output.value).toBe('');
   });
 
-  it('Converter: open dropdown list', () => {
+  test('Converter: open dropdown list', () => {
     const selectionMock = {
       ...defaultSelectionMock,
       isDropped: true,
@@ -141,7 +141,7 @@ describe('ConvertModal', () => {
     expect(getByTestId('dropdown-item-EUR')).toBeInTheDocument();
   });
 
-  it('Converter: select dropdown item', () => {
+  test('Converter: select dropdown item', () => {
     const mockHandleSelect = jest.fn();
 
     const selectionMock = {
@@ -158,7 +158,7 @@ describe('ConvertModal', () => {
     expect(mockHandleSelect).toHaveBeenCalledWith('JPY');
   });
 
-  it('Conveter: calls convertAmount when valid input submitted', () => {
+  test('Conveter: calls convertAmount when valid input submitted', () => {
     const mockConvertAmount = jest.fn();
 
     const conversionMock = {
@@ -175,7 +175,7 @@ describe('ConvertModal', () => {
     expect(mockConvertAmount).toHaveBeenCalled();
   });
 
-  it('Converter: renders converted amount', () => {
+  test('Converter: renders converted amount', () => {
     const conversionMock = {
       ...defaultConversionMock,
       convertedAmount: '150',
@@ -187,7 +187,7 @@ describe('ConvertModal', () => {
     expect(output.value).toBe('150');
   });
 
-  it('Converter: shows loading state when converting', () => {
+  test('Converter: shows loading state when converting', () => {
     const conversionMock = {
       ...defaultConversionMock,
       isLoading: true,
@@ -199,7 +199,7 @@ describe('ConvertModal', () => {
     expect(convertButton).toHaveAttribute('disabled');
   });
 
-  it('Converter: closes dropdown after currency selection', () => {
+  test('Converter: closes dropdown after currency selection', () => {
     const mockHandleSelect = jest.fn();
     const mockCloseDropdown = jest.fn();
 
@@ -218,7 +218,7 @@ describe('ConvertModal', () => {
     expect(mockHandleSelect).toHaveBeenCalledWith('EUR');
   });
 
-  it('Converter: resets conversions and currency on modal close', () => {
+  test('Converter: resets conversions and currency on modal close', () => {
     const mockResetConversion = jest.fn();
     const mockResetCurrency = jest.fn();
 
@@ -252,7 +252,7 @@ describe('ConvertModal', () => {
     expect(mockResetCurrency).toHaveBeenCalled();
   });
 
-  it('Converter: closes dropdown when clicking outside', () => {
+  test('Converter: closes dropdown when clicking outside', () => {
     const mockCloseDropdown = jest.fn();
 
     const selectionMock = {

@@ -34,13 +34,6 @@ export const useCurrencySelection = (
     setFilteredCurrencies(filtered);
   }, [debouncedValue, currencies]);
 
-  useEffect(() => {
-    if (isDropped) {
-      setFilteredCurrencies(currencies);
-      setSearchValue('');
-    }
-  }, [isDropped, currencies]);
-
   const handleOpenDropdown = () => {
     setIsDropped((prev) => !prev);
   };
@@ -58,7 +51,6 @@ export const useCurrencySelection = (
   const closeDropdown = () => {
     setIsDropped(false);
     setSearchValue('');
-    console.log('closed');
   };
 
   const resetCurrency = () => {

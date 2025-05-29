@@ -37,6 +37,7 @@ const htmlTags = [
   'figcaption',
   'blockquote',
   'pre',
+  'canvas',
   'code',
 ];
 

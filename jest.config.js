@@ -6,8 +6,11 @@ export default {
     '^.+\\.(ts|tsx)$': 'ts-jest',
     '^.+\\.js$': 'babel-jest',
   },
+  transformIgnorePatterns: [
+    '/node_modules/(?!chart.js|chartjs-chart-financial|chartjs-adapter-luxon)',
+  ],
   moduleNameMapper: {
-    'styled-components': '<rootDir>/src/__mock__styled-components.js',
+    'styled-components': '<rootDir>/src/__mock__/styled-components.js',
 
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(svg|png|jpg|jpeg|gif)$': 'identity-obj-proxy',
@@ -26,7 +29,16 @@ export default {
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
   },
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts', '!src/index.tsx'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/__mocks__/**',
+    '!src/**/constants/**',
+    '!src/**/types/**',
+    '!src/**/data/**',
+    '!src/**/styles/**',
+    '!src/**/assets/**',
+    '!src/**/*.styles.{js,ts}',
+  ],
   coverageReporters: ['text', 'lcov', 'html'],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{ts,tsx}',

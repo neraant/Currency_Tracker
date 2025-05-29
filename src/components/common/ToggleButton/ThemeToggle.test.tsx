@@ -4,7 +4,7 @@ import { ToggleButton } from '@components/common/ToggleButton/ToggleButton';
 import { ThemeToggleProvider } from '@context/ThemeContext';
 
 describe('ThemeToggle', () => {
-  it('renders with default dark theme', () => {
+  test('renders with default dark theme', () => {
     render(
       <ThemeToggleProvider>
         <ToggleButton />
@@ -15,7 +15,7 @@ describe('ThemeToggle', () => {
     expect(wrapper).toHaveAttribute('data-theme', 'dark');
   });
 
-  it('toggles theme on click', async () => {
+  test('toggles theme on click', async () => {
     render(
       <ThemeToggleProvider>
         <ToggleButton />
