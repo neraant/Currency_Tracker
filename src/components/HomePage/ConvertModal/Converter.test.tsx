@@ -75,199 +75,146 @@ describe('ConvertModal', () => {
     );
   };
 
-  test('Converter: renders modal', () => {
-    const { getByTestId } = setup();
-    expect(getByTestId('convert-button')).toBeInTheDocument();
-  });
-
-  test('Converter: calls handleChangeAmount while user typing', () => {
-    const mockChangeAmount = jest.fn();
-
-    const conversionMock = {
-      ...defaultConversionMock,
-      handleChangeAmount: mockChangeAmount,
-    };
-
-    const { getByTestId } = setup({ conversionMock });
-
-    const amountInput = getByTestId('amount-input');
-    fireEvent.change(amountInput, { target: { value: '200' } });
-
-    expect(mockChangeAmount).toHaveBeenCalledWith('200');
-  });
-
-  test('Converter: check invalid input data', () => {
-    const mockChangeAmount = jest.fn();
-    const mockConvertAmount = jest.fn();
-
-    const conversionMock = {
-      ...defaultConversionMock,
-      isAmountValid: false,
-      convertedAmount: '',
-      handleChangeAmount: mockChangeAmount,
-      convertAmount: mockConvertAmount,
-    };
-
-    const { getByTestId } = setup({ conversionMock });
-
-    const amountInput = getByTestId('amount-input');
-    fireEvent.change(amountInput, { target: { value: 'abc' } });
-
-    const convertButton = getByTestId('convert-button');
-    fireEvent.click(convertButton);
-
-    expect(mockChangeAmount).toHaveBeenCalledWith('abc');
-    expect(mockConvertAmount).toHaveBeenCalled();
-
-    const output = getByTestId('converted-output') as HTMLInputElement;
-    expect(output.value).toBe('');
-  });
-
-  test('Converter: open dropdown list', () => {
-    const selectionMock = {
-      ...defaultSelectionMock,
-      isDropped: true,
-    };
-
-    const { getByTestId } = setup({ selectionMock });
-
-    const currencyInput = getByTestId('currency-input');
-    fireEvent.click(currencyInput);
-
-    const dropdownList = getByTestId('dropdown-list');
-    expect(dropdownList).toBeInTheDocument();
-
-    expect(getByTestId('dropdown-item-USD')).toBeInTheDocument();
-    expect(getByTestId('dropdown-item-EUR')).toBeInTheDocument();
-  });
-
-  test('Converter: select dropdown item', () => {
-    const mockHandleSelect = jest.fn();
-
-    const selectionMock = {
-      ...defaultSelectionMock,
-      handleSelect: mockHandleSelect,
-      isDropped: true,
-    };
-
-    const { getByTestId } = setup({ selectionMock });
-
-    const currency = getByTestId('dropdown-item-JPY');
-    fireEvent.click(currency);
-
-    expect(mockHandleSelect).toHaveBeenCalledWith('JPY');
-  });
-
-  test('Conveter: calls convertAmount when valid input submitted', () => {
-    const mockConvertAmount = jest.fn();
-
-    const conversionMock = {
-      ...defaultConversionMock,
-      isAmountValid: true,
-      convertAmount: mockConvertAmount,
-    };
-
-    const { getByTestId } = setup({ conversionMock });
-
-    const convertButton = getByTestId('convert-button');
-    fireEvent.click(convertButton);
-
-    expect(mockConvertAmount).toHaveBeenCalled();
-  });
-
-  test('Converter: renders converted amount', () => {
-    const conversionMock = {
-      ...defaultConversionMock,
-      convertedAmount: '150',
-    };
-
-    const { getByTestId } = setup({ conversionMock });
-
-    const output = getByTestId('converted-output') as HTMLInputElement;
-    expect(output.value).toBe('150');
-  });
-
-  test('Converter: shows loading state when converting', () => {
-    const conversionMock = {
-      ...defaultConversionMock,
-      isLoading: true,
-    };
-
-    const { getByTestId } = setup({ conversionMock });
-    const convertButton = getByTestId('convert-button');
-
-    expect(convertButton).toHaveAttribute('disabled');
-  });
-
-  test('Converter: closes dropdown after currency selection', () => {
-    const mockHandleSelect = jest.fn();
-    const mockCloseDropdown = jest.fn();
-
-    const selectionMock = {
-      ...defaultSelectionMock,
-      isDropped: true,
-      handleSelect: mockHandleSelect,
-      closeDropdown: mockCloseDropdown,
-    };
-
-    const { getByTestId } = setup({ selectionMock });
-
-    const currency = getByTestId('dropdown-item-EUR');
-    fireEvent.click(currency);
-
-    expect(mockHandleSelect).toHaveBeenCalledWith('EUR');
-  });
-
-  test('Converter: resets conversions and currency on modal close', () => {
-    const mockResetConversion = jest.fn();
-    const mockResetCurrency = jest.fn();
-
-    const conversionMock = {
-      ...defaultConversionMock,
-      resetConversion: mockResetConversion,
-    };
-
-    const selectionMock = {
-      ...defaultSelectionMock,
-      resetCurrency: mockResetCurrency,
-    };
-
-    const { rerender } = setup({
-      conversionMock,
-      selectionMock,
+  describe('Modal Rendering', () => {
+    test('renders modal', () => {
+      const { getByTestId } = setup();
+      expect(getByTestId('convert-button')).toBeInTheDocument();
     });
 
-    rerender(
-      <ThemeProvider theme={theme}>
-        <ConvertModal
-          currencies={[]}
-          clickedCurrency={CurrencyCode.EUR}
-          isModalOpen={false}
-          onCloseModal={onCloseModal}
-        />
-      </ThemeProvider>
-    );
+    test('renders converted amount', () => {
+      const conversionMock = { ...defaultConversionMock, convertedAmount: '150' };
+      const { getByTestId } = setup({ conversionMock });
+      expect((getByTestId('converted-output') as HTMLInputElement).value).toBe('150');
+    });
 
-    expect(mockResetConversion).toHaveBeenCalled();
-    expect(mockResetCurrency).toHaveBeenCalled();
+    test('shows loading state when converting', () => {
+      const conversionMock = { ...defaultConversionMock, isLoading: true };
+      const { getByTestId } = setup({ conversionMock });
+      expect(getByTestId('convert-button')).toHaveAttribute('disabled');
+    });
   });
 
-  test('Converter: closes dropdown when clicking outside', () => {
-    const mockCloseDropdown = jest.fn();
+  describe('Amount Input', () => {
+    test('calls handleChangeAmount while typing', () => {
+      const mockChangeAmount = jest.fn();
+      const conversionMock = { ...defaultConversionMock, handleChangeAmount: mockChangeAmount };
+      const { getByTestId } = setup({ conversionMock });
 
-    const selectionMock = {
-      ...defaultSelectionMock,
-      isDropped: true,
-      closeDropdown: mockCloseDropdown,
-    };
+      fireEvent.change(getByTestId('amount-input'), { target: { value: '200' } });
+      expect(mockChangeAmount).toHaveBeenCalledWith('200');
+    });
 
-    const { getByTestId, container } = setup({ selectionMock });
+    test('handles invalid input data', () => {
+      const mockChangeAmount = jest.fn();
+      const mockConvertAmount = jest.fn();
+      const conversionMock = {
+        ...defaultConversionMock,
+        isAmountValid: false,
+        convertedAmount: '',
+        handleChangeAmount: mockChangeAmount,
+        convertAmount: mockConvertAmount,
+      };
 
-    const currencyInput = getByTestId('currency-input');
-    fireEvent.click(currencyInput);
+      const { getByTestId } = setup({ conversionMock });
+      fireEvent.change(getByTestId('amount-input'), { target: { value: 'abc' } });
+      fireEvent.click(getByTestId('convert-button'));
 
-    fireEvent.mouseDown(container);
+      expect(mockChangeAmount).toHaveBeenCalledWith('abc');
+      expect(mockConvertAmount).toHaveBeenCalled();
+      expect((getByTestId('converted-output') as HTMLInputElement).value).toBe('');
+    });
 
-    expect(mockCloseDropdown).toHaveBeenCalled();
+    test('calls convertAmount when input is valid and submitted', () => {
+      const mockConvertAmount = jest.fn();
+      const conversionMock = { ...defaultConversionMock, convertAmount: mockConvertAmount };
+
+      const { getByTestId } = setup({ conversionMock });
+      fireEvent.click(getByTestId('convert-button'));
+
+      expect(mockConvertAmount).toHaveBeenCalled();
+    });
+  });
+
+  describe('Dropdown Interaction', () => {
+    test('opens dropdown list on click', () => {
+      const selectionMock = { ...defaultSelectionMock, isDropped: true };
+      const { getByTestId } = setup({ selectionMock });
+
+      fireEvent.click(getByTestId('currency-input'));
+
+      expect(getByTestId('dropdown-list')).toBeInTheDocument();
+      expect(getByTestId('dropdown-item-USD')).toBeInTheDocument();
+      expect(getByTestId('dropdown-item-EUR')).toBeInTheDocument();
+    });
+
+    test('selects dropdown item', () => {
+      const mockHandleSelect = jest.fn();
+      const selectionMock = {
+        ...defaultSelectionMock,
+        handleSelect: mockHandleSelect,
+        isDropped: true,
+      };
+
+      const { getByTestId } = setup({ selectionMock });
+      fireEvent.click(getByTestId('dropdown-item-JPY'));
+
+      expect(mockHandleSelect).toHaveBeenCalledWith('JPY');
+    });
+
+    test('closes dropdown when clicking outside', () => {
+      const mockCloseDropdown = jest.fn();
+      const selectionMock = {
+        ...defaultSelectionMock,
+        isDropped: true,
+        closeDropdown: mockCloseDropdown,
+      };
+
+      const { getByTestId, container } = setup({ selectionMock });
+      fireEvent.click(getByTestId('currency-input'));
+      fireEvent.mouseDown(container);
+
+      expect(mockCloseDropdown).toHaveBeenCalled();
+    });
+
+    test('closes dropdown after selecting currency', () => {
+      const mockHandleSelect = jest.fn();
+      const mockCloseDropdown = jest.fn();
+      const selectionMock = {
+        ...defaultSelectionMock,
+        isDropped: true,
+        handleSelect: mockHandleSelect,
+        closeDropdown: mockCloseDropdown,
+      };
+
+      const { getByTestId } = setup({ selectionMock });
+      fireEvent.click(getByTestId('dropdown-item-EUR'));
+
+      expect(mockHandleSelect).toHaveBeenCalledWith('EUR');
+    });
+  });
+
+  describe('Modal Lifecycle', () => {
+    test('resets conversion and currency on modal close', () => {
+      const mockResetConversion = jest.fn();
+      const mockResetCurrency = jest.fn();
+      const conversionMock = { ...defaultConversionMock, resetConversion: mockResetConversion };
+      const selectionMock = { ...defaultSelectionMock, resetCurrency: mockResetCurrency };
+
+      const { rerender } = setup({ conversionMock, selectionMock });
+
+      rerender(
+        <ThemeProvider theme={theme}>
+          <ConvertModal
+            currencies={[]}
+            clickedCurrency={CurrencyCode.EUR}
+            isModalOpen={false}
+            onCloseModal={onCloseModal}
+          />
+        </ThemeProvider>
+      );
+
+      expect(mockResetConversion).toHaveBeenCalled();
+      expect(mockResetCurrency).toHaveBeenCalled();
+    });
   });
 });

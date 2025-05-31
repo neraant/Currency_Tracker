@@ -43,7 +43,7 @@ interface IChartComponentState {
   chartBar: IChartBar;
 }
 
-export class ChartComponent extends PureComponent<IChartComponentProps, IChartComponentState> {
+class ChartComponent extends PureComponent<IChartComponentProps, IChartComponentState> {
   static contextType = ObserverContext;
   context!: ContextType<typeof ObserverContext>;
 
@@ -233,3 +233,5 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
     );
   }
 }
+
+export { ChartComponent };

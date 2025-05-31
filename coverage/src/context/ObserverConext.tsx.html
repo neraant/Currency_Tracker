@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>7/14</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">41.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>5/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,12 +108,30 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -126,25 +144,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -168,13 +168,13 @@ type SubjectsMap = {
   [K in keyof ObserverStateMap]: Subject&lt;ObserverStateMap[K]&gt;;
 };
 &nbsp;
-export const ObserverContext = <span class="cstat-no" title="statement not covered" >createContext&lt;SubjectsMap | null&gt;(null);</span>
+export const ObserverContext = createContext&lt;SubjectsMap | null&gt;(null);
 &nbsp;
 interface SubjectProviderProps {
   children: ReactNode;
 }
 &nbsp;
-export const SubjectProvider = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> children }: SubjectProviderProps) =&gt; {</span>
+export const SubjectProvider = <span class="fstat-no" title="function not covered" >({</span> children }: SubjectProviderProps) =&gt; {
   const subjects = <span class="cstat-no" title="statement not covered" >useMemo&lt;SubjectsMap&gt;(</span>
 <span class="fstat-no" title="function not covered" >    () =</span>&gt; (<span class="cstat-no" title="statement not covered" >{</span>
       last_updated: new Subject&lt;string | null&gt;(null),
@@ -189,7 +189,7 @@ export const SubjectProvider = <span class="cstat-no" title="statement not cover
 <span class="cstat-no" title="statement not covered" >  return &lt;ObserverContext.Provider value={subjects}&gt;{children}&lt;/ObserverContext.Provider&gt;;</span>
 };
 &nbsp;
-export const useSubject = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >&lt;K extends keyof ObserverStateMap&gt;(</span></span>
+export const useSubject = <span class="fstat-no" title="function not covered" >&lt;K extends keyof ObserverStateMap&gt;(</span>
   key: K
 ): Subject&lt;ObserverStateMap[K]&gt; =&gt; {
   const context = <span class="cstat-no" title="statement not covered" >useContext(ObserverContext);</span>
@@ -205,7 +205,7 @@ export const useSubject = <span class="cstat-no" title="statement not covered" >
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-29T21:27:16.948Z
+                at 2025-05-31T08:14:42.535Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

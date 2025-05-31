@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CACHE_TTL } from '@constants/time';
 
 interface useQueryResult<T> {
@@ -16,7 +16,7 @@ export interface CachedValue<T> {
   data: T;
 }
 
-const memoryCache = new Map<string, CachedValue<any>>();
+export const memoryCache = new Map<string, CachedValue<any>>();
 
 export function useQuery<T>(
   key: string,
@@ -27,17 +27,7 @@ export function useQuery<T>(
   const [isLoading, setIsLoading] = useState(!memoryCache.has(key));
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    const now = Date.now();
-    const cached = memoryCache.get(key);
-    const isMemoryStale = !cached || now - cached.timestamp >= ttl;
-
-    if (isMemoryStale) {
-      fetchData();
-    }
-  }, [key, ttl]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -56,7 +46,17 @@ export function useQuery<T>(
       setError(error as Error);
       setIsLoading(false);
     }
-  };
+  }, [key, queryFn, ttl]);
+
+  useEffect(() => {
+    const now = Date.now();
+    const cached = memoryCache.get(key);
+    const isMemoryStale = !cached || now - cached.timestamp >= ttl;
+
+    if (isMemoryStale) {
+      fetchData();
+    }
+  }, [fetchData]);
 
   function readCache(): T | null {
     const now = Date.now();
