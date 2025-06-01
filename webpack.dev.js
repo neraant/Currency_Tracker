@@ -22,5 +22,12 @@ module.exports = merge(common, {
     client: {
       overlay: true,
     },
+    ...(process.env.CYPRESS_COVERAGE && {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+      },
+    }),
   },
 });

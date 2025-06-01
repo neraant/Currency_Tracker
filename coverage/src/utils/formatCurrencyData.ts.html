@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/8</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/7</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,7 +91,7 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,22 +99,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">216x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">216x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,22 +127,22 @@ import {
   FormattedCurrencyData,
 } from '@typings/currency';
 &nbsp;
-export const formatCurrencyData = <span class="fstat-no" title="function not covered" >(d</span>ata: CurrencyApiResponse): FormattedCurrencyData =&gt; {
-  const formatted: Currency[] = <span class="cstat-no" title="statement not covered" >[];</span>
+export const formatCurrencyData = (data: CurrencyApiResponse): FormattedCurrencyData =&gt; {
+  const formatted: Currency[] = [];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  for (const [code, details] of Object.entries(data.data)) {</span>
-    const currencyCode = <span class="cstat-no" title="statement not covered" >code as CurrencyCode;</span>
+  for (const [code, details] of Object.entries(data.data)) {
+    const currencyCode = code as CurrencyCode;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    formatted.push({</span>
+    formatted.push({
       code: currencyCode,
-      name: CURRENCY_NAMES[code as CurrencyCode] || code,
+      name: CURRENCY_NAMES[code as CurrencyCode] || <span class="branch-1 cbranch-no" title="branch not covered" >code,</span>
       icon: CURRENCY_ICONS[code as CurrencyCode],
       value: parseFloat(details.value.toFixed(2)),
       formattedValue: `R$ ${details.value.toFixed(2)}`,
     });
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return {</span>
+  return {
     currencies: formatted,
     last_updated_at: data.meta?.last_updated_at,
   };
@@ -154,7 +154,7 @@ export const formatCurrencyData = <span class="fstat-no" title="function not cov
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-31T08:14:42.535Z
+                at 2025-06-01T12:08:28.786Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

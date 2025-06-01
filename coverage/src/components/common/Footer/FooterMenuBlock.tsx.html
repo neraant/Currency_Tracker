@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>5/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -122,20 +122,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">246x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">246x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">246x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">492x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,20 +162,20 @@ interface FooterMenuBlockProps {
   links: FooterLink[];
 }
 &nbsp;
-export const FooterMenuBlock = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> title, links }: FooterMenuBlockProps) =&gt; {</span>
-  const [isOpen, setIsOpen] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
+export const FooterMenuBlock = ({ title, links }: FooterMenuBlockProps) =&gt; {
+  const [isOpen, setIsOpen] = useState(false);
 &nbsp;
-  const handleOpenClick = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
+  const handleOpenClick = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    setIsOpen(<span class="fstat-no" title="function not covered" >(p</span>re) =&gt; <span class="cstat-no" title="statement not covered" >!pre)</span>;</span>
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;FooterMenuWrapper className={isOpen ? 'active' : ''}&gt;
+  return (
+    &lt;FooterMenuWrapper className={isOpen ? <span class="branch-0 cbranch-no" title="branch not covered" >'active' </span>: ''}&gt;
       &lt;FooterMenuTitle onClick={handleOpenClick}&gt;{title}&lt;/FooterMenuTitle&gt;
 &nbsp;
       &lt;FooterMenu&gt;
-        {links.map(<span class="fstat-no" title="function not covered" >({</span> label, link }) =&gt; (
-<span class="cstat-no" title="statement not covered" >          &lt;FooterMenuItem key={label}&gt;</span>
+        {links.map(({ label, link }) =&gt; (
+          &lt;FooterMenuItem key={label}&gt;
             &lt;FooterMenuLink to={link}&gt;{label}&lt;/FooterMenuLink&gt;
           &lt;/FooterMenuItem&gt;
         ))}
@@ -190,7 +190,7 @@ export const FooterMenuBlock = <span class="cstat-no" title="statement not cover
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-31T08:14:42.535Z
+                at 2025-06-01T12:08:28.786Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

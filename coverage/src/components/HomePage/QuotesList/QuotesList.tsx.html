@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -116,17 +116,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">122x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -136,7 +127,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">122x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">576x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,8 +156,8 @@ interface QuotesListProps {
   selectCurrency: (currency: CurrencyCode) =&gt; void;
 }
 &nbsp;
-export const QuotesList = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> isLoading, currencies, error, selectCurrency }: QuotesListProps) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (error) {</span>
+export const QuotesList = ({ isLoading, currencies, error, selectCurrency }: QuotesListProps) =&gt; {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (error) {
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;QuotesListContainer&gt;
         &lt;QuotesListTitle&gt;Quotes&lt;/QuotesListTitle&gt;
@@ -167,16 +167,16 @@ export const QuotesList = <span class="cstat-no" title="statement not covered" >
     );
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;QuotesListContainer&gt;
+  return (
+    &lt;QuotesListContainer data-testid="currency-card-list"&gt;
       &lt;QuotesListTitle&gt;Quotes&lt;/QuotesListTitle&gt;
 &nbsp;
       {isLoading ? (
         &lt;Spinner /&gt;
       ) : (
         &lt;QuotesListWrapper&gt;
-          {currencies.map(<span class="fstat-no" title="function not covered" >(c</span>urrency) =&gt; (
-<span class="cstat-no" title="statement not covered" >            &lt;QuotesItem {...currency} key={currency.code} selectCurrency={selectCurrency} /&gt;</span>
+          {currencies.map((currency) =&gt; (
+            &lt;QuotesItem {...currency} key={currency.code} selectCurrency={selectCurrency} /&gt;
           ))}
         &lt;/QuotesListWrapper&gt;
       )}
@@ -190,7 +190,7 @@ export const QuotesList = <span class="cstat-no" title="statement not covered" >
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-31T08:14:42.535Z
+                at 2025-06-01T12:08:28.786Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

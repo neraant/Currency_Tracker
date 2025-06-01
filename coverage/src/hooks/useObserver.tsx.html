@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/10</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.22% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/9</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -81,41 +81,41 @@
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">190x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">190x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">190x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useState } from 'react';
 import { IObserver } from '@patterns/observer/interfaces';
 import { Subject } from '@patterns/observer/Subject';
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useObserver&lt;</span>T&gt;(subject: Subject&lt;T&gt;): T {
-  const [state, setState] = <span class="cstat-no" title="statement not covered" >useState&lt;T&gt;(subject.getState());</span>
+export function useObserver&lt;T&gt;(subject: Subject&lt;T&gt;): T {
+  const [state, setState] = useState&lt;T&gt;(subject.getState());
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
-    const observer: IObserver&lt;T&gt; = <span class="cstat-no" title="statement not covered" >{</span>
-      update: <span class="fstat-no" title="function not covered" >(d</span>ata: T) =&gt; <span class="cstat-no" title="statement not covered" >setState(data),</span>
+  useEffect(() =&gt; {
+    const observer: IObserver&lt;T&gt; = {
+      update: (data: T) =&gt; setState(data),
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    subject.addObserver(observer);</span>
-<span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >subject.removeObserver(observer);</span></span>
+    subject.addObserver(observer);
+    return () =&gt; subject.removeObserver(observer);
   }, [subject]);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return state;</span>
+  return state;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -124,7 +124,7 @@ export function <span class="fstat-no" title="function not covered" >useObserver
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-31T08:14:42.535Z
+                at 2025-06-01T12:08:28.786Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

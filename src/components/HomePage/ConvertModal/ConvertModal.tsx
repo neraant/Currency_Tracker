@@ -90,7 +90,9 @@ export const ConvertModal = ({
     >
       <ConverterWrapper>
         <ConverterColumn>
-          <ConverterDropDownLabel>{clickedCurrency}</ConverterDropDownLabel>
+          <ConverterDropDownLabel data-testid="currency-convert-modal-label">
+            {clickedCurrency}
+          </ConverterDropDownLabel>
 
           <ConverterDropDown ref={menuRef}>
             <ConverterDropDownInput

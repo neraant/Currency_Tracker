@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -135,32 +135,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,33 +193,33 @@ interface ITimelinePageState {
   isModal: boolean;
 }
 &nbsp;
-<span class="fstat-no" title="function not covered" >export </span>class TimelinePage extends PureComponent&lt;{}, ITimelinePageState&gt; {
-<span class="cstat-no" title="statement not covered" >  state: ITimelinePageState = {</span>
+export class TimelinePage extends PureComponent&lt;{}, ITimelinePageState&gt; {
+  state: ITimelinePageState = {
     selectedCurrency: CurrencyCode.USD,
     isModal: false,
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  setCurrency = <span class="fstat-no" title="function not covered" >(n</span>ewCurrency: CurrencyCode | '') =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({ selectedCurrency: newCurrency || CurrencyCode.USD });</span>
+  setCurrency = (newCurrency: CurrencyCode | '') =&gt; {
+    this.setState({ selectedCurrency: newCurrency || <span class="branch-1 cbranch-no" title="branch not covered" >CurrencyCode.USD </span>});
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  handleCloseModal = <span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({ isModal: false });</span>
+  handleCloseModal = () =&gt; {
+    this.setState({ isModal: false });
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  handleOpenModal = <span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({ isModal: true });</span>
+  handleOpenModal = () =&gt; {
+    this.setState({ isModal: true });
   };
 &nbsp;
-<span class="fstat-no" title="function not covered" >  render(</span>) {
-    const { selectedCurrency, isModal } = <span class="cstat-no" title="statement not covered" >this.state;</span>
+  render() {
+    const { selectedCurrency, isModal } = this.state;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;Container&gt;
+    return (
+      &lt;Container data-testid="chart-container"&gt;
         &lt;div style={{ marginTop: '60px' }}&gt;
           &lt;CurrencyDropDown setCurrency={this.setCurrency} selectedCurrency={selectedCurrency}&gt;
-            {<span class="fstat-no" title="function not covered" >({</span> query, handleDropDown, handleInputChange, handleKeyDown }) =&gt; (
-<span class="cstat-no" title="statement not covered" >              &lt;ChartSearch</span>
+            {({ query, handleDropDown, handleInputChange, handleKeyDown }) =&gt; (
+              &lt;ChartSearch
                 query={query}
                 handleDropDown={handleDropDown}
                 handleInputChange={handleInputChange}
@@ -247,7 +247,7 @@ interface ITimelinePageState {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-31T08:14:42.535Z
+                at 2025-06-01T12:08:28.786Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

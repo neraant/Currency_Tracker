@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/24</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/20</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -109,8 +109,8 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -122,38 +122,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">118x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">118x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">118x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">472x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { DateTime } from 'luxon';
 import { MAX_COEF, MID_COEF, MIN_COEF } from '@constants/chart';
@@ -168,28 +170,29 @@ export interface IChartEntry {
 &nbsp;
 type LuxonDateTime = InstanceType&lt;typeof DateTime&gt;;
 &nbsp;
-export const getRandomData = <span class="fstat-no" title="function not covered" >() =</span>&gt; {
-  const barData: IChartEntry[] = <span class="cstat-no" title="statement not covered" >[];</span>
-  let date = <span class="cstat-no" title="statement not covered" >DateTime.now().minus({ days: 30 });</span>
-  let lastClose = <span class="cstat-no" title="statement not covered" >30;</span>
+export const getRandomData = () =&gt; {
+  const barData: IChartEntry[] = [];
+  let date = DateTime.now().minus({ days: 30 });
+  let lastClose = 30;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; lastClose; i++) {</span>
-    const bar = <span class="cstat-no" title="statement not covered" >getRandomBar(date, lastClose);</span>
-<span class="cstat-no" title="statement not covered" >    lastClose = parseFloat(bar.close);</span>
-<span class="cstat-no" title="statement not covered" >    barData.push(bar);</span>
-<span class="cstat-no" title="statement not covered" >    date = date.plus({ days: 1 });</span>
+  for (let i = 0; i &lt; lastClose; i++) {
+    const bar = getRandomBar(date, lastClose);
+    lastClose = parseFloat(bar.close);
+    barData.push(bar);
+    date = date.plus({ days: 1 });
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return barData;</span>
+  console.log(barData);
+  return barData;
 };
 &nbsp;
-export const getRandomBar = <span class="fstat-no" title="function not covered" >(d</span>ate: LuxonDateTime, lastClose: number): IChartEntry =&gt; {
-  const open = <span class="cstat-no" title="statement not covered" >getRandomNumber(lastClose * MID_COEF, lastClose * MAX_COEF);</span>
-  const close = <span class="cstat-no" title="statement not covered" >getRandomNumber(open * MID_COEF, open * MAX_COEF);</span>
-  const high = <span class="cstat-no" title="statement not covered" >getRandomNumber(Math.max(open, close), Math.max(open, close) * 1.1);</span>
-  const low = <span class="cstat-no" title="statement not covered" >getRandomNumber(Math.min(open, close) * MIN_COEF, Math.min(open, close));</span>
+export const getRandomBar = (date: LuxonDateTime, lastClose: number): IChartEntry =&gt; {
+  const open = getRandomNumber(lastClose * MID_COEF, lastClose * MAX_COEF);
+  const close = getRandomNumber(open * MID_COEF, open * MAX_COEF);
+  const high = getRandomNumber(Math.max(open, close), Math.max(open, close) * 1.1);
+  const low = getRandomNumber(Math.min(open, close) * MIN_COEF, Math.min(open, close));
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return {</span>
+  return {
     datetime: date.toISO(),
     open: open.toFixed(2),
     high: high.toFixed(2),
@@ -198,8 +201,8 @@ export const getRandomBar = <span class="fstat-no" title="function not covered" 
   };
 };
 &nbsp;
-export const getRandomNumber = <span class="fstat-no" title="function not covered" >(m</span>in: number, max: number): number =&gt; {
-<span class="cstat-no" title="statement not covered" >  return Math.random() * (max - min) + min;</span>
+export const getRandomNumber = (min: number, max: number): number =&gt; {
+  return Math.random() * (max - min) + min;
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -208,7 +211,7 @@ export const getRandomNumber = <span class="fstat-no" title="function not covere
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-31T08:14:42.535Z
+                at 2025-06-01T12:08:28.786Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

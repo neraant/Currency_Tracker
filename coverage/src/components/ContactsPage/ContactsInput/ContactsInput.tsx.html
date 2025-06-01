@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>6/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>6/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -122,29 +122,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,29 +172,29 @@ interface ContactsInputProps {
   error?: string;
 }
 &nbsp;
-export const ContactsInput = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
+export const ContactsInput = ({
   label,
   name,
   error,
   value,
   onFocus,
-  onBlur<span class="cstat-no" title="statement not covered" >,</span>
-  ...rest<span class="cstat-no" title="statement not covered" ></span>
+  onBlur,
+  ...rest
 }: ContactsInputProps &amp; InputHTMLAttributes&lt;HTMLInputElement&gt;) =&gt; {
-  const [isFocused, setIsFocused] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
-  const isActive = <span class="cstat-no" title="statement not covered" >isFocused || !!value;</span>
+  const [isFocused, setIsFocused] = useState(false);
+  const isActive = isFocused || !!value;
 &nbsp;
-  const handleFocus = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>: React.FocusEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
+  const handleFocus = <span class="fstat-no" title="function not covered" >(e</span>: React.FocusEvent&lt;HTMLInputElement&gt;) =&gt; {
 <span class="cstat-no" title="statement not covered" >    setIsFocused(true);</span>
 <span class="cstat-no" title="statement not covered" >    onFocus?.(e);</span>
   };
 &nbsp;
-  const handleBlur = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>: React.FocusEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
+  const handleBlur = <span class="fstat-no" title="function not covered" >(e</span>: React.FocusEvent&lt;HTMLInputElement&gt;) =&gt; {
 <span class="cstat-no" title="statement not covered" >    setIsFocused(false);</span>
 <span class="cstat-no" title="statement not covered" >    onBlur?.(e);</span>
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;ContactInputContainer&gt;
       &lt;ContactLabel $isActive={isActive} htmlFor={name}&gt;
         {label}
@@ -209,7 +209,7 @@ export const ContactsInput = <span class="cstat-no" title="statement not covered
         {...rest}
         autoComplete="nope"
       /&gt;
-      {error &amp;&amp; &lt;ErrorText&gt;{error}&lt;/ErrorText&gt;}
+      {error &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;ErrorText&gt;{error}&lt;/ErrorText&gt;}</span>
     &lt;/ContactInputContainer&gt;
   );
 };
@@ -220,7 +220,7 @@ export const ContactsInput = <span class="cstat-no" title="statement not covered
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-31T08:14:42.535Z
+                at 2025-06-01T12:08:28.786Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

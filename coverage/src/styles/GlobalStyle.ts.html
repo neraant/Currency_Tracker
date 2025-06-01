@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/8</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/8</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,20 +118,18 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -139,9 +137,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,16 +157,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">34x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,11 +180,11 @@ export const GlobalStyle = createGlobalStyle`
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		font-family: ${<span class="fstat-no" title="function not covered" >({</span> theme }) =&gt; <span class="cstat-no" title="statement not covered" >theme.typography.fontFamily.poppins}</span>;
+		font-family: ${({ theme }) =&gt; theme.typography.fontFamily.poppins};
 	}
 	body {
 		position: relative;
-		background-color: ${<span class="fstat-no" title="function not covered" >({</span> theme }) =&gt; <span class="cstat-no" title="statement not covered" >theme.background.primary}</span>;
+		background-color: ${({ theme }) =&gt; theme.background.primary};
 	}
 	#root {
 		display: flex;
@@ -194,7 +194,7 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	a {
 		text-decoration: none;
-		color: ${<span class="fstat-no" title="function not covered" >({</span> theme }) =&gt; <span class="cstat-no" title="statement not covered" >theme.text.primary}</span>;
+		color: ${({ theme }) =&gt; theme.text.primary};
 	}
 	ul {
 		list-style-type: none;
@@ -214,12 +214,12 @@ export const GlobalStyle = createGlobalStyle`
 	}
 &nbsp;
 	::-webkit-scrollbar-track {
-		background: ${<span class="fstat-no" title="function not covered" >({</span> theme }) =&gt; <span class="cstat-no" title="statement not covered" >theme.background.primary}</span>;
+		background: ${({ theme }) =&gt; theme.background.primary};
 	}
 &nbsp;
 	::-webkit-scrollbar-thumb {
 		border-radius: 4px;
-		background: ${<span class="fstat-no" title="function not covered" >({</span> theme }) =&gt; <span class="cstat-no" title="statement not covered" >theme.scrollbar.thumb}</span>;
+		background: ${({ theme }) =&gt; theme.scrollbar.thumb};
 	}
 `;
 &nbsp;
@@ -235,7 +235,7 @@ export const Container = styled.div`
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-29T21:24:25.126Z
+                at 2025-06-01T12:08:28.786Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

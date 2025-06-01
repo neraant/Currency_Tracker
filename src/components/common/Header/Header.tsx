@@ -10,7 +10,7 @@ export const Header = () => {
     <HeaderContainer>
       <Container>
         <HeaderWrapper>
-          <Link to="/" data-testid="link-home">
+          <Link to="/" data-testid="link-home-logo">
             <HeaderLogo src={logo} alt="logo" />
           </Link>
 

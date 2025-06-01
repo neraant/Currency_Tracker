@@ -1,0 +1,49 @@
+{
+  "data": {
+    "ARS": {
+      "code": "ARS",
+      "value": 207.49,
+      "name": "Argentine Peso"
+    },
+    "AUD": {
+      "code": "AUD",
+      "value": 0.27,
+      "name": "Australian Dollar"
+    },
+    "BTC": {
+      "code": "BTC",
+      "value": 0.0,
+      "name": "Bitcoin"
+    },
+    "CAD": {
+      "code": "CAD",
+      "value": 0.24,
+      "name": "Canadian Dollar"
+    },
+    "CNY": {
+      "code": "CNY",
+      "value": 1.26,
+      "name": "Yuan"
+    },
+    "EUR": {
+      "code": "EUR",
+      "value": 0.15,
+      "name": "Euro"
+    },
+    "GBP": {
+      "code": "GBP",
+      "value": 0.13,
+      "name": "Libra"
+    },
+    "JPY": {
+      "code": "JPY",
+      "value": 25.16,
+      "name": "Yen"
+    },
+    "USD": {
+      "code": "USD",
+      "value": 0.17,
+      "name": "Commercial Dollar"
+    }
+  }
+}

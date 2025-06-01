@@ -2,7 +2,7 @@ import { NotFoundSection } from '@components/common/NotFoundSection/NotFoundSect
 
 export const NotFoundPage = () => {
   return (
-    <main>
+    <main data-testid="notfound-container">
       <NotFoundSection />
     </main>
   );

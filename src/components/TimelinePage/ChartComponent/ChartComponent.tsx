@@ -207,8 +207,10 @@ class ChartComponent extends PureComponent<IChartComponentProps, IChartComponent
         <CurrencyInfoWrapper>
           <CurrencyImage src={CURRENCY_ICONS[selectedCurrency]} alt={selectedCurrency} />
           <CurrencyInfoTexts>
-            <CurrencyTitle>{CURRENCY_NAMES[selectedCurrency]}</CurrencyTitle>
-            <CurrencyText>{selectedCurrency}</CurrencyText>
+            <CurrencyTitle data-testid="currency-chart-title">
+              {CURRENCY_NAMES[selectedCurrency]}
+            </CurrencyTitle>
+            <CurrencyText data-testid="currency-chart-text">{selectedCurrency}</CurrencyText>
           </CurrencyInfoTexts>
           {isLoading && <Spinner size="lg" />}
         </CurrencyInfoWrapper>
@@ -217,7 +219,12 @@ class ChartComponent extends PureComponent<IChartComponentProps, IChartComponent
           <ErrorFallback errorMessage={error} />
         ) : (
           <CanvasContainer>
-            <CanvasGraph ref={this.chartRef} width={CHART_WIDTH} height={CHART_HEIGHT} />
+            <CanvasGraph
+              data-testid="chart"
+              ref={this.chartRef}
+              width={CHART_WIDTH}
+              height={CHART_HEIGHT}
+            />
           </CanvasContainer>
         )}
 

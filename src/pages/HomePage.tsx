@@ -35,7 +35,7 @@ export const HomePage = () => {
   };
 
   return (
-    <Container>
+    <Container data-testid="currency-converter-container">
       <UpdateComponent />
       <QuotesList
         currencies={currencies}
