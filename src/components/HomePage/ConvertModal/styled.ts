@@ -42,6 +42,8 @@ export const ConverterDropDown = styled.div`
     background-repeat: no-repeat;
     background-position: center;
     pointer-events: none;
+
+    filter: ${({ theme }) => (theme.background.primary === '#ffffff' ? 'invert(1)' : 'invert(0)')};
   }
 `;
 

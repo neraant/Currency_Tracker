@@ -33,8 +33,8 @@ export const getChartConfig = ({
     options: {
       responsive: true,
       animation: {
-        duration: 800, // Длительность анимации в миллисекундах
-        easing: 'easeInOutQuart', // Тип анимации
+        duration: 800,
+        easing: 'easeInOutQuart',
       },
       animations: {
         tension: {
