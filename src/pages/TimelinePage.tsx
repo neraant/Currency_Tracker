@@ -32,7 +32,7 @@ export class TimelinePage extends PureComponent<{}, ITimelinePageState> {
     const { selectedCurrency, isModal } = this.state;
 
     return (
-      <Container>
+      <Container data-testid="chart-container">
         <div style={{ marginTop: '60px' }}>
           <CurrencyDropDown setCurrency={this.setCurrency} selectedCurrency={selectedCurrency}>
             {({ query, handleDropDown, handleInputChange, handleKeyDown }) => (

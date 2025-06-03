@@ -55,11 +55,11 @@ export const DarkTheme: DefaultTheme = {
       '8xl': '3.75rem',
     },
     fontWeight: {
-      light: 300,
-      regular: 400,
-      medium: 500,
-      semibold: 600,
-      bold: 700,
+      light: '300',
+      regular: '400',
+      medium: '500',
+      semibold: '600',
+      bold: '700',
     },
     lineHeight: {
       none: 1,

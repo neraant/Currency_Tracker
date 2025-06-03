@@ -6,5 +6,5 @@ interface OverlayProps {
 }
 
 export const Overlay = ({ isOpen, onClick }: OverlayProps) => {
-  return <OverlayContainer $isOpen={isOpen} onClick={onClick} />;
+  return <OverlayContainer data-testid="overlay" $isOpen={isOpen} onClick={onClick} />;
 };

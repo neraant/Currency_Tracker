@@ -23,7 +23,7 @@ export const QuotesList = ({ isLoading, currencies, error, selectCurrency }: Quo
   }
 
   return (
-    <QuotesListContainer>
+    <QuotesListContainer data-testid="currency-card-list">
       <QuotesListTitle>Quotes</QuotesListTitle>
 
       {isLoading ? (

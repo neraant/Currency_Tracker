@@ -32,6 +32,26 @@ export const getChartConfig = ({
     },
     options: {
       responsive: true,
+      animation: {
+        duration: 800,
+        easing: 'easeInOutQuart',
+      },
+      animations: {
+        tension: {
+          duration: 1000,
+          easing: 'linear',
+          from: 1,
+          to: 0,
+          loop: true,
+        },
+      },
+      transitions: {
+        active: {
+          animation: {
+            duration: 400,
+          },
+        },
+      },
       plugins: {
         legend: {
           display: false,
@@ -42,8 +62,8 @@ export const getChartConfig = ({
           intersect: true,
           borderColor: '#474747',
           backgroundColor: DarkTheme.background.primary,
-          titleColor: DarkTheme.text.primary,
-          bodyColor: DarkTheme.text.primary,
+          titleColor: DarkTheme.border.primary,
+          bodyColor: DarkTheme.border.primary,
           borderWidth: 1,
           displayColors: false,
           padding: 12,
@@ -75,14 +95,30 @@ export const getChartConfig = ({
               zone: 'utc',
             },
           },
+          grid: {
+            display: true,
+            color: DarkTheme.border.primary,
+            lineWidth: 1,
+          },
+          ticks: {
+            color: DarkTheme.border.primary,
+          },
         },
         y: {
           type: 'linear',
+          grid: {
+            display: true,
+            color: DarkTheme.border.primary,
+            lineWidth: 1,
+          },
+          ticks: {
+            color: DarkTheme.border.primary,
+          },
         },
       },
       onClick: (event, activeElements, chart) => {
         const elements =
-          chart.getElementsAtEventForMode(event as any, 'nearest', { intersect: true }, false) ||
+          chart.getElementsAtEventForMode(event as any, 'nearest', { intersect: false }, false) ||
           [];
 
         onBarClick(elements);
@@ -93,7 +129,7 @@ export const getChartConfig = ({
         const elements = chart.getElementsAtEventForMode(
           event as any,
           'nearest',
-          { intersect: true },
+          { intersect: false },
           false
         );
 

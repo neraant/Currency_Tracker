@@ -35,7 +35,7 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
 
     return (
       <>
-        <Container>
+        <Container data-testid="map-container">
           <ElasticSearch setCurrency={this.handleSetCurrency} selectedCurrency={selectedCurrency} />
         </Container>
         <Map filterCurrency={debouncedQuery} />

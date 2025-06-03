@@ -35,6 +35,7 @@ export class ElasticSearch extends PureComponent<ElasticSearchProps, {}> {
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Сurrency search..."
+                data-testid="elastic-search"
               />
             )}
           </CurrencyDropDown>

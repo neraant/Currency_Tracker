@@ -23,6 +23,7 @@ export const getRandomData = () => {
     date = date.plus({ days: 1 });
   }
 
+  console.log(barData);
   return barData;
 };
 

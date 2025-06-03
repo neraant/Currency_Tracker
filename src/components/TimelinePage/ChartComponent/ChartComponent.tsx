@@ -43,7 +43,7 @@ interface IChartComponentState {
   chartBar: IChartBar;
 }
 
-export class ChartComponent extends PureComponent<IChartComponentProps, IChartComponentState> {
+class ChartComponent extends PureComponent<IChartComponentProps, IChartComponentState> {
   static contextType = ObserverContext;
   context!: ContextType<typeof ObserverContext>;
 
@@ -170,7 +170,13 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
 
         return { chartData: updatedData };
       },
-      () => this.renderChart()
+      () => {
+        if (this.chartInstance) {
+          const parsedData = parseChartData(this.state.chartData);
+          this.chartInstance.data.datasets[0].data = parsedData;
+          this.chartInstance.update('active');
+        }
+      }
     );
   };
 
@@ -201,8 +207,10 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
         <CurrencyInfoWrapper>
           <CurrencyImage src={CURRENCY_ICONS[selectedCurrency]} alt={selectedCurrency} />
           <CurrencyInfoTexts>
-            <CurrencyTitle>{CURRENCY_NAMES[selectedCurrency]}</CurrencyTitle>
-            <CurrencyText>{selectedCurrency}</CurrencyText>
+            <CurrencyTitle data-testid="currency-chart-title">
+              {CURRENCY_NAMES[selectedCurrency]}
+            </CurrencyTitle>
+            <CurrencyText data-testid="currency-chart-text">{selectedCurrency}</CurrencyText>
           </CurrencyInfoTexts>
           {isLoading && <Spinner size="lg" />}
         </CurrencyInfoWrapper>
@@ -211,7 +219,12 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
           <ErrorFallback errorMessage={error} />
         ) : (
           <CanvasContainer>
-            <CanvasGraph ref={this.chartRef} width={CHART_WIDTH} height={CHART_HEIGHT} />
+            <CanvasGraph
+              data-testid="chart"
+              ref={this.chartRef}
+              width={CHART_WIDTH}
+              height={CHART_HEIGHT}
+            />
           </CanvasContainer>
         )}
 
@@ -227,3 +240,5 @@ export class ChartComponent extends PureComponent<IChartComponentProps, IChartCo
     );
   }
 }
+
+export { ChartComponent };

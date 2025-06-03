@@ -78,10 +78,10 @@ export class Map extends PureComponent<MapProps, {}> {
     }
 
     const popupHtml = `
-    <div>
+    <div data-testid="bank-info">
       <h4>${bank.name}</h4>
       <p>${bank.address}</p>
-      <p><strong>Валюты:</strong> ${bank.currencies.join(', ')}</p>
+      <p data-testid="available-currencies"><strong>Валюты:</strong> ${bank.currencies.join(', ')}</p>
       ${bank.phone ? `<p><strong>Тел.:</strong> ${bank.phone}</p>` : ''}
       ${workingHoursHtml}
     </div>
@@ -91,6 +91,7 @@ export class Map extends PureComponent<MapProps, {}> {
 
     const el = document.createElement('div');
     el.className = 'custom-marker';
+    el.setAttribute('data-testid', 'marker');
     el.innerHTML = `<img src="${bankIcon}" alt="bank" style="width: 20px; height: 20px;" />`;
 
     return new mapboxgl.Marker(el)
@@ -100,6 +101,6 @@ export class Map extends PureComponent<MapProps, {}> {
   }
 
   render(): ReactNode {
-    return <MapWrapper ref={this.mapContainerRef} />;
+    return <MapWrapper data-testid="map-wrapper" ref={this.mapContainerRef} />;
   }
 }

@@ -6,7 +6,6 @@ import { ContactsInfo } from '@components/ContactsPage/ContactsInfo/ContactsInfo
 import { ContactsInput } from '@components/ContactsPage/ContactsInput/ContactsInput';
 import { CONTACT_FIELDS } from '@constants/contacts';
 import { useSubject } from '@context/ObserverConext';
-import { Container } from '@styles/GlobalStyle';
 import { RegisterInterface } from '@typings/contacts';
 import { schema } from '@utils/schema';
 import { ContactContainer } from './styled';
@@ -45,27 +44,25 @@ export const ContactWrapper = () => {
   };
 
   return (
-    <Container>
-      <ContactContainer>
-        <ContactsInfo />
+    <ContactContainer>
+      <ContactsInfo />
 
-        <ContactsForm onSubmit={handleSubmit(submitForm, onError)}>
-          {CONTACT_FIELDS.map((field) => (
-            <ContactsInput
-              key={field}
-              label={field}
-              error={errors[field]?.message}
-              value={values[field]}
-              {...register(field)}
-            />
-          ))}
-        </ContactsForm>
+      <ContactsForm onSubmit={handleSubmit(submitForm, onError)}>
+        {CONTACT_FIELDS.map((field) => (
+          <ContactsInput
+            key={field}
+            label={field}
+            error={errors[field]?.message}
+            value={values[field]}
+            {...register(field)}
+          />
+        ))}
+      </ContactsForm>
 
-        <Popup
-          isError={!isSubmitSuccessful}
-          onPopupClose={() => subject.setState({ isPopup: false, message: '' })}
-        />
-      </ContactContainer>
-    </Container>
+      <Popup
+        isError={!isSubmitSuccessful}
+        onPopupClose={() => subject.setState({ isPopup: false, message: '' })}
+      />
+    </ContactContainer>
   );
 };

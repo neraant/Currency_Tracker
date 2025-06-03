@@ -23,13 +23,13 @@ export const QuotesItem = ({
   selectCurrency,
 }: QuotesItemsProps) => {
   return (
-    <QuotesCard onClick={() => selectCurrency(code)}>
-      <QuotesCardIcon src={icon} alt={name} />
+    <QuotesCard data-testid={`currency-card-${code}`} onClick={() => selectCurrency(code)}>
+      <QuotesCardIcon data-testid="currency-card-icon" src={icon} alt={name} />
 
       <QuotesCardInfo>
-        <QuotesCardTitle>{name}</QuotesCardTitle>
+        <QuotesCardTitle data-testid="currency-card-title">{name}</QuotesCardTitle>
 
-        <QuotesCardText>{formattedValue}</QuotesCardText>
+        <QuotesCardText data-testid="currency-card-text">{formattedValue}</QuotesCardText>
       </QuotesCardInfo>
     </QuotesCard>
   );

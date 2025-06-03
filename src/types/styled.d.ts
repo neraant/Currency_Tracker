@@ -42,11 +42,11 @@ declare module 'styled-components' {
         [key: string]: string;
       };
       fontWeight: {
-        light: number;
-        regular: number;
-        medium: number;
-        semibold: number;
-        bold: number;
+        light: string;
+        regular: string;
+        medium: string;
+        semibold: string;
+        bold: string;
       };
       lineHeight: {
         [key: string]: number;

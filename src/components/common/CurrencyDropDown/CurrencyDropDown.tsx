@@ -124,7 +124,7 @@ export const CurrencyDropDown = ({
   };
 
   return (
-    <CurrencyDropDownWrapper ref={inputRef}>
+    <CurrencyDropDownWrapper data-testid="currency-selector-wrapper" ref={inputRef}>
       {children({
         query,
         handleDropDown,
@@ -132,19 +132,23 @@ export const CurrencyDropDown = ({
         handleKeyDown,
       })}
 
-      <CurrencyDropDownList $isDropped={isDropped}>
+      <CurrencyDropDownList data-testid="currency-selector" $isDropped={isDropped}>
         {filteredCurrencies.length ? (
           filteredCurrencies.map((currency, index) => (
             <CurrencyDropDownItem
               key={currency}
               onClick={() => handleSelect(currency)}
               $isActive={index === activeIndex}
+              data-testid={`currency-selector-${currency}`}
             >
               {currency}
             </CurrencyDropDownItem>
           ))
         ) : (
-          <CurrencyDropDownItem style={{ pointerEvents: 'none', opacity: 0.6 }}>
+          <CurrencyDropDownItem
+            data-testid="no-results-message"
+            style={{ pointerEvents: 'none', opacity: 0.6 }}
+          >
             Not found
           </CurrencyDropDownItem>
         )}

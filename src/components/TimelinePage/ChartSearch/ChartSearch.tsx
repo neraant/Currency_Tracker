@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, PureComponent, ReactNode } from 'react';
+import { ChangeEvent, KeyboardEvent, PureComponent } from 'react';
 import { CurrencyCode } from '@typings/currency';
 import { CurrencyDropDownInput } from './styled';
 
@@ -10,12 +10,14 @@ interface ChartSearchProps {
   selectedCurrency: CurrencyCode | '';
 }
 
-export class ChartSearch extends PureComponent<ChartSearchProps, {}> {
-  render(): ReactNode {
+export class ChartSearch extends PureComponent<ChartSearchProps> {
+  render() {
     const { handleDropDown, handleInputChange, handleKeyDown, query, selectedCurrency } =
       this.props;
+
     return (
       <CurrencyDropDownInput
+        data-testid="currency-dropdown-input"
         onClick={handleDropDown}
         value={query}
         onChange={handleInputChange}
