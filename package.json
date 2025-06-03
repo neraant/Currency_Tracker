@@ -52,6 +52,7 @@
     "@types/react-dom": "^19.1.5",
     "@types/react-svg": "^5.0.0",
     "@types/styled-components": "^5.1.34",
+    "@types/testing-library__jest-dom": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "babel-loader": "^10.0.0",
